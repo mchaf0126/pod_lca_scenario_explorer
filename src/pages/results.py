@@ -1,10 +1,12 @@
+"""Results page of dashboard"""
 from pathlib import Path
 import pandas as pd
 import plotly.express as px
 from dash import html, dcc, callback, Input, Output, register_page
 import dash_bootstrap_components as dbc
 import src.utils.general as utils
-from src.components.dropdowns import create_dropdown
+from src.components.selection import create_dropdown
+from src.components.results_data_work import create_all_impacts_df
 
 register_page(__name__, path='/results')
 
@@ -70,32 +72,70 @@ layout = html.Div(
     Output('stacked_bar', 'figure'),
     [
         Input('scope_dropdown', 'value'),
-        Input('impact_dropdown', 'value')
+        Input('impact_dropdown', 'value'),
+        Input('impact_dropdown', 'options')
     ]
 )
-def update_chart(scope, impact_type):
+def update_chart(scope, impact_type, impact_options):
 
-    new_df = pd.melt(
-        df,
-        id_vars=scope,
-        value_vars=impact_type,
-        var_name='Impacts',
-        value_name='Impact Amount'
-    )
-    fig = px.histogram(
-        new_df.sort_values(scope),
-        y=scope,
-        x='Impact Amount',
-        color=scope,
-        histfunc='sum'
-    )
-    fig.update_yaxes(
-        title=f'Impacts by {scope}',
-        categoryorder='category descending'
-    )
+    for item in impact_options:
+        if item['value'] == impact_type:
+            impact_index = impact_options.index(item)
 
-    fig.update_xaxes(
-        title=f'{impact_type}'
-    )
+    if impact_type == 'All':
+
+        new_grouped_impacts = create_all_impacts_df(
+            df=df,
+            scope=scope
+        )
+
+        fig = px.histogram(
+            new_grouped_impacts,
+            x='Impacts',
+            y='percentage',
+            color=scope,
+        ).update_yaxes(
+            title=f'Percent contribution by {scope}',
+            tickformat=".1%"
+        ).update_xaxes(
+            categoryorder='array',
+            categoryarray=[
+                'GWP',
+                'AP',
+                'EP',
+                'ODP',
+                'SFP'
+            ],
+            title=''
+        )
+
+    else:
+        new_df = pd.melt(
+            df,
+            id_vars=scope,
+            value_vars=impact_type,
+            var_name='Impacts',
+            value_name='Impact Amount'
+        )
+
+        fig = px.histogram(
+            new_df.sort_values(scope),
+            y=scope,
+            x='Impact Amount',
+            color=scope,
+            histfunc='sum'
+        )
+        fig.update_yaxes(
+            title=f'Impacts by {scope}',
+            categoryorder='category descending'
+        )
+        fig.update_xaxes(
+            title=f'{impact_options[impact_index]["value"]}',
+            tickformat=',.0f',
+        )
+        if impact_type == 'Ozone Depletion Potential Total (CFC-11eq)':
+            fig.update_xaxes(
+                tickformat='.4f',
+            )
 
     return fig

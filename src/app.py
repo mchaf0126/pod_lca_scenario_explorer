@@ -32,7 +32,7 @@ app.layout = dbc.Container(
             )
         ),
         dbc.Row(
-            page_container
+            page_container,
         ),
         dbc.Row(
             html.Footer(

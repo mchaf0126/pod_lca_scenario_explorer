@@ -1,17 +1,28 @@
 ---
 scope_dropdown:
-  label: Categorization Scope
+  label: Categorization
   dropdown_list:
-    - Revit building element
-    - Tally Entry Division
-    - Life Cycle Stage
-    - Revit category
-  first_item: Revit building element
+    - 
+      label: Life Cycle Stage
+      value: Life Cycle Stage
+    - 
+      label: Revit Building Element
+      value: Revit building element
+    - 
+      label: Tally Entry Division
+      value: Tally Entry Division
+    - 
+      label: Revit Category
+      value: Revit category
+  first_item: Life Cycle Stage
   dropdown_id: scope_dropdown
 
 impact_dropdown: 
   label: Impacts
   dropdown_list: 
+    -
+      label: All
+      value: All
     - 
       label: GWP
       value: Global Warming Potential Total (kgCO2eq)        
@@ -27,8 +38,148 @@ impact_dropdown:
     - 
       label: SFP
       value: Smog Formation Potential Total (kgO3eq)
-  first_item: Global Warming Potential Total (kgCO2eq)
+  first_item: All
   dropdown_id: impact_dropdown
 
+scope_dropdown_a4_scenario:
+  label: Categorization
+  dropdown_list:
+    - 
+      label: Life Cycle Stage
+      value: Life Cycle Stage
+    - 
+      label: Revit Building Element
+      value: Revit building element
+    - 
+      label: Tally Entry Division
+      value: Tally Entry Division
+    - 
+      label: Revit Category
+      value: Revit category
+  first_item: Life Cycle Stage
+  dropdown_id: scope_dropdown_a4_scenario
+
+scope_dropdown_a5_scenario:
+  label: Categorization
+  dropdown_list:
+    - 
+      label: Life Cycle Stage
+      value: Life Cycle Stage
+    - 
+      label: Revit Building Element
+      value: Revit building element
+    - 
+      label: Tally Entry Division
+      value: Tally Entry Division
+    - 
+      label: Revit Category
+      value: Revit category
+  first_item: Life Cycle Stage
+  dropdown_id: scope_dropdown_a5_scenario
+
+scope_dropdown_b4_scenario:
+  label: Categorization
+  dropdown_list:
+    - 
+      label: Life Cycle Stage
+      value: Life Cycle Stage
+    - 
+      label: Revit Building Element
+      value: Revit building element
+    - 
+      label: Tally Entry Division
+      value: Tally Entry Division
+    - 
+      label: Revit Category
+      value: Revit category
+  first_item: Life Cycle Stage
+  dropdown_id: scope_dropdown_b4_scenario
+
+scope_dropdown_eol_scenario:
+  label: Categorization
+  dropdown_list:
+    - 
+      label: Life Cycle Stage
+      value: Life Cycle Stage
+    - 
+      label: Revit Building Element
+      value: Revit building element
+    - 
+      label: Tally Entry Division
+      value: Tally Entry Division
+    - 
+      label: Revit Category
+      value: Revit category
+  first_item: Life Cycle Stage
+  dropdown_id: scope_dropdown_eol_scenario
+
+a4_scenario_checklist: 
+  label: Transportation Scenarios
+  checklist: 
+    -
+      label: US National Average Distances
+      value: 1_us_avg_dist
+    - 
+      label: Global Average Distances
+      value: 2_global_avg_dist    
+    - 
+      label: Electric Vehicles
+      value: 3_elec_vehicles
+  first_item: []
+  checklist_id: a4_scenario_checklist
+
+a5_scenario_checklist: 
+  label: Construction Scenarios
+  checklist: 
+    -
+      label: Average Construction
+      value: 1_avg_construction
+    - 
+      label: All Electric Vehicles
+      value: 2_elec_vehicles
+  first_item: []
+  checklist_id: a5_scenario_checklist
+
+a5_scenario_slider:
+  label: Stories Below Grade
+  min_value: 0
+  max_value: 5
+  step: 1
+  marks: 
+    0: '0'
+    1: '1'
+    2: '2'
+    3: '3'
+    4: '4'
+    5: '5'
+  value: 0
+  slider_id: a5_scenario_slider
+
+b4_scenario_checklist: 
+  label: Replacement Scenarios
+  checklist: 
+    -
+      label: RICS Replacement Rates
+      value: 1_rics_repl_rates
+    - 
+      label: ASHRAE 240P Replacement Rates
+      value: 2_ashrae_repl_rates
+  first_item: []
+  checklist_id: b4_scenario_checklist
+
+eol_scenario_checklist: 
+  label: End-of-life Scenarios
+  checklist: 
+    -
+      label: Regionally Specific
+      value: 1_regionally_specific
+    - 
+      label: Recycle 50% of materials
+      value: 2_50%_recycle      
+    - 
+      label: Recycle 100% of materials
+      value: 3_100%_recycle
+  first_item: []
+  checklist_id: eol_scenario_checklist
 
 

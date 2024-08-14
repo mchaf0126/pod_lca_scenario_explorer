@@ -40,19 +40,19 @@ layout = html.Div(
                         dcc.Markdown(
                             '''
                             At present, the dashboard is in beta. There are
-                            currently two pages of note:
+                            currently two types of pages of note:
                             *  **Results** - the traditional results for a WBLCA.
-                            *  **Scenario Builder** - This will show different scenarios
+                            *  **Scenarios** - These will show different scenarios
                             built by the UW Team to enable the user to compare different
-                            scenarios against the template model.
+                            scenarios against the template model. There are currently four
+                            different scenarios mocked up in this dashboard:
+                               *  **Transportation Scenarios**
+                               *  **Construction Scenarios**
+                               *  **Replacement Scenarios**
+                               *  **End-of-life Scenarios**
                             ''',
                             className='fw-light'
                         ),
-                        html.Br(),
-                        html.Br(),
-                        html.Br(),
-                        html.Br(),
-                        html.Br(),
                     ],
                     width={"size": 8},
                     class_name='pe-5'

@@ -16,7 +16,7 @@ def create_header() -> html.Div:
                         dbc.Col(
                             html.A(
                                 html.Img(
-                                    src='assets/CLF_Logo_Rev_MED.png',
+                                    src='assets/W-Logo_Purple_RGB.png',
                                     height="60px"
                                 ),
                                 href='https://carbonleadershipforum.org'
@@ -24,7 +24,7 @@ def create_header() -> html.Div:
                         ),
                         dbc.Col(
                             dbc.NavbarBrand(
-                                'WBLCA Benchmark Dashboard',
+                                'ARPA-E Template Model Explorer',
                                 className='fs-3 text-white fw-bolder'
                             ),
                         ),
@@ -35,27 +35,47 @@ def create_header() -> html.Div:
                 ),
                 dbc.Nav([
                     dbc.NavItem(
-                        dbc.NavLink(
-                            'Home',
-                            href='/',
-                            className='fs-5 text-white fw-bolder'
-                        ),
+                        [
+                            dbc.NavLink(
+                                'Home',
+                                href='/',
+                                className='fs-5 text-white fw-bolder'
+                            )
+                        ]
+                    ),
+                    dbc.NavItem(
+                        [
+                            dbc.NavLink(
+                                'Results',
+                                href='/results',
+                                className='fs-5 text-white fw-bolder'
+                            ),
+                        ],
                     ),
                     dbc.DropdownMenu(
-                        label='Explore the data',
+                        label='Scenarios',
                         children=[
                             dbc.DropdownMenuItem(
-                                "Results",
-                                href="results"
+                                "Transportation Scenarios",
+                                href="a4_scenario_builder"
                             ),
                             dbc.DropdownMenuItem(
-                                "Scenario Builder",
-                                href="scenario_builder"
+                                "Construction Scenarios",
+                                href="a5_scenario_builder"
+                            ),
+                            dbc.DropdownMenuItem(
+                                "Replacement Scenarios",
+                                href="b4_scenario_builder"
+                            ),
+                            dbc.DropdownMenuItem(
+                                "End-of-life Scenarios",
+                                href="eol_scenario_builder"
                             )
                         ],
+                        align_end=True,
                         nav=True,
                         toggleClassName='fs-5 text-white fw-bolder',
-                    )
+                    ),
                 ])
             ],
             fluid=True
