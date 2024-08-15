@@ -71,9 +71,9 @@ layout = html.Div(
                                *  **Construction Scenarios**
                                *  **Replacement Scenarios**
                                *  **End-of-life Scenarios**
-                               
+
                             An additional section of the dashboard will facilitate selection or
-                            upload of a base building model, or the generation of a detailed, 
+                            upload of a base building model, or the generation of a detailed,
                             structured Bill of Materials (BoM). This element is still in scoping
                             and development and not yet ready to be shared.
                             ''',
