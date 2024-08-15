@@ -113,14 +113,27 @@ scope_dropdown_eol_scenario:
   first_item: Life Cycle Stage
   dropdown_id: scope_dropdown_eol_scenario
 
+a4_scenario_radioitem: 
+  label: Approach
+  radiolist: 
+    -
+      label: Prebuilt Scenarios
+      value: prebuilt
+    - 
+      label: Custom Scenarios
+      value: custom 
+  first_item: prebuilt
+  radio_id: a4_scenario_radioitem
+
+
 a4_scenario_checklist: 
   label: Transportation Scenarios
   checklist: 
     -
-      label: US National Average Distances
+      label: Domestic Supply Chain
       value: 1_us_avg_dist
     - 
-      label: Global Average Distances
+      label: Global Supply Chain
       value: 2_global_avg_dist    
     - 
       label: Electric Vehicles
@@ -128,32 +141,63 @@ a4_scenario_checklist:
   first_item: []
   checklist_id: a4_scenario_checklist
 
+a5_scenario_radioitem: 
+  label: Approach
+  radiolist: 
+    -
+      label: Prebuilt Scenarios
+      value: prebuilt
+    - 
+      label: Custom Scenarios
+      value: custom 
+  first_item: prebuilt
+  radio_id: a5_scenario_radioitem
+
 a5_scenario_checklist: 
   label: Construction Scenarios
   checklist: 
-    -
-      label: Average Construction
-      value: 1_avg_construction
     - 
-      label: All Electric Vehicles
-      value: 2_elec_vehicles
+      label: All Electric Site Equipment
+      value: 1_all_elec_equip
+    - 
+      label: Advanced Waste Recovery
+      value: 2_waste_recovery
+    - 
+      label: Off-site Fabrication
+      value: 3_off_site_fab
   first_item: []
   checklist_id: a5_scenario_checklist
 
-a5_scenario_slider:
-  label: Stories Below Grade
-  min_value: 0
-  max_value: 5
-  step: 1
-  marks: 
-    0: '0'
-    1: '1'
-    2: '2'
-    3: '3'
-    4: '4'
-    5: '5'
-  value: 0
-  slider_id: a5_scenario_slider
+a5_equipment_checklist:
+  label: Equipment
+  checklist: 
+    -
+      label: Site Heating
+      value: site_heating
+    - 
+      label: Electric Lighting
+      value: electric_lighting
+    - 
+      label: Grid Connection
+      value: grid_connection
+    - 
+      label: Diesel Generators
+      value: diesel_generatorss
+  first_item: []
+  checklist_id: a5_equipment_checklist
+
+
+b4_scenario_radioitem: 
+  label: Approach
+  radiolist: 
+    -
+      label: Prebuilt Scenarios
+      value: prebuilt
+    - 
+      label: Custom Scenarios
+      value: custom 
+  first_item: prebuilt
+  radio_id: b4_scenario_radioitem
 
 b4_scenario_checklist: 
   label: Replacement Scenarios
@@ -167,18 +211,33 @@ b4_scenario_checklist:
   first_item: []
   checklist_id: b4_scenario_checklist
 
+eol_scenario_radioitem: 
+  label: Approach
+  radiolist: 
+    -
+      label: Prebuilt Scenarios
+      value: prebuilt
+    - 
+      label: Custom Scenarios
+      value: custom 
+  first_item: prebuilt
+  radio_id: eol_scenario_radioitem
+
 eol_scenario_checklist: 
   label: End-of-life Scenarios
   checklist: 
     -
-      label: Regionally Specific
-      value: 1_regionally_specific
+      label: Regional Mix
+      value: 1_regional_mix
     - 
-      label: Recycle 50% of materials
-      value: 2_50%_recycle      
+      label: 100% Landfill
+      value: 2_100%_landfill    
     - 
-      label: Recycle 100% of materials
-      value: 3_100%_recycle
+      label: 100% Incineration
+      value: 3_100%_incineration
+    - 
+      label: 100% Recycle / Reuse
+      value: 4_100%_recycle
   first_item: []
   checklist_id: eol_scenario_checklist
 

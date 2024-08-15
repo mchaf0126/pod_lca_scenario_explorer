@@ -96,3 +96,34 @@ def create_slider(label: str,
         className='mb-4'
     )
     return slider
+
+
+def create_radio(label: str,
+                 radiolist: list,
+                 first_item: str,
+                 radio_id: str) -> html.Div:
+    """_summary_
+
+    Args:
+        labe (str): _description_
+        dropdown_list (list): _description_
+        first_item (str): _description_
+        id (str): _description_
+
+    Returns:
+        html.Div: _description_
+    """
+
+    radioitems = html.Div(
+        [
+            dbc.Label(label),
+            dbc.RadioItems(
+                options=radiolist,
+                value=first_item,
+                id=radio_id,
+                inputCheckedClassName="border border-primary bg-primary"
+            ),
+        ],
+        className='mb-4'
+    )
+    return radioitems
