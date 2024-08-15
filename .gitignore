@@ -155,7 +155,6 @@ dmypy.json
 cython_debug/
 
 # Project specific info
-/data/
 /notebooks/
 
 # PyCharm
