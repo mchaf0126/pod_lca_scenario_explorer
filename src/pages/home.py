@@ -39,15 +39,15 @@ layout = html.Div(
                         ),
                         dcc.Markdown(
                             '''
-                            The POD|LCA WBLCA Scenario Explorer is made from a set of structured 
-                            WBLCA template models with pre-built scenarios. The tool allows users 
-                            to enter project information and explore changes to the model results 
+                            The POD|LCA WBLCA Scenario Explorer is made from a set of structured
+                            WBLCA template models with pre-built scenarios. The tool allows users
+                            to enter project information and explore changes to the model results
                             related to specific scenarios and methodological decisions.
 
-                            This version, currently in development, is a POC model that will allow 
-                            us to continue to develop background data infrastructure and model code 
-                            base for the future POD LCA tools. For M3.3 Milestone we are proposing 
-                            to create a fully functional model along with updated documentation and 
+                            This version, currently in development, is a POC model that will allow
+                            us to continue to develop background data infrastructure and model code
+                            base for the future POD LCA tools. For M3.3 Milestone we are proposing
+                            to create a fully functional model along with updated documentation and
                             datasets for use by our internal tool development & framework team.
                             ''',
                             className='fw-light'
