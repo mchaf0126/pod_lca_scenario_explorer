@@ -5,12 +5,16 @@ site_author: University of Washington
 theme:
   features:
     - toc.integrate
+    - navigation.top
+    - navigation.footer
+    - search.highlight
     - content.code.copy 
     - content.code.annotation 
   name: material
   logo: assets/W-Logo_Purple_RGB.png
   palette:
     primary: deep purple
+    accent: indigo
 
 nav:
   - Homepage: index.md
@@ -19,3 +23,13 @@ nav:
   - Construction Scenarios: construction-scenarios.md
   - Replacement Scenarios: replacement-scenarios.md
   - End-of-life Scenarios: eol-scenarios.md
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mchaf0126/pod_lca_scenario_explorer
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/carbon-leadership-forum/
+
+copyright: Copyright &copy; 2024 University of Washington
