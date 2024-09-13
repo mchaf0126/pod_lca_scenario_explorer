@@ -1,0 +1,21 @@
+site_name: POD|LCA Scenario Explorer
+# 
+site_author: University of Washington
+# 
+theme:
+  features:
+    - toc.integrate
+    - content.code.copy 
+    - content.code.annotation 
+  name: material
+  logo: assets/W-Logo_Purple_RGB.png
+  palette:
+    primary: deep purple
+
+nav:
+  - Homepage: index.md
+  - Results: results.md
+  - Transportation Scenarios: transportation-scenarios.md
+  - Construction Scenarios: construction-scenarios.md
+  - Replacement Scenarios: replacement-scenarios.md
+  - End-of-life Scenarios: eol-scenarios.md
