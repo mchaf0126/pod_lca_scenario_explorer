@@ -9,18 +9,38 @@
 
 ## Template Model
 
-* [Page 2](template-model/page-2.md)
+* [Description](template-model/page-2.md)
+* [Setup](template-model/setup.md)
+* [Options](template-model/options.md)
+
+## Special Material
+
+* [Description](special-material/description.md)
+* [Methodology](special-material/methodology.md)
 
 ## Results
 
-* [Page 1](results/page-1.md)
+* [Description](results/page-1.md)
+* [Options](results/options.md)
 
 ## Scenarios
 
-* [Transportation Scenarios](scenarios/transportation-scenarios.md)
-* [Construction Scenarios](scenarios/construction-scenarios.md)
-* [Replacement Scenarios](scenarios/replacement-scenarios.md)
-* [End-of-life Scenarios](scenarios/end-of-life-scenarios.md)
+* [Transportation Scenarios](scenarios/transportation-scenarios/README.md)
+  * [Description](scenarios/transportation-scenarios/description.md)
+  * [Prebuilt Scenarios](scenarios/transportation-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](scenarios/transportation-scenarios/custom-scenarios.md)
+* [Construction Scenarios](scenarios/construction-scenarios/README.md)
+  * [Description](scenarios/construction-scenarios/description.md)
+  * [Prebuilt Scenarios](scenarios/construction-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](scenarios/construction-scenarios/custom-scenarios.md)
+* [Replacement Scenarios](scenarios/replacement-scenarios/README.md)
+  * [Description](scenarios/replacement-scenarios/description.md)
+  * [Prebuilt Scenarios](scenarios/replacement-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](scenarios/replacement-scenarios/custom-scenarios.md)
+* [End-of-life Scenarios](scenarios/end-of-life-scenarios/README.md)
+  * [Description](scenarios/end-of-life-scenarios/description.md)
+  * [Prebuilt Scenarios](scenarios/end-of-life-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](scenarios/end-of-life-scenarios/custom-scenarios.md)
 
 ## Useful Info for Gitbook
 
