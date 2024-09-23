@@ -1,5 +1,5 @@
 ---
-cover: .gitbook/assets/ARTPACK-Life Cycle Lab-Left-k (1).jpg
+cover: .gitbook/assets/LCL_logo.png
 coverY: 0
 ---
 
