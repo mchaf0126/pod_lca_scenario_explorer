@@ -1,5 +1,5 @@
 ---
-cover: .gitbook/assets/LCL_logo.png
+cover: .gitbook/assets/ARTPACK-Life Cycle Lab-Left-purple.png
 coverY: 0
 ---
 
