@@ -9,7 +9,7 @@ Use Revit Category as an extra category to map. e.g., 'Steel, reinforcing rod' w
 [Revit category are built into Revit and are intuitive building assemblies
 https://www.autodesk.com/support/technical/article/caas/tsarticles/ts/40TllwlxZoInjymoTI0lkB.html#:~:text=Model%20elements-,Revit%20categories,to%20behave%20in%20a%20project.]
 
-from Template model: 	Material Name => material_type (in RICS_mapper)
+from Template model: 	Material Name => material (in RICS_mapper)
 			Revit category => assembly (in RICS_mapper)
 
 Clarification needed:

@@ -112,8 +112,7 @@ class ReplacementScenario:
             service_life : df.
                 Table with columns 'id', 'material', 'service life'.
             mapper : df.
-                Table mapping materials in template model to 'material' in the service_life table
-                [TODO: which column in the template model to be mapped to]  
+                Table mapping 'Material Name', 'Revit category' in template model to 'material', 'assembly' in the service_life table
 
             Returns
             -------
@@ -122,14 +121,14 @@ class ReplacementScenario:
         """
 
 
-        material_to_service_life = pd.merge(mapper[['material', 'type']], service_life[['type', 'service_life']], 
+        material_to_service_life = pd.merge(mapper[['material', 'assembly', 'type']], service_life[['type', 'service_life']], 
                                             on='type', 
                                             how='left').drop(columns=['type'])
         model_with_service_life = pd.merge(model.model_material_data, material_to_service_life, 
-                                         left_on='Material Name', 
-                                         right_on='material', 
+                                         left_on=['Material Name', 'Revit category'], 
+                                         right_on=['material', 'assembly'], 
                                          how='left').drop(columns=['material'])
-        # TODO: merge with 'material' is problamatic: one to many mappings occur---to be reviewed
+        
         model.model_material_data = model_with_service_life
 
         return model
@@ -175,11 +174,12 @@ class ReplacementScenario:
 
         return b4
 
-    def set_results(self, model, result):
+    def set_results(model, result):
         """ Set calculated replacement (B4) impacts to the model data.
         """
 
         pass
+        # TODO: Implement method
 
 
 class RICS(ReplacementScenario):
@@ -214,7 +214,7 @@ class ASHRAE(ReplacementScenario):
         service_life_file = data_folder + '\ASHRAE_service_life.csv'
 
         service_life = pd.read_csv(service_life_file)
-        mapper = None # 
+        mapper = None 
 
         return mapper, service_life
 
@@ -224,10 +224,10 @@ class ASHRAE(ReplacementScenario):
         """
 
         model_with_service_life = pd.merge(model.model_material_data.assign(**{'Omniclass L3':model.model_material_data['Omniclass L3'].str.lower()}), 
-                                         service_life.assign(material=service_life['material'].str.lower()), 
+                                         service_life.assign(type=service_life['type'].str.lower()), 
                                          left_on='Omniclass L3', 
-                                         right_on='material', 
-                                         how='left').drop(columns=['material'])
+                                         right_on='type', 
+                                         how='left').drop(columns=['type'])
         
         model.model_material_data = model_with_service_life
 
@@ -243,7 +243,7 @@ if __name__ == '__main__':
     building.set_model_data_path(DATA_FOLDER + r'\template_model\Template_Model_1.csv')
     building.preprocess_data()
 
-    replacement_scenario = ASHRAE  # RICS
+    replacement_scenario = ASHRAE  # RICS or ASHRAE
     mapper, service_life = replacement_scenario.import_data(DATA_FOLDER + r'\databases\replacement')
     replacement_scenario.map_service_life(building, service_life, mapper)
     b4_impacts = replacement_scenario.calculate_impacts(building)
