@@ -1,4 +1,4 @@
-id,material,assembly,type
+id,material_type,assembly,RICS_type
 1,"Aluminum extrusion, mill-finished, Kawneer - EPD",Curtainwall Mullions,Glazed cladded/curtain walling
 2,"Powder coating, metal stock",Curtainwall Mullions,Glazed cladded/curtain walling
 3,"Glazing, double, insulated (air)",Curtainwall Panels,Glazed cladded/curtain walling

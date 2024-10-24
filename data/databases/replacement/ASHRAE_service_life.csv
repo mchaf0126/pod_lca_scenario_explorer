@@ -1,8 +1,8 @@
-id,material,service_life
+id,type,service_life
 1,standard foundations,60+
 2,special foundations,60+
 3,walls for subgrade enclosure,60+
-4,standard slabs on grade,60+
+4,standards slabs on grade,60+
 5,structural slab on grade,60+
 6,slab trenches,60+
 7,pits and bases,60+
