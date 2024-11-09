@@ -2,11 +2,6 @@
 
 * [Homepage](README.md)
 
-## Getting Started
-
-* [Quickstart](getting-started/quickstart.md)
-* [Publish your docs](getting-started/publish-your-docs.md)
-
 ## Template Model
 
 * [Description](template-model/page-2.md)
@@ -41,6 +36,11 @@
   * [Description](scenarios/end-of-life-scenarios/description.md)
   * [Prebuilt Scenarios](scenarios/end-of-life-scenarios/prebuilt-scenarios.md)
   * [Custom Scenarios](scenarios/end-of-life-scenarios/custom-scenarios.md)
+
+## Getting Started
+
+* [Quickstart](getting-started/quickstart.md)
+* [Publish your docs](getting-started/publish-your-docs.md)
 
 ## Useful Info for Gitbook
 
