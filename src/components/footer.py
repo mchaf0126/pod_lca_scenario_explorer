@@ -53,7 +53,7 @@ def create_footer() -> html.Div:
             )
         ],
         fluid=True,
-        class_name='bg-primary fixed-bottom p-3 fs-6'
+        class_name='bg-primary p-3 fs-6'
     )
 
     return navbar

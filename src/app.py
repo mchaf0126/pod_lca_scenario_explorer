@@ -29,10 +29,11 @@ app.layout = dbc.Container(
                     ),
                     justify='center'
                 ),
-            )
+            ),
         ),
         dbc.Row(
             page_container,
+            class_name='vh-100 gy-5'
         ),
         dbc.Row(
             html.Footer(
