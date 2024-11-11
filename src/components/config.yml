@@ -1,4 +1,16 @@
 ---
+tm_dropdown:
+  label: Template Model
+  dropdown_list:
+    - 
+      label: Template Model 1
+      value: tm_1
+    - 
+      label: Template Model 2
+      value: tm_2
+  first_item: tm_1
+  dropdown_id: tm_dropdown
+
 scope_dropdown:
   label: Categorization
   dropdown_list:
@@ -240,5 +252,7 @@ eol_scenario_checklist:
       value: 4_100%_recycle
   first_item: []
   checklist_id: eol_scenario_checklist
+
+
 
 
