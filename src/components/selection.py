@@ -54,6 +54,7 @@ def create_checklist(label: str,
                 options=checklist,
                 value=first_item,
                 id=dropdown_id,
+                persistence=True,
                 inputCheckedClassName="border border-primary bg-primary"
             ),
         ],
