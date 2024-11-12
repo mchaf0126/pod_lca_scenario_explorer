@@ -76,7 +76,8 @@ layout = html.Div(
         Input('impact_dropdown', 'value'),
         Input('impact_dropdown', 'options'),
         Input('template_model_name', 'data')
-    ]
+    ],
+    prevent_initial_callback=True
 )
 def update_chart(scope, impact_type, impact_options, template_model_name_dict):
 
