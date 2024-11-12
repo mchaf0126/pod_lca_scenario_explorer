@@ -69,9 +69,8 @@ layout = html.Div(
                 ),
                 dbc.Col(
                     [
-                        dcc.Markdown('''
-                                     THIS IS STILL IN DEVELOPMENT
-                                     ''')
+                        html.Img(id='tm_image'),
+                        dcc.Markdown(id='tm_description')
                     ], xs=8, sm=8, md=9, lg=9, xl=9, xxl=9
                 ),
             ],
@@ -82,14 +81,15 @@ layout = html.Div(
 )
 
 
-# @callback(
-#     Output('second_card_body_a4', 'children'),
-#     Input('a4_scenario_radioitem', 'value')
-# )
-# def update_second_card_body(radio_item):
-#     if radio_item == 'prebuilt':
-#         return [scope_dropdown, impact_dropdown]
-#     return [special_mat_1, special_mat_2]
+@callback(
+    [Output('tm_image', 'src'),
+     Output('tm_description', 'children')],
+    Input(tm_dropdown_yaml['dropdown_id'], 'value')
+)
+def update_image(dropdown_item):
+    markdown_text = f'### This is {dropdown_item}'
+    
+    return f'assets/tm_images/{dropdown_item}.png', markdown_text
 
 
 # @callback(

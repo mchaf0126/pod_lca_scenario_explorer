@@ -7,7 +7,7 @@ tm_dropdown:
       value: tm_1
     - 
       label: Template Model 2
-      value: tm_2
+      value: tm_2_dummy
   first_item: tm_1
   dropdown_id: tm_dropdown
 
