@@ -149,7 +149,6 @@ def update_chart(template_model_name_dict: dict,
                  prebuilt_scenario: list[str],
                  impact_type: str):
 
-    print(prebuilt_scenario)
     # check if template model has been selected
     if template_model_name_dict is None:
         return no_update, '## Please select a Template Model first'
