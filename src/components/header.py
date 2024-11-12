@@ -46,6 +46,15 @@ def create_header() -> html.Div:
                     dbc.NavItem(
                         [
                             dbc.NavLink(
+                                'Template Models',
+                                href='/template_model',
+                                className='fs-5 text-white fw-bolder'
+                            )
+                        ]
+                    ),
+                    dbc.NavItem(
+                        [
+                            dbc.NavLink(
                                 'Results',
                                 href='/results',
                                 className='fs-5 text-white fw-bolder'
@@ -80,6 +89,6 @@ def create_header() -> html.Div:
             ],
             fluid=True
         ),
-        color='primary'
+        color='primary',
     ),
     return navbar
