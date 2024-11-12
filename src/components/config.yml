@@ -72,9 +72,6 @@ scope_dropdown_a5_scenario:
   label: Categorization
   dropdown_list:
     - 
-      label: Life Cycle Stage
-      value: Life Cycle Stage
-    - 
       label: Revit Building Element
       value: Revit building element
     - 
@@ -83,7 +80,7 @@ scope_dropdown_a5_scenario:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown_a5_scenario
 
 scope_dropdown_b4_scenario:
@@ -105,9 +102,6 @@ scope_dropdown_eol_scenario:
   label: Categorization
   dropdown_list:
     - 
-      label: Life Cycle Stage
-      value: Life Cycle Stage
-    - 
       label: Revit Building Element
       value: Revit building element
     - 
@@ -116,7 +110,7 @@ scope_dropdown_eol_scenario:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown_eol_scenario
 
 a4_scenario_radioitem: 
