@@ -11,18 +11,6 @@ from src.components.a4_components import create_special_material_form
 
 register_page(__name__, path='/template_model')
 
-layout = html.Div(
-    children=[
-        dbc.Row(
-            dcc.Markdown(
-                '''
-                # THIS IS STILL IN DEVELOPMENT
-                '''
-            )
-        )
-    ]
-)
-
 current_file_path = Path(__file__)
 main_directory = current_file_path.parents[2]
 
@@ -40,7 +28,6 @@ tm_dropdown = create_dropdown(
     first_item=tm_dropdown_yaml['first_item'],
     dropdown_id=tm_dropdown_yaml['dropdown_id']
 )
-
 
 card_child = dbc.CardBody(
     [
@@ -87,8 +74,7 @@ layout = html.Div(
     Input(tm_dropdown_yaml['dropdown_id'], 'value')
 )
 def update_image(dropdown_item):
-    markdown_text = f'### This is {dropdown_item}'
-    
+    markdown_text = f'### This is {dropdown_item}' 
     return f'assets/tm_images/{dropdown_item}.png', markdown_text
 
 
