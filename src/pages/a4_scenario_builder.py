@@ -11,18 +11,6 @@ from src.components.selection import create_dropdown, create_checklist, \
 
 register_page(__name__, path='/a4_scenario_builder')
 
-layout = html.Div(
-    children=[
-        dbc.Row(
-            dcc.Markdown(
-                '''
-                # THIS IS STILL IN DEVELOPMENT
-                '''
-            )
-        )
-    ]
-)
-
 current_file_path = Path(__file__)
 main_directory = current_file_path.parents[2]
 prebuilt_scenario_directory = main_directory.joinpath('data/frontend/combined_prebuilt_scenarios.csv')
@@ -144,7 +132,8 @@ def update_second_card_body(radio_item):
         Input(scope_dropdown_yaml['dropdown_id'], 'value'),
         Input(scenario_checklist_yaml['checklist_id'], 'value'),
         Input(impact_dropdown_yaml['dropdown_id'], 'value'),
-    ]
+    ],
+    prevent_initial_callback=True
 )
 def update_chart(template_model_name_dict: dict,
                  categorization: str,
@@ -159,6 +148,7 @@ def update_chart(template_model_name_dict: dict,
         temp_model_filter & a4_filter
     ]
 
+    # filter down to selected template model from prebuilt scenarios
     filtered_prebuilt_scenario_df = prebuilt_scenario_df[
         prebuilt_scenario_df['Revit model'] == template_model_name_dict.get('template_model_value')
     ]
@@ -174,6 +164,7 @@ def update_chart(template_model_name_dict: dict,
     new_df = new_df.groupby(categorization).sum()
     new_df['Impacts'] = f'{template_model_name_dict.get("template_model_name")} - Default Transport'
 
+    # create dataframes with the selected impact_type for each prebuilt scenario chosen
     list_of_dfs = [new_df]
     for unique_p_scenario in prebuilt_scenario:
         temp = filtered_prebuilt_scenario_df[
@@ -191,8 +182,10 @@ def update_chart(template_model_name_dict: dict,
 
         list_of_dfs.append(temp_eol_adjusted_df)
 
+    # combine these dataframes to visualize them
     checklist_df = pd.concat(list_of_dfs)
 
+    # create graph
     fig = px.bar(
         checklist_df,
         x='Impacts',
