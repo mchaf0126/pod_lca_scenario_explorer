@@ -34,7 +34,7 @@ assert scope_dropdown_yaml is not None, 'The config for cat. dropdowns could not
 scenario_checklist_yaml = config.get('eol_scenario_checklist')
 assert scenario_checklist_yaml is not None, 'The config for scenario checklist could not be set'
 
-impact_dropdown_yaml = config.get('b4_impact_dropdown')
+impact_dropdown_yaml = config.get('eol_impact_dropdown')
 assert impact_dropdown_yaml is not None, 'The config for the impact dropdowns could not be set'
 
 eol_radioitem = create_radio(
@@ -119,7 +119,6 @@ layout = html.Div(
     ],
 )
 
-
 @callback(
     Output('second_card_body_eol', 'children'),
     Input('eol_scenario_radioitem', 'value')
@@ -146,16 +145,17 @@ def update_second_card_body(radio_item):
 )
 def update_chart(template_model_name_dict: dict,
                  categorization: str,
-                 prebuilt_scenario: str,
+                 prebuilt_scenario: list[str],
                  impact_type: str):
 
+    print(prebuilt_scenario)
     # check if template model has been selected
     if template_model_name_dict is None:
         return no_update, '## Please select a Template Model first'
 
     # filter down to selected template model's a4 impacts
     temp_model_filter = template_model_impact_df['Revit model'] == template_model_name_dict.get('template_model_value')
-    b4_filter = template_model_impact_df['Life Cycle Stage'] == '[B2-B5] Maintenance and Replacement'
+    b4_filter = template_model_impact_df['Life Cycle Stage'] == '[C2-C4] End of Life'
 
     filtered_template_model_df = template_model_impact_df[
         temp_model_filter & b4_filter
@@ -175,7 +175,7 @@ def update_chart(template_model_name_dict: dict,
         value_name='Impact Amount'
     )
     new_df = new_df.groupby(categorization).sum()
-    new_df['Impacts'] = f'{template_model_name_dict.get("template_model_name")} - Default Replacement'
+    new_df['Impacts'] = f'{template_model_name_dict.get("template_model_name")} - Default End-of-life'
 
     # create dataframes with the selected impact_type for each prebuilt scenario chosen
     list_of_dfs = [new_df]

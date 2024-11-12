@@ -138,7 +138,7 @@ def update_second_card_body(radio_item):
 )
 def update_chart(template_model_name_dict: dict,
                  categorization: str,
-                 prebuilt_scenario: str,
+                 prebuilt_scenario: list[str],
                  impact_type: str):
 
     # check if template model has been selected
