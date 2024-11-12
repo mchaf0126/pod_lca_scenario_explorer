@@ -149,7 +149,7 @@ def update_chart(template_model_name_dict: dict,
 
     # check if template model has been selected
     if template_model_name_dict is None:
-        return no_update, '### Please select a Template Model first'
+        return no_update, '## Please select a Template Model first'
 
     # filter down to selected template model's a4 impacts
     temp_model_filter = template_model_impact_df['Revit model'] == template_model_name_dict.get('template_model_value')
