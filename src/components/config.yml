@@ -72,9 +72,6 @@ scope_dropdown_a5_scenario:
   label: Categorization
   dropdown_list:
     - 
-      label: Life Cycle Stage
-      value: Life Cycle Stage
-    - 
       label: Revit Building Element
       value: Revit building element
     - 
@@ -83,7 +80,7 @@ scope_dropdown_a5_scenario:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown_a5_scenario
 
 scope_dropdown_b4_scenario:
@@ -105,9 +102,6 @@ scope_dropdown_eol_scenario:
   label: Categorization
   dropdown_list:
     - 
-      label: Life Cycle Stage
-      value: Life Cycle Stage
-    - 
       label: Revit Building Element
       value: Revit building element
     - 
@@ -116,7 +110,7 @@ scope_dropdown_eol_scenario:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown_eol_scenario
 
 a4_scenario_radioitem: 
@@ -273,18 +267,30 @@ eol_scenario_checklist:
   checklist: 
     -
       label: Regional Mix
-      value: 1_regional_mix
-    - 
-      label: 100% Landfill
-      value: 2_100%_landfill    
-    - 
-      label: 100% Incineration
-      value: 3_100%_incineration
-    - 
-      label: 100% Recycle / Reuse
-      value: 4_100%_recycle
+      value: regional_mix
   first_item: []
   checklist_id: eol_scenario_checklist
+
+eol_impact_dropdown: 
+  label: Impacts
+  dropdown_list: 
+    - 
+      label: GWP
+      value: Global Warming Potential Total (kgCO2eq)        
+    - 
+      label: AP
+      value: Acidification Potential Total (kgSO2eq)
+    - 
+      label: EP
+      value: Eutrophication Potential Total (kgNeq)
+    - 
+      label: ODP
+      value: Ozone Depletion Potential Total (CFC-11eq)
+    - 
+      label: SFP
+      value: Smog Formation Potential Total (kgO3eq)
+  first_item: Global Warming Potential Total (kgCO2eq)
+  dropdown_id: b4_impact_dropdown
 
 
 
