@@ -2,7 +2,7 @@
 from pathlib import Path
 import pandas as pd
 import plotly.express as px
-from dash import html, dcc, callback, Input, Output, register_page
+from dash import html, dcc, callback, Input, Output, register_page, no_update
 import dash_bootstrap_components as dbc
 import src.utils.general as utils
 from src.components.selection import create_dropdown, create_checklist, \
@@ -73,6 +73,7 @@ card_child = dbc.CardBody(
     class_name='pb-0'
 )
 second_child = dbc.CardBody(
+    children=[scope_dropdown, impact_dropdown, scenario_dropdown],
     id='second_card_body_a4',
     class_name='my_0 py-0',
 )
@@ -105,6 +106,7 @@ layout = html.Div(
                 dbc.Col(
                     [
                         dcc.Graph(id="a4_scenario_bar"),
+                        dcc.Markdown(id='potential_error_message', className='text-center')
                     ], xs=8, sm=8, md=9, lg=9, xl=9, xxl=9
                 ),
             ],
@@ -117,21 +119,26 @@ layout = html.Div(
 
 @callback(
     Output('second_card_body_a4', 'children'),
-    Input('a4_scenario_radioitem', 'value')
+    Input('a4_scenario_radioitem', 'value'),
+    prevent_initial_callback=True
 )
 def update_second_card_body(radio_item):
-    if radio_item == 'prebuilt':
+    if radio_item == 'custom':
+        return html.Div('Custom Scenarios are not implemented yet')
+    else:
         return [scope_dropdown, impact_dropdown, scenario_dropdown]
-    return html.Div('Custom Scenarios are not implemented yet')
 
 
 @callback(
-    Output('a4_scenario_bar', 'figure'),
+    [
+        Output('a4_scenario_bar', 'figure'),
+        Output('potential_error_message', 'children')
+    ],
     [
         Input('template_model_name', 'data'),
-        Input(scope_dropdown_yaml['dropdown_id'], 'value'),
-        Input(scenario_checklist_yaml['checklist_id'], 'value'),
-        Input(impact_dropdown_yaml['dropdown_id'], 'value'),
+        Input(scope_dropdown_yaml.get('dropdown_id'), 'value'),
+        Input(scenario_checklist_yaml.get('checklist_id'), 'value'),
+        Input(impact_dropdown_yaml.get('dropdown_id'), 'value'),
     ],
     prevent_initial_callback=True
 )
@@ -139,6 +146,10 @@ def update_chart(template_model_name_dict: dict,
                  categorization: str,
                  prebuilt_scenario: str,
                  impact_type: str):
+
+    # check if template model has been selected
+    if template_model_name_dict is None:
+        return no_update, '### Please select a Template Model first'
 
     # filter down to selected template model's a4 impacts
     temp_model_filter = template_model_impact_df['Revit model'] == template_model_name_dict.get('template_model_value')
@@ -202,4 +213,4 @@ def update_chart(template_model_name_dict: dict,
     if len(prebuilt_scenario) > 2:
         fig.update_traces(width=.8)
 
-    return fig
+    return fig, ''

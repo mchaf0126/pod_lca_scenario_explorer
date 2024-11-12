@@ -65,7 +65,7 @@ scope_dropdown_a4_scenario:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown_a4_scenario
 
 scope_dropdown_a5_scenario:
