@@ -19,7 +19,10 @@ footer = create_footer()
 
 app.layout = dbc.Container(
     [
-        dcc.Store(id='template_model_name'),
+        dcc.Store(
+            id='template_model_name',
+            storage_type='session'
+        ),
         dbc.Row(
             html.Header(
                 dbc.Row(

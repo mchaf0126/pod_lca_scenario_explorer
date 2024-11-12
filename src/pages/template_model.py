@@ -70,10 +70,21 @@ layout = html.Div(
 
 @callback(
     Output('template_model_name', 'data'),
-    Input(tm_dropdown_yaml['dropdown_id'], 'value')
+    [
+        Input(tm_dropdown_yaml['dropdown_id'], 'options'),
+        Input(tm_dropdown_yaml['dropdown_id'], 'value')
+    ]
 )
-def update_tm_name(value):
-    return value
+def update_tm_name(template_model_options, dropdown_value):
+    for item in template_model_options:
+        if item['value'] == dropdown_value:
+            template_model_index = template_model_options.index(item)
+
+    template_model_name = template_model_options[template_model_index]['label']
+    return {
+        "template_model_name": template_model_name,
+        'template_model_value': dropdown_value
+    }
 
 
 @callback(
@@ -81,9 +92,9 @@ def update_tm_name(value):
      Output('tm_description', 'children')],
     Input('template_model_name', 'data')
 )
-def update_image(dropdown_item):
-    markdown_text = f'### This is {dropdown_item}' 
-    return f'assets/tm_images/{dropdown_item}.png', markdown_text
+def update_image(template_model_name_dict):
+    markdown_text = f'### This is {template_model_name_dict.get("template_model_name")}'
+    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', markdown_text
 
 
 # @callback(
