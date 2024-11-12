@@ -69,9 +69,17 @@ layout = html.Div(
 
 
 @callback(
+    Output('template_model_name', 'data'),
+    Input(tm_dropdown_yaml['dropdown_id'], 'value')
+)
+def update_tm_name(value):
+    return value
+
+
+@callback(
     [Output('tm_image', 'src'),
      Output('tm_description', 'children')],
-    Input(tm_dropdown_yaml['dropdown_id'], 'value')
+    Input('template_model_name', 'data')
 )
 def update_image(dropdown_item):
     markdown_text = f'### This is {dropdown_item}' 

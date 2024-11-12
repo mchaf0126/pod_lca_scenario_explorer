@@ -13,14 +13,19 @@ register_page(__name__, path='/results')
 layout = html.Div(
     children=[
         dbc.Row(
-            dcc.Markdown(
-                '''
-                # THIS IS STILL IN DEVELOPMENT
-                '''
-            )
+            dcc.Markdown(id='test_for_state')
         )
     ]
 )
+
+@callback(
+    Output('test_for_state', 'children'),
+    Input('template_model_name', 'data')
+)
+def update_image(state_value):
+    markdown_text = f'### This came from dcc.store: {state_value}' 
+    return  markdown_text
+
 
 # current_file_path = Path(__file__)
 # main_directory = current_file_path.parents[2]

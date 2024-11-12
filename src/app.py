@@ -1,4 +1,4 @@
-from dash import Dash, html, page_container
+from dash import Dash, html, page_container, dcc
 import dash_bootstrap_components as dbc
 from dash_bootstrap_templates import load_figure_template
 from src.components.header import create_header
@@ -19,6 +19,7 @@ footer = create_footer()
 
 app.layout = dbc.Container(
     [
+        dcc.Store(id='template_model_name'),
         dbc.Row(
             html.Header(
                 dbc.Row(
