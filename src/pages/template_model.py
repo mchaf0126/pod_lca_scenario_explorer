@@ -1,13 +1,9 @@
 """Results page of dashboard"""
 from pathlib import Path
-import pandas as pd
-import plotly.express as px
 from dash import html, dcc, callback, Input, Output, register_page
 import dash_bootstrap_components as dbc
 import src.utils.general as utils
-from src.components.selection import create_dropdown, create_checklist, \
-    create_radio
-from src.components.a4_components import create_special_material_form
+from src.components.selection import create_dropdown
 
 register_page(__name__, path='/template_model')
 
@@ -70,10 +66,21 @@ layout = html.Div(
 
 @callback(
     Output('template_model_name', 'data'),
-    Input(tm_dropdown_yaml['dropdown_id'], 'value')
+    [
+        Input(tm_dropdown_yaml['dropdown_id'], 'options'),
+        Input(tm_dropdown_yaml['dropdown_id'], 'value')
+    ]
 )
-def update_tm_name(value):
-    return value
+def update_tm_name(template_model_options, dropdown_value):
+    for item in template_model_options:
+        if item['value'] == dropdown_value:
+            template_model_index = template_model_options.index(item)
+
+    template_model_name = template_model_options[template_model_index]['label']
+    return {
+        "template_model_name": template_model_name,
+        'template_model_value': dropdown_value
+    }
 
 
 @callback(
@@ -81,71 +88,6 @@ def update_tm_name(value):
      Output('tm_description', 'children')],
     Input('template_model_name', 'data')
 )
-def update_image(dropdown_item):
-    markdown_text = f'### This is {dropdown_item}' 
-    return f'assets/tm_images/{dropdown_item}.png', markdown_text
-
-
-# @callback(
-#     Output('a4_scenario_bar', 'figure'),
-#     [
-#         Input('scope_dropdown_a4_scenario', 'value'),
-#         Input('a4_scenario_checklist', 'value'),
-#     ]
-# )
-# def update_chart(scope, checklist_value):
-
-#     # update with actual logic
-#     percent_dict = {
-#         '1_us_avg_dist': 25,
-#         '2_global_avg_dist': 50,
-#         '3_elec_vehicles': 75
-#     }
-#     new_df = pd.melt(
-#         df,
-#         id_vars=scope,
-#         value_vars='Global Warming Potential Total (kgCO2eq)',
-#         var_name='Impacts',
-#         value_name='Impact Amount'
-#     )
-#     new_df = new_df.groupby(scope).sum()
-#     new_df['Impacts'] = '0_default_transport'
-
-#     list_of_dfs = [new_df]
-#     for num in checklist_value:
-#         temp = df.copy()
-#         temp.loc[
-#             temp['Life Cycle Stage'] == '[A4] Transportation',
-#             'Global Warming Potential Total (kgCO2eq)'
-#         ] = temp['Global Warming Potential Total (kgCO2eq)'] * (1 - (percent_dict.get(num) / 100))
-#         temp_eol_adjusted_df = pd.melt(
-#             temp,
-#             id_vars=scope,
-#             value_vars='Global Warming Potential Total (kgCO2eq)',
-#             var_name='Impacts',
-#             value_name='Impact Amount'
-#         )
-#         temp_eol_adjusted_df = temp_eol_adjusted_df.groupby(scope).sum()
-#         temp_eol_adjusted_df['Impacts'] = num
-
-#         list_of_dfs.append(temp_eol_adjusted_df)
-
-#     checklist_df = pd.concat(list_of_dfs)
-
-#     fig = px.bar(
-#         checklist_df,
-#         x='Impacts',
-#         y='Impact Amount',
-#         color=checklist_df.index,
-#     ).update_yaxes(
-#         title=f'Total Global Warming Potential by {scope}',
-#         tickformat=',.0f',
-#     ).update_xaxes(
-#         categoryorder='category ascending',
-#         title=''
-#     )
-#     fig.update_traces(width=.2 + .2 * len(checklist_value))
-#     if len(checklist_value) > 2:
-#         fig.update_traces(width=.8)
-
-#     return fig
+def update_image(template_model_name_dict):
+    markdown_text = f'### This is {template_model_name_dict.get("template_model_name")}'
+    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', markdown_text
