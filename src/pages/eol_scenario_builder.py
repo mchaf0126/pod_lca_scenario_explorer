@@ -119,6 +119,7 @@ layout = html.Div(
     ],
 )
 
+
 @callback(
     Output('second_card_body_eol', 'children'),
     Input('eol_scenario_radioitem', 'value')
