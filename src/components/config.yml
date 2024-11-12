@@ -90,9 +90,6 @@ scope_dropdown_b4_scenario:
   label: Categorization
   dropdown_list:
     - 
-      label: Life Cycle Stage
-      value: Life Cycle Stage
-    - 
       label: Revit Building Element
       value: Revit building element
     - 
@@ -101,7 +98,7 @@ scope_dropdown_b4_scenario:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown_b4_scenario
 
 scope_dropdown_eol_scenario:
@@ -231,12 +228,33 @@ b4_scenario_checklist:
   checklist: 
     -
       label: RICS Replacement Rates
-      value: 1_rics_repl_rates
+      value: RICS
     - 
       label: ASHRAE 240P Replacement Rates
-      value: 2_ashrae_repl_rates
+      value: ASHRAE_240
   first_item: []
   checklist_id: b4_scenario_checklist
+
+b4_impact_dropdown: 
+  label: Impacts
+  dropdown_list: 
+    - 
+      label: GWP
+      value: Global Warming Potential Total (kgCO2eq)        
+    - 
+      label: AP
+      value: Acidification Potential Total (kgSO2eq)
+    - 
+      label: EP
+      value: Eutrophication Potential Total (kgNeq)
+    - 
+      label: ODP
+      value: Ozone Depletion Potential Total (CFC-11eq)
+    - 
+      label: SFP
+      value: Smog Formation Potential Total (kgO3eq)
+  first_item: Global Warming Potential Total (kgCO2eq)
+  dropdown_id: b4_impact_dropdown
 
 eol_scenario_radioitem: 
   label: Approach

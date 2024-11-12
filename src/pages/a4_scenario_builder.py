@@ -50,7 +50,7 @@ scope_dropdown = create_dropdown(
     dropdown_id=scope_dropdown_yaml['dropdown_id']
 )
 
-scenario_dropdown = create_checklist(
+scenario_checklist = create_checklist(
     label=scenario_checklist_yaml['label'],
     checklist=scenario_checklist_yaml['checklist'],
     first_item=scenario_checklist_yaml['first_item'],
@@ -73,7 +73,7 @@ card_child = dbc.CardBody(
     class_name='pb-0'
 )
 second_child = dbc.CardBody(
-    children=[scope_dropdown, impact_dropdown, scenario_dropdown],
+    children=[scope_dropdown, impact_dropdown, scenario_checklist],
     id='second_card_body_a4',
     class_name='my_0 py-0',
 )
@@ -106,7 +106,7 @@ layout = html.Div(
                 dbc.Col(
                     [
                         dcc.Graph(id="a4_scenario_bar"),
-                        dcc.Markdown(id='potential_error_message', className='text-center')
+                        dcc.Markdown(id='a4_potential_error_message', className='text-center')
                     ], xs=8, sm=8, md=9, lg=9, xl=9, xxl=9
                 ),
             ],
@@ -126,13 +126,13 @@ def update_second_card_body(radio_item):
     if radio_item == 'custom':
         return html.Div('Custom Scenarios are not implemented yet')
     else:
-        return [scope_dropdown, impact_dropdown, scenario_dropdown]
+        return [scope_dropdown, impact_dropdown, scenario_checklist]
 
 
 @callback(
     [
         Output('a4_scenario_bar', 'figure'),
-        Output('potential_error_message', 'children')
+        Output('a4_potential_error_message', 'children')
     ],
     [
         Input('template_model_name', 'data'),
@@ -149,7 +149,7 @@ def update_chart(template_model_name_dict: dict,
 
     # check if template model has been selected
     if template_model_name_dict is None:
-        return no_update, '### Please select a Template Model first'
+        return no_update, '## Please select a Template Model first'
 
     # filter down to selected template model's a4 impacts
     temp_model_filter = template_model_impact_df['Revit model'] == template_model_name_dict.get('template_model_value')
@@ -181,17 +181,17 @@ def update_chart(template_model_name_dict: dict,
         temp = filtered_prebuilt_scenario_df[
             filtered_prebuilt_scenario_df['prebuilt_scenario'] == unique_p_scenario
         ]
-        temp_eol_adjusted_df = pd.melt(
+        p_scenario_df = pd.melt(
             temp,
             id_vars=categorization,
             value_vars=impact_type,
             var_name='Impacts',
             value_name='Impact Amount'
         )
-        temp_eol_adjusted_df = temp_eol_adjusted_df.groupby(categorization).sum()
-        temp_eol_adjusted_df['Impacts'] = f'{template_model_name_dict.get("template_model_name")} - {unique_p_scenario}'
+        p_scenario_df = p_scenario_df.groupby(categorization).sum()
+        p_scenario_df['Impacts'] = f'{template_model_name_dict.get("template_model_name")} - {unique_p_scenario}'
 
-        list_of_dfs.append(temp_eol_adjusted_df)
+        list_of_dfs.append(p_scenario_df)
 
     # combine these dataframes to visualize them
     checklist_df = pd.concat(list_of_dfs)
