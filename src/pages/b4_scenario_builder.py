@@ -195,6 +195,7 @@ def update_chart(template_model_name_dict: dict,
         x='Impacts',
         y='Impact Amount',
         color=checklist_df.index,
+        title=f'Impacts for Replacement Scenarios of {template_model_name_dict.get("template_model_name")}'
     ).update_yaxes(
         title=f'Total Global Warming Potential by {categorization}',
         tickformat=',.0f',
