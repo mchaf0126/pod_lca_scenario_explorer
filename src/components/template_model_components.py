@@ -1,5 +1,5 @@
 from pathlib import Path
-from dash import html
+from dash import html, dcc
 import dash_bootstrap_components as dbc
 import src.utils.general as utils
 
@@ -7,6 +7,8 @@ current_file_path = Path(__file__)
 main_directory = current_file_path.parents[2]
 
 config_path = main_directory.joinpath('src/components/config.yml')
+
+from src.components.selection import create_dropdown
 
 config = utils.read_yaml(config_path)
 assert config is not None, 'The config dictionary could not be set'
@@ -128,6 +130,67 @@ sidebar = dbc.Container(
                 start_collapsed=True,
                 always_open=True
             )
+        )
+    ],
+    class_name='p-0 mt-2',
+    fluid=True
+)
+
+display_data = dbc.Container(
+    [
+        dbc.Row(
+            [
+                dbc.Label(
+                    id='tm_description',
+                    class_name='fs-5 fw-bold mt-2 text-center'
+                ),
+                html.Img(id='tm_image'),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            dbc.CardBody(
+                                [
+                                    html.H5("Architecture", className="card-title"),
+                                    dcc.Markdown(
+                                        id='arch_criteria_text',
+                                        className="card-text",
+                                    ),
+                                ]
+                            )
+                        ),
+                    ]
+                ),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            dbc.CardBody(
+                                [
+                                    html.H4("Structure", className="card-title"),
+                                    dcc.Markdown(
+                                        id='str_criteria_text',
+                                        className="card-text",
+                                    ),
+                                ]
+                            )
+                        )
+                    ]
+                ),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            dbc.CardBody(
+                                [
+                                    html.H4("Enclosure", className="card-title"),
+                                    dcc.Markdown(
+                                        id='enc_criteria_text',
+                                        className="card-text",
+                                    ),
+                                ]
+                            )
+                        )
+                    ]
+                )
+            ]
         )
     ],
     class_name='p-0 mt-2',

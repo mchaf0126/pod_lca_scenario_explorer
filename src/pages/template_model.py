@@ -1,143 +1,11 @@
 """Results page of dashboard"""
-from pathlib import Path
 import pandas as pd
 from dash import html, dcc, callback, Input, Output, State, register_page, no_update
 import dash_bootstrap_components as dbc
-import src.utils.general as utils
-from src.components.selection import create_dropdown
+import src.components.template_model_components as tmc
 
 register_page(__name__, path='/template_model')
 
-current_file_path = Path(__file__)
-main_directory = current_file_path.parents[2]
-
-config_path = main_directory.joinpath('src/components/config.yml')
-
-config = utils.read_yaml(config_path)
-assert config is not None, 'The config dictionary could not be set'
-
-location_dropdown_yaml = config.get('location_dropdown')
-assert location_dropdown_yaml is not None, 'The config for location dropdown could not be set'
-
-building_use_type_dropdown_yaml = config.get('building_use_type_dropdown')
-assert building_use_type_dropdown_yaml is not None, 'The config for building use dropdown could not be set'
-
-str_horiz_grav_sys_dropdown_yaml = config.get('str_horiz_grav_sys_dropdown')
-assert str_horiz_grav_sys_dropdown_yaml is not None, 'The config for str horiz grav dropdown could not be set'
-
-str_vert_grav_sys_dropdown_yaml = config.get('str_vert_grav_sys_dropdown')
-assert str_vert_grav_sys_dropdown_yaml is not None, 'The config for str vert grav dropdown could not be set'
-
-str_lat_sys_dropdown_yaml = config.get('str_lat_sys_dropdown')
-assert str_lat_sys_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
-
-cladding_type_dropdown_yaml = config.get('cladding_type_dropdown')
-assert cladding_type_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
-
-roofing_type_dropdown_yaml = config.get('roofing_type_dropdown')
-assert roofing_type_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
-
-wwr_dropdown_yaml = config.get('wwr_dropdown')
-assert wwr_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
-
-location_dropdown = create_dropdown(
-    label=location_dropdown_yaml['label'],
-    dropdown_list=location_dropdown_yaml['dropdown_list'],
-    first_item=location_dropdown_yaml['first_item'],
-    dropdown_id=location_dropdown_yaml['dropdown_id']
-)
-building_use_type_dropdown = create_dropdown(
-    label=building_use_type_dropdown_yaml['label'],
-    dropdown_list=building_use_type_dropdown_yaml['dropdown_list'],
-    first_item=building_use_type_dropdown_yaml['first_item'],
-    dropdown_id=building_use_type_dropdown_yaml['dropdown_id']
-)
-
-str_horiz_grav_sys_dropdown = create_dropdown(
-    label=str_horiz_grav_sys_dropdown_yaml['label'],
-    dropdown_list=str_horiz_grav_sys_dropdown_yaml['dropdown_list'],
-    first_item=str_horiz_grav_sys_dropdown_yaml['first_item'],
-    dropdown_id=str_horiz_grav_sys_dropdown_yaml['dropdown_id']
-)
-
-str_vert_grav_sys_dropdown = create_dropdown(
-    label=str_vert_grav_sys_dropdown_yaml['label'],
-    dropdown_list=str_vert_grav_sys_dropdown_yaml['dropdown_list'],
-    first_item=str_vert_grav_sys_dropdown_yaml['first_item'],
-    dropdown_id=str_vert_grav_sys_dropdown_yaml['dropdown_id']
-)
-
-str_lat_sys_dropdown = create_dropdown(
-    label=str_lat_sys_dropdown_yaml['label'],
-    dropdown_list=str_lat_sys_dropdown_yaml['dropdown_list'],
-    first_item=str_lat_sys_dropdown_yaml['first_item'],
-    dropdown_id=str_lat_sys_dropdown_yaml['dropdown_id']
-)
-
-cladding_type_dropdown = create_dropdown(
-    label=cladding_type_dropdown_yaml['label'],
-    dropdown_list=cladding_type_dropdown_yaml['dropdown_list'],
-    first_item=cladding_type_dropdown_yaml['first_item'],
-    dropdown_id=cladding_type_dropdown_yaml['dropdown_id']
-)
-
-roofing_type_dropdown = create_dropdown(
-    label=roofing_type_dropdown_yaml['label'],
-    dropdown_list=roofing_type_dropdown_yaml['dropdown_list'],
-    first_item=roofing_type_dropdown_yaml['first_item'],
-    dropdown_id=roofing_type_dropdown_yaml['dropdown_id']
-)
-
-wwr_dropdown = create_dropdown(
-    label=wwr_dropdown_yaml['label'],
-    dropdown_list=wwr_dropdown_yaml['dropdown_list'],
-    first_item=wwr_dropdown_yaml['first_item'],
-    dropdown_id=wwr_dropdown_yaml['dropdown_id']
-)
-
-sidebar = dbc.Container(
-    [
-        dbc.Row(
-            dbc.Label(
-                'Template Model Selector',
-                class_name='fs-5 fw-bold my-2 text-center'
-            ),
-        ),
-        dbc.Row(
-            dbc.Accordion(
-                [
-                    dbc.AccordionItem(
-                        [
-                            location_dropdown,
-                            building_use_type_dropdown
-                        ],
-                        title="Architecture",
-                    ),
-                    dbc.AccordionItem(
-                        [
-                            str_horiz_grav_sys_dropdown,
-                            str_vert_grav_sys_dropdown,
-                            str_lat_sys_dropdown
-                        ],
-                        title="Structure",
-                    ),
-                    dbc.AccordionItem(
-                        [
-                            cladding_type_dropdown,
-                            roofing_type_dropdown,
-                            wwr_dropdown
-                        ],
-                        title="Enclosure",
-                    ),
-                ],
-                start_collapsed=True,
-                always_open=True
-            )
-        )
-    ],
-    class_name='p-0 mt-2',
-    fluid=True
-)
 
 layout = html.Div(
     children=[
@@ -146,24 +14,20 @@ layout = html.Div(
                 [
                     dbc.Col(
                         [
-                            sidebar
+                            tmc.sidebar
                         ], xs=3, sm=3, md=3, lg=3, xl=3, xxl=3,
                         class_name=''
                     ),
                     dbc.Col(
                         [
-                            dbc.Label(
-                                id='tm_description',
-                                class_name='fs-5 fw-bold mt-2 text-center'
-                            ),
-                            html.Img(id='tm_image'),
-                        ], xs=5, sm=5, md=5, lg=5, xl=5, xxl=5,
+                            tmc.display_data
+                        ], xs=6, sm=6, md=6, lg=6, xl=6, xxl=6,
                         class_name=''
                     ),
                     dbc.Col(
                         [
                             dcc.Graph(id="tm_summary"),
-                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4
+                        ], xs=3, sm=3, md=3, lg=3, xl=3, xxl=3
                     ),
                 ],
                 justify='center',
@@ -179,7 +43,7 @@ layout = html.Div(
 @callback(
     Output('template_model_name', 'data'),
     [
-        Input(location_dropdown_yaml['dropdown_id'], 'value'),
+        Input('location_dropdown', 'value'),
         State('template_model_metadata', 'data')
     ]
 )
@@ -187,7 +51,10 @@ def update_tm_name(location_dropdown_value, tm_metadata):
     tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
     if location_dropdown_value not in tm_metadata_df['city'].unique():
         return no_update
-    tm_name = tm_metadata_df.loc[tm_metadata_df['city'] == location_dropdown_value, 'template_model'].item()
+    tm_name = tm_metadata_df.loc[
+        tm_metadata_df['city'] == location_dropdown_value,
+        'template_model'
+    ].item()
 
     return {
         "template_model_name": str(tm_name),
@@ -196,19 +63,26 @@ def update_tm_name(location_dropdown_value, tm_metadata):
 
 
 @callback(
-    Output(component_id='output_test', component_property='children'),
-    Input(component_id='template_model_metadata', component_property='data')
-)
-def test(tm_metadata):
-    tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
-    return tm_metadata_df['city']
-
-
-@callback(
-    [Output('tm_image', 'src'),
-     Output('tm_description', 'children')],
+    [
+        Output('tm_image', 'src'),
+        Output('tm_description', 'children')
+    ],
     Input('template_model_name', 'data')
 )
 def update_image(template_model_name_dict):
     markdown_text = f'This is {template_model_name_dict.get("template_model_name")}'
     return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', markdown_text
+
+
+@callback(
+    Output('arch_criteria_text', 'children'),
+    [
+        Input('location_dropdown', 'value'),
+        Input('building_use_type_dropdown', 'value')
+    ]
+)
+def update_arch_criteria_text(location, building_use_type):
+    return f'''
+        __Location:__ {location}
+        __Building Use Type:__ {building_use_type}
+        '''
