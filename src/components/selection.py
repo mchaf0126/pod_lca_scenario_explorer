@@ -24,6 +24,7 @@ def create_dropdown(label: str, dropdown_list: list, first_item: str, dropdown_i
                 id=dropdown_id,
                 clearable=False,
                 persistence=True,
+                optionHeight=50
             ),
         ],
         className='mb-4'

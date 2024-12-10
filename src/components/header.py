@@ -31,61 +31,61 @@ def create_header() -> html.Div:
                     ],
                     align='center',
                     justify='left',
-                    className='g-4'
+                    className='g-4 p-0'
                 ),
-                dbc.Nav([
-                    dbc.NavItem(
-                        [
-                            dbc.NavLink(
-                                'Home',
-                                href='/',
-                                className='fs-5 text-white fw-bolder'
-                            )
-                        ]
-                    ),
-                    dbc.NavItem(
-                        [
-                            dbc.NavLink(
-                                'Template Models',
-                                href='/template_model',
-                                className='fs-5 text-white fw-bolder'
-                            )
-                        ]
-                    ),
-                    dbc.NavItem(
-                        [
-                            dbc.NavLink(
-                                'Results',
-                                href='/results',
-                                className='fs-5 text-white fw-bolder'
-                            ),
-                        ],
-                    ),
-                    dbc.DropdownMenu(
-                        label='Scenarios',
-                        children=[
-                            dbc.DropdownMenuItem(
-                                "Transportation Scenarios",
-                                href="a4_scenario_builder"
-                            ),
-                            dbc.DropdownMenuItem(
-                                "Construction Scenarios",
-                                href="a5_scenario_builder"
-                            ),
-                            dbc.DropdownMenuItem(
-                                "Replacement Scenarios",
-                                href="b4_scenario_builder"
-                            ),
-                            dbc.DropdownMenuItem(
-                                "End-of-life Scenarios",
-                                href="eol_scenario_builder"
-                            )
-                        ],
-                        align_end=True,
-                        nav=True,
-                        toggleClassName='fs-5 text-white fw-bolder',
-                    ),
-                ])
+                # dbc.Nav([
+                #     dbc.NavItem(
+                #         [
+                #             dbc.NavLink(
+                #                 'Home',
+                #                 href='/',
+                #                 className='fs-5 text-white fw-bolder'
+                #             )
+                #         ]
+                #     ),
+                #     dbc.NavItem(
+                #         [
+                #             dbc.NavLink(
+                #                 'Template Models',
+                #                 href='/template_model',
+                #                 className='fs-5 text-white fw-bolder'
+                #             )
+                #         ]
+                #     ),
+                #     dbc.NavItem(
+                #         [
+                #             dbc.NavLink(
+                #                 'Results',
+                #                 href='/results',
+                #                 className='fs-5 text-white fw-bolder'
+                #             ),
+                #         ],
+                #     ),
+                #     dbc.DropdownMenu(
+                #         label='Scenarios',
+                #         children=[
+                #             dbc.DropdownMenuItem(
+                #                 "Transportation Scenarios",
+                #                 href="a4_scenario_builder"
+                #             ),
+                #             dbc.DropdownMenuItem(
+                #                 "Construction Scenarios",
+                #                 href="a5_scenario_builder"
+                #             ),
+                #             dbc.DropdownMenuItem(
+                #                 "Replacement Scenarios",
+                #                 href="b4_scenario_builder"
+                #             ),
+                #             dbc.DropdownMenuItem(
+                #                 "End-of-life Scenarios",
+                #                 href="eol_scenario_builder"
+                #             )
+                #         ],
+                #         align_end=True,
+                #         nav=True,
+                #         toggleClassName='fs-5 text-white fw-bolder',
+                #     ),
+                # ])
             ],
             fluid=True
         ),

@@ -1,15 +1,136 @@
 ---
-tm_dropdown:
-  label: Template Model
+location_dropdown:
+  label: Location
   dropdown_list:
     - 
-      label: Template Model 1
-      value: tm_1
+      label: Philadelphia, PA
+      value: Philadelphia, PA
     - 
-      label: Template Model 2
-      value: tm_2_dummy
-  first_item: tm_1
-  dropdown_id: tm_dropdown
+      label: Seattle, WA
+      value: Seattle, WA
+    - 
+      label: Los Angeles, CA
+      value: Los Angeles, CA
+    - 
+      label: Chicago, IL
+      value: Chicago, IL
+    - 
+      label: Austin, TX
+      value: Austin, TX
+    - 
+      label: Atlanta, GA
+      value: Atlanta, GA
+    - 
+      label: Unknown
+      value: Unknown
+  first_item: Philadelphia, PA
+  dropdown_id: location_dropdown
+
+building_use_type_dropdown:
+  label: Building Use Type
+  dropdown_list:
+    - 
+      label: Office
+      value: Office
+    - 
+      label: Multi-family
+      value: Multi-family
+    - 
+      label: Single Family Home
+      value: Single Family Home
+    - 
+      label: Education
+      value: Education
+    - 
+      label: Healthcare
+      value: Healthcare
+  first_item: Office
+  dropdown_id: building_use_type_dropdown
+
+str_horiz_grav_sys_dropdown:
+  label: Primary Horizontal Gravity System
+  dropdown_list:
+    - 
+      label: "Concrete: Non-PT Framing"
+      value: "Concrete: Non-PT Framing"
+    - 
+      label: "Steel: Frame + Concrete on Metal Deck"
+      value: "Steel: Frame + Concrete on Metal Deck"
+    - 
+      label: "Wood: Engineered Panels"
+      value: "Wood: Engineered Panels"
+  first_item: "Concrete: Non-PT Framing"
+  dropdown_id: str_horiz_grav_sys_dropdown
+
+str_vert_grav_sys_dropdown:
+  label: Primary Vertical Gravity System
+  dropdown_list:
+    - 
+      label: "Concrete: CIP"
+      value: "Concrete: CIP"
+    - 
+      label: "Steel: Columns"
+      value: "Steel: Columns"
+    - 
+      label: "Wood: Mass Timber"
+      value: "Wood: Mass Timber"
+  first_item: "Wood: Mass Timber"
+  dropdown_id: str_vert_grav_sys_dropdown
+
+str_lat_sys_dropdown:
+  label: Primary Lateral System
+  dropdown_list:
+    - 
+      label: "Concrete: Shear Walls"
+      value: "Concrete: Shear Walls"
+    - 
+      label: "Steel: Braced Frames"
+      value: "Steel: Braced Frames"
+    - 
+      label: "Wood: Shear Panels"
+      value: "Wood: Shear Panels"
+  first_item: "Concrete: Shear Walls"
+  dropdown_id: str_lat_sys_dropdown
+
+cladding_type_dropdown:
+  label: Cladding Type
+  dropdown_list:
+    - 
+      label: "Curtainwall"
+      value: "Curtainwall"
+    - 
+      label: "Wood rainscreen"
+      value: "Wood rainscreen"
+  first_item: "Curtainwall"
+  dropdown_id: cladding_type_dropdown
+
+roofing_type_dropdown:
+  label: Roofing Type
+  dropdown_list:
+    - 
+      label: "Roof Option 1"
+      value: "Roof Option 1"
+    - 
+      label: "Roof Option 2"
+      value: "Roof Option 2"
+  first_item: "Roof Option 1"
+  dropdown_id: roofing_type_dropdown
+
+wwr_dropdown:
+  label: Window-to-wall Ratio
+  dropdown_list:
+    - 
+      label: "25%"
+      value: "25%"
+    - 
+      label: "50%"
+      value: "50%"
+    - 
+      label: "75%"
+      value: "75%"
+  first_item: "75%"
+  dropdown_id: wwr_dropdown
+
 
 scope_dropdown:
   label: Categorization

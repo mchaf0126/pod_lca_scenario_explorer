@@ -1,64 +1,41 @@
 """Results page of dashboard"""
-from pathlib import Path
-from dash import html, dcc, callback, Input, Output, register_page
+import pandas as pd
+import plotly.express as px
+from dash import html, callback, Input, Output, State, register_page, no_update
 import dash_bootstrap_components as dbc
-import src.utils.general as utils
-from src.components.selection import create_dropdown
+import src.components.template_model_components as tmc
 
 register_page(__name__, path='/template_model')
 
-current_file_path = Path(__file__)
-main_directory = current_file_path.parents[2]
-
-config_path = main_directory.joinpath('src/components/config.yml')
-
-config = utils.read_yaml(config_path)
-assert config is not None, 'The config dictionary could not be set'
-
-tm_dropdown_yaml = config.get('tm_dropdown')
-assert tm_dropdown_yaml is not None, 'The config for tm dropdown could not be set'
-
-tm_dropdown = create_dropdown(
-    label=tm_dropdown_yaml['label'],
-    dropdown_list=tm_dropdown_yaml['dropdown_list'],
-    first_item=tm_dropdown_yaml['first_item'],
-    dropdown_id=tm_dropdown_yaml['dropdown_id']
-)
-
-card_child = dbc.CardBody(
-    [
-        dbc.Label('Template Model Selector', class_name='fs-5 fw-bold my-0'),
-        html.Hr(),
-        tm_dropdown,
-    ],
-    class_name='pb-0'
-)
-
-tm_controls = dbc.Card(
-    [
-        card_child,
-    ],
-    id='dropdown_card'
-)
 
 layout = html.Div(
     children=[
-        dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        tm_controls
-                    ], xs=4, sm=4, md=3, lg=3, xl=3, xxl=3
-                ),
-                dbc.Col(
-                    [
-                        html.Img(id='tm_image'),
-                        dcc.Markdown(id='tm_description')
-                    ], xs=8, sm=8, md=9, lg=9, xl=9, xxl=9
-                ),
-            ],
-            justify='center',
-            className='mb-4'
+        dbc.Container(
+            dbc.Row(
+                [
+                    dbc.Col(
+                        [
+                            tmc.sidebar
+                        ], xs=2, sm=2, md=2, lg=2, xl=2, xxl=2,
+                        class_name=''
+                    ),
+                    dbc.Col(
+                        [
+                            tmc.display_data
+                        ], xs=6, sm=6, md=6, lg=6, xl=6, xxl=6,
+                        class_name=''
+                    ),
+                    dbc.Col(
+                        [
+                            tmc.figure
+                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4
+                    ),
+                ],
+                justify='center',
+                className='vh-100'
+            ),
+            fluid=True,
+            class_name='mw-100'
         ),
     ],
 )
@@ -67,27 +44,117 @@ layout = html.Div(
 @callback(
     Output('template_model_name', 'data'),
     [
-        Input(tm_dropdown_yaml['dropdown_id'], 'options'),
-        Input(tm_dropdown_yaml['dropdown_id'], 'value')
+        Input('location_dropdown', 'value'),
+        State('template_model_metadata', 'data')
     ]
 )
-def update_tm_name(template_model_options, dropdown_value):
-    for item in template_model_options:
-        if item['value'] == dropdown_value:
-            template_model_index = template_model_options.index(item)
+def update_tm_name(location_dropdown_value, tm_metadata):
+    tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
+    if location_dropdown_value not in tm_metadata_df['location'].unique():
+        return no_update
+    tm_name = tm_metadata_df.loc[
+        tm_metadata_df['location'] == location_dropdown_value,
+        'template_model'
+    ].item()
 
-    template_model_name = template_model_options[template_model_index]['label']
     return {
-        "template_model_name": template_model_name,
-        'template_model_value': dropdown_value
+        "template_model_name": str(tm_name),
+        'template_model_value': str(tm_name)
     }
 
 
 @callback(
-    [Output('tm_image', 'src'),
-     Output('tm_description', 'children')],
+    [
+        Output('tm_image', 'src'),
+        Output('tm_description', 'children')
+    ],
     Input('template_model_name', 'data')
 )
 def update_image(template_model_name_dict):
-    markdown_text = f'### This is {template_model_name_dict.get("template_model_name")}'
-    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', markdown_text
+    markdown_text = f'This is {template_model_name_dict.get("template_model_name")}'
+    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', \
+        markdown_text
+
+
+@callback(
+    [
+        Output('arch_criteria_text', 'children'),
+        Output('str_criteria_text', 'children'),
+        Output('enc_criteria_text', 'children'),
+    ],
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_metadata', 'data')
+    ]
+)
+def update_criteria_text(tm_name, tm_metadata):
+    tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
+    unpacked_tm_name = tm_name.get('template_model_value')
+    tm_row = tm_metadata_df[tm_metadata_df['template_model'] == unpacked_tm_name]
+
+    building_use_type = tm_row['building_use_type'].item()
+    project_area = tm_row['project_area'].item()
+    building_height = tm_row['building_height'].item()
+    location = tm_row['location'].item()
+    stories_above_grade = tm_row['stories_above_grade'].item()
+    stories_below_grade = tm_row['stories_below_grade'].item()
+    bay_size = tm_row['bay_size'].item()
+    str_vert_grav_sys = tm_row['str_vert_grav_sys'].item()
+    str_horiz_grav_sys = tm_row['str_horiz_grav_sys'].item()
+    str_lat_sys = tm_row['str_lat_sys'].item()
+    cladding_type = tm_row['cladding_type'].item()
+    roofing_type = tm_row['roofing_type'].item()
+    wwr = tm_row['wwr'].item()
+
+    arch_text = f'''
+        - __Location:__ {location}
+        - __Building Use Type:__ {building_use_type}
+        - __Project Area:__ {project_area}
+        - __Building Height:__ {building_height}
+        - __Stories Above Grade:__ {stories_above_grade}
+        - __Stories Below Grade:__ {stories_below_grade}
+        - __Bay Size:__ {bay_size}
+    '''
+    str_text = f'''
+        - __H. Gravity System:__ {str_horiz_grav_sys}
+        - __V. Gravity System:__ {str_vert_grav_sys}
+        - __Lateral System:__ {str_lat_sys}
+    '''
+    enc_text = f'''
+        - __Cladding Type:__ {cladding_type}
+        - __Roofing Type:__ {roofing_type}
+        - __Window-to-wall Ratio:__ {wwr}
+    '''
+    return arch_text, str_text, enc_text
+
+
+@callback(
+    Output('tm_summary', 'figure'),
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data')
+    ]
+)
+def update_tm_summary_graph(tm_name, tm_impacts):
+    tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
+    unpacked_tm_name = tm_name.get('template_model_value')
+    df_to_graph = tm_impacts_df[tm_impacts_df['Revit model'] == unpacked_tm_name]
+
+    df_to_graph = df_to_graph.groupby('Revit category').sum()
+
+    fig = px.bar(
+        df_to_graph,
+        x='Global Warming Potential Total (kgCO2eq)',
+        color=df_to_graph.index,
+        # title=f'GWP Impacts of {unpacked_tm_name}',
+        height=600
+    ).update_yaxes(
+        title='',
+        tickformat=',.0f',
+    ).update_xaxes(
+        categoryorder='category ascending',
+        title=''
+    ).update_layout(
+        showlegend=False
+    )
+    return fig
