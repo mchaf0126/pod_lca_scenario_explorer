@@ -62,20 +62,16 @@ layout = html.Div(
                             '''
                             At present, the dashboard is in beta. There are
                             currently two types of pages of note:
-                            *  **Results** - the traditional results for a WBLCA.
-                            *  **Scenarios** - These will show different scenarios
-                            built by the UW Team to enable the user to compare different
-                            scenarios against the template model. There are currently four
-                            different scenarios mocked up in this dashboard:
-                               *  **Transportation Scenarios**
-                               *  **Construction Scenarios**
-                               *  **Replacement Scenarios**
-                               *  **End-of-life Scenarios**
+                            *  **Template Model Selection** - a page to select the template model
+                            to be compared against.
+                            *  **Novel Material Definition** - a page to define and apply a novel material 
+                            to the template model for analysis.
 
-                            An additional section of the dashboard will facilitate selection or
-                            upload of a base building model, or the generation of a detailed,
-                            structured Bill of Materials (BoM). This element is still in scoping
-                            and development and not yet ready to be shared.
+
+                            An additional section of the dashboard will facilitate the results of the template
+                            model in a format to show the different impacts of individual scenarios (Scenario 
+                            Explorer) and a way to see the combination of scenarios and their impact on the
+                            template model (Model Comparison). These are still in development.
                             ''',
                             className='fw-light'
                         ),

@@ -222,7 +222,7 @@ figure = dbc.Container(
         dbc.Row(
             dbc.Label(
                 'Total Global Warming Potential by Building Element',
-                class_name='fs-5 fw-bold mt-2 text-center'
+                class_name='fw-bold text-center'
             ),
         ),
         dbc.Row(
