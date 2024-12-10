@@ -4,26 +4,26 @@ location_dropdown:
   dropdown_list:
     - 
       label: Philadelphia, PA
-      value: philadelphia
+      value: Philadelphia, PA
     - 
       label: Seattle, WA
-      value: seattle
+      value: Seattle, WA
     - 
       label: Los Angeles, CA
-      value: los_angeles
+      value: Los Angeles, CA
     - 
       label: Chicago, IL
-      value: chicago
+      value: Chicago, IL
     - 
       label: Austin, TX
-      value: austin
+      value: Austin, TX
     - 
       label: Atlanta, GA
-      value: atlanta
+      value: Atlanta, GA
     - 
       label: Unknown
-      value: unknown
-  first_item: philadelphia
+      value: Unknown
+  first_item: Philadelphia, PA
   dropdown_id: location_dropdown
 
 building_use_type_dropdown:
@@ -31,20 +31,20 @@ building_use_type_dropdown:
   dropdown_list:
     - 
       label: Office
-      value: office
+      value: Office
     - 
       label: Multi-family
-      value: multifamily
+      value: Multi-family
     - 
       label: Single Family Home
-      value: sfh
+      value: Single Family Home
     - 
       label: Education
-      value: education
+      value: Education
     - 
       label: Healthcare
-      value: healthcare
-  first_item: office
+      value: Healthcare
+  first_item: Office
   dropdown_id: building_use_type_dropdown
 
 str_horiz_grav_sys_dropdown:
@@ -52,14 +52,14 @@ str_horiz_grav_sys_dropdown:
   dropdown_list:
     - 
       label: "Concrete: Non-PT Framing"
-      value: conc_non_pt
+      value: "Concrete: Non-PT Framing"
     - 
       label: "Steel: Frame + Concrete on Metal Deck"
-      value: steel_w_metal_deck
+      value: "Steel: Frame + Concrete on Metal Deck"
     - 
       label: "Wood: Engineered Panels"
-      value: clt
-  first_item: conc_non_pt
+      value: "Wood: Engineered Panels"
+  first_item: "Concrete: Non-PT Framing"
   dropdown_id: str_horiz_grav_sys_dropdown
 
 str_vert_grav_sys_dropdown:
@@ -67,14 +67,14 @@ str_vert_grav_sys_dropdown:
   dropdown_list:
     - 
       label: "Concrete: CIP"
-      value: conc_cip
+      value: "Concrete: CIP"
     - 
       label: "Steel: Columns"
-      value: steel_col
+      value: "Steel: Columns"
     - 
       label: "Wood: Mass Timber"
-      value: glt
-  first_item: conc_cip
+      value: "Wood: Mass Timber"
+  first_item: "Wood: Mass Timber"
   dropdown_id: str_vert_grav_sys_dropdown
 
 str_lat_sys_dropdown:
@@ -82,14 +82,14 @@ str_lat_sys_dropdown:
   dropdown_list:
     - 
       label: "Concrete: Shear Walls"
-      value: conc_sw
+      value: "Concrete: Shear Walls"
     - 
       label: "Steel: Braced Frames"
-      value: steel_col
+      value: "Steel: Braced Frames"
     - 
       label: "Wood: Shear Panels"
-      value: wood_sw
-  first_item: conc_sw
+      value: "Wood: Shear Panels"
+  first_item: "Concrete: Shear Walls"
   dropdown_id: str_lat_sys_dropdown
 
 cladding_type_dropdown:
@@ -97,11 +97,11 @@ cladding_type_dropdown:
   dropdown_list:
     - 
       label: "Curtainwall"
-      value: curtainwall
+      value: "Curtainwall"
     - 
       label: "Wood rainscreen"
-      value: wood_rainscreen
-  first_item: curtainwall
+      value: "Wood rainscreen"
+  first_item: "Curtainwall"
   dropdown_id: cladding_type_dropdown
 
 roofing_type_dropdown:
@@ -109,11 +109,11 @@ roofing_type_dropdown:
   dropdown_list:
     - 
       label: "Roof Option 1"
-      value: roof_1
+      value: "Roof Option 1"
     - 
       label: "Roof Option 2"
-      value: roof_2
-  first_item: roof_1
+      value: "Roof Option 2"
+  first_item: "Roof Option 1"
   dropdown_id: roofing_type_dropdown
 
 wwr_dropdown:
@@ -121,14 +121,14 @@ wwr_dropdown:
   dropdown_list:
     - 
       label: "25%"
-      value: 0.25
+      value: "25%"
     - 
       label: "50%"
-      value: 0.5
+      value: "50%"
     - 
       label: "75%"
-      value: 0.75
-  first_item: 0.25
+      value: "75%"
+  first_item: "75%"
   dropdown_id: wwr_dropdown
 
 

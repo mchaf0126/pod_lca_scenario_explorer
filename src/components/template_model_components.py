@@ -2,13 +2,12 @@ from pathlib import Path
 from dash import html, dcc
 import dash_bootstrap_components as dbc
 import src.utils.general as utils
+from src.components.selection import create_dropdown
 
 current_file_path = Path(__file__)
 main_directory = current_file_path.parents[2]
 
 config_path = main_directory.joinpath('src/components/config.yml')
-
-from src.components.selection import create_dropdown
 
 config = utils.read_yaml(config_path)
 assert config is not None, 'The config dictionary could not be set'
@@ -148,45 +147,60 @@ display_data = dbc.Container(
                 dbc.Col(
                     [
                         dbc.Card(
-                            dbc.CardBody(
-                                [
-                                    html.H5("Architecture", className="card-title"),
-                                    dcc.Markdown(
-                                        id='arch_criteria_text',
-                                        className="card-text",
-                                    ),
-                                ]
-                            )
-                        ),
-                    ]
-                ),
-                dbc.Col(
-                    [
-                        dbc.Card(
-                            dbc.CardBody(
-                                [
-                                    html.H4("Structure", className="card-title"),
-                                    dcc.Markdown(
-                                        id='str_criteria_text',
-                                        className="card-text",
-                                    ),
-                                ]
-                            )
+                            [
+                                dbc.CardHeader(
+                                    "Architecture",
+                                    class_name='fs-5 fw-bold'
+                                ),
+                                dbc.CardBody(
+                                    [
+                                        dcc.Markdown(
+                                            id='arch_criteria_text',
+                                            className="card-text",
+                                        ),
+                                    ]
+                                )
+                            ]
                         )
                     ]
                 ),
                 dbc.Col(
                     [
                         dbc.Card(
-                            dbc.CardBody(
-                                [
-                                    html.H4("Enclosure", className="card-title"),
-                                    dcc.Markdown(
-                                        id='enc_criteria_text',
-                                        className="card-text",
-                                    ),
-                                ]
-                            )
+                            [
+                                dbc.CardHeader(
+                                    "Structure",
+                                    class_name='fs-5 fw-bold'
+                                ),
+                                dbc.CardBody(
+                                    [
+                                        dcc.Markdown(
+                                            id='str_criteria_text',
+                                            className="card-text",
+                                        ),
+                                    ]
+                                )
+                            ]
+                        )
+                    ]
+                ),
+                dbc.Col(
+                    [
+                        dbc.Card(
+                            [
+                                dbc.CardHeader(
+                                    "Enclosure",
+                                    class_name='fs-5 fw-bold'
+                                ),
+                                dbc.CardBody(
+                                    [
+                                        dcc.Markdown(
+                                            id='enc_criteria_text',
+                                            className="card-text",
+                                        ),
+                                    ]
+                                )
+                            ]
                         )
                     ]
                 )
