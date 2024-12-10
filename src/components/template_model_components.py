@@ -1,12 +1,7 @@
-"""Results page of dashboard"""
 from pathlib import Path
-import pandas as pd
-from dash import html, dcc, callback, Input, Output, State, register_page, no_update
+from dash import html
 import dash_bootstrap_components as dbc
 import src.utils.general as utils
-from src.components.selection import create_dropdown
-
-register_page(__name__, path='/template_model')
 
 current_file_path = Path(__file__)
 main_directory = current_file_path.parents[2]
@@ -138,77 +133,3 @@ sidebar = dbc.Container(
     class_name='p-0 mt-2',
     fluid=True
 )
-
-layout = html.Div(
-    children=[
-        dbc.Container(
-            dbc.Row(
-                [
-                    dbc.Col(
-                        [
-                            sidebar
-                        ], xs=3, sm=3, md=3, lg=3, xl=3, xxl=3,
-                        class_name=''
-                    ),
-                    dbc.Col(
-                        [
-                            dbc.Label(
-                                id='tm_description',
-                                class_name='fs-5 fw-bold mt-2 text-center'
-                            ),
-                            html.Img(id='tm_image'),
-                        ], xs=5, sm=5, md=5, lg=5, xl=5, xxl=5,
-                        class_name=''
-                    ),
-                    dbc.Col(
-                        [
-                            dcc.Graph(id="tm_summary"),
-                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4
-                    ),
-                ],
-                justify='center',
-                className='vh-100'
-            ),
-            fluid=True,
-            class_name='mw-100'
-        ),
-    ],
-)
-
-
-@callback(
-    Output('template_model_name', 'data'),
-    [
-        Input(location_dropdown_yaml['dropdown_id'], 'value'),
-        State('template_model_metadata', 'data')
-    ]
-)
-def update_tm_name(location_dropdown_value, tm_metadata):
-    tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
-    if location_dropdown_value not in tm_metadata_df['city'].unique():
-        return no_update
-    tm_name = tm_metadata_df.loc[tm_metadata_df['city'] == location_dropdown_value, 'template_model'].item()
-
-    return {
-        "template_model_name": str(tm_name),
-        'template_model_value': str(tm_name)
-    }
-
-
-@callback(
-    Output(component_id='output_test', component_property='children'),
-    Input(component_id='template_model_metadata', component_property='data')
-)
-def test(tm_metadata):
-    tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
-    return tm_metadata_df['city']
-
-
-@callback(
-    [Output('tm_image', 'src'),
-     Output('tm_description', 'children')],
-    Input('template_model_name', 'data')
-)
-def update_image(template_model_name_dict):
-    markdown_text = f'This is {template_model_name_dict.get("template_model_name")}'
-    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', markdown_text

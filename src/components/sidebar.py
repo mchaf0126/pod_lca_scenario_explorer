@@ -54,7 +54,7 @@ def create_sidebar() -> html.Div:
             ],
             fluid=True,
         ),
-        color='#f8f9fa',
+        color='light',
     )
     return sidebar
 # dbc.Nav([
