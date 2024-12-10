@@ -1,7 +1,7 @@
 """Results page of dashboard"""
 import pandas as pd
 import plotly.express as px
-from dash import html, dcc, callback, Input, Output, State, register_page, no_update
+from dash import html, callback, Input, Output, State, register_page, no_update
 import dash_bootstrap_components as dbc
 import src.components.template_model_components as tmc
 
@@ -72,11 +72,12 @@ def update_tm_name(location_dropdown_value, tm_metadata):
 )
 def update_image(template_model_name_dict):
     markdown_text = f'This is {template_model_name_dict.get("template_model_name")}'
-    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', markdown_text
+    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', \
+        markdown_text
 
 
 @callback(
-    [  
+    [
         Output('arch_criteria_text', 'children'),
         Output('str_criteria_text', 'children'),
         Output('enc_criteria_text', 'children'),
