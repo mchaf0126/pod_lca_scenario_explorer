@@ -16,7 +16,8 @@ app = Dash(
 
 current_file_path = Path(__file__)
 main_directory = current_file_path.parents[1]
-metadata_df = pd.read_csv(main_directory.joinpath('data/frontend/project_metadata.csv'))
+tm_metadata_df = pd.read_csv(main_directory.joinpath('data/frontend/project_metadata.csv'))
+tm_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_impacts.csv'))
 
 load_figure_template('pulse')
 
@@ -33,6 +34,10 @@ app.layout = dbc.Container(
             id='template_model_metadata',
             storage_type='session',
         ),
+        dcc.Store(
+            id='template_model_impacts',
+            storage_type='session',
+        ),
         dbc.Row(
             [
                 dbc.Col(
@@ -40,6 +45,7 @@ app.layout = dbc.Container(
                     xs=3, sm=3, md=2, lg=2, xl=2, xxl=2,
                     style={
                         "width": "14rem",
+                        'position': 'relative'
                     },
                     class_name='p-3 bg-light'
                 ),
@@ -80,8 +86,16 @@ app.layout = dbc.Container(
     Output(component_id='template_model_metadata', component_property='data'),
     Input(component_id='template_model_metadata', component_property='data')
 )
-def load_data(_):
-    return {'tm_metadata': metadata_df.to_dict()}
+def load_tm_metadata(_):
+    return {'tm_metadata': tm_metadata_df.to_dict()}
+
+
+@callback(
+    Output(component_id='template_model_impacts', component_property='data'),
+    Input(component_id='template_model_impacts', component_property='data')
+)
+def load_tm_impacts(_):
+    return {'tm_impacts': tm_impacts_df.to_dict()}
 
 
 if __name__ == "__main__":

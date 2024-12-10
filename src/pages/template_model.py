@@ -1,5 +1,6 @@
 """Results page of dashboard"""
 import pandas as pd
+import plotly.express as px
 from dash import html, dcc, callback, Input, Output, State, register_page, no_update
 import dash_bootstrap_components as dbc
 import src.components.template_model_components as tmc
@@ -26,7 +27,7 @@ layout = html.Div(
                     ),
                     dbc.Col(
                         [
-                            dcc.Graph(id="tm_summary"),
+                            tmc.figure
                         ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4
                     ),
                 ],
@@ -89,6 +90,7 @@ def update_criteria_text(tm_name, tm_metadata):
     tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
     unpacked_tm_name = tm_name.get('template_model_value')
     tm_row = tm_metadata_df[tm_metadata_df['template_model'] == unpacked_tm_name]
+
     building_use_type = tm_row['building_use_type'].item()
     project_area = tm_row['project_area'].item()
     building_height = tm_row['building_height'].item()
@@ -108,7 +110,7 @@ def update_criteria_text(tm_name, tm_metadata):
         - __Building Use Type:__ {building_use_type}
         - __Project Area:__ {project_area}
         - __Building Height:__ {building_height}
-        - __Stories above grade:__ {stories_above_grade}
+        - __Stories Above Grade:__ {stories_above_grade}
         - __Stories Below Grade:__ {stories_below_grade}
         - __Bay Size:__ {bay_size}
     '''
@@ -123,3 +125,35 @@ def update_criteria_text(tm_name, tm_metadata):
         - __Window-to-wall Ratio:__ {wwr}
     '''
     return arch_text, str_text, enc_text
+
+
+@callback(
+    Output('tm_summary', 'figure'),
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data')
+    ]
+)
+def update_tm_summary_graph(tm_name, tm_impacts):
+    tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
+    unpacked_tm_name = tm_name.get('template_model_value')
+    df_to_graph = tm_impacts_df[tm_impacts_df['Revit model'] == unpacked_tm_name]
+
+    df_to_graph = df_to_graph.groupby('Revit category').sum()
+
+    fig = px.bar(
+        df_to_graph,
+        x='Global Warming Potential Total (kgCO2eq)',
+        color=df_to_graph.index,
+        # title=f'GWP Impacts of {unpacked_tm_name}',
+        height=600
+    ).update_yaxes(
+        title='',
+        tickformat=',.0f',
+    ).update_xaxes(
+        categoryorder='category ascending',
+        title=''
+    ).update_layout(
+        showlegend=False
+    )
+    return fig

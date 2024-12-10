@@ -138,12 +138,17 @@ sidebar = dbc.Container(
 display_data = dbc.Container(
     [
         dbc.Row(
+            dbc.Label(
+                id='tm_description',
+                class_name='fs-5 fw-bold mt-2 text-center'
+            ),
+        ),
+        dbc.Row(
+            html.Img(id='tm_image'),
+            class_name='py-4'
+        ),
+        dbc.Row(
             [
-                dbc.Label(
-                    id='tm_description',
-                    class_name='fs-5 fw-bold mt-2 text-center'
-                ),
-                html.Img(id='tm_image'),
                 dbc.Col(
                     [
                         dbc.Card(
@@ -204,9 +209,26 @@ display_data = dbc.Container(
                         )
                     ]
                 )
-            ]
+            ],
+            class_name='pt-4'
         )
     ],
-    class_name='p-0 mt-2',
+    class_name='px-3 mt-2',
+    fluid=True
+)
+
+figure = dbc.Container(
+    [
+        dbc.Row(
+            dbc.Label(
+                'Total Global Warming Potential by Building Element',
+                class_name='fs-5 fw-bold mt-2 text-center'
+            ),
+        ),
+        dbc.Row(
+            dcc.Graph(id="tm_summary"),
+        )
+    ],
+    class_name='mt-2',
     fluid=True
 )
