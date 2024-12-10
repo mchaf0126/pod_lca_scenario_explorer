@@ -1,7 +1,7 @@
 """Results page of dashboard"""
 import pandas as pd
 import plotly.express as px
-from dash import html, callback, Input, Output, State, register_page, no_update, dcc
+from dash import html, callback, Input, Output, State, register_page, dcc
 import dash_bootstrap_components as dbc
 import src.components.novel_material_components as nmc
 
@@ -23,11 +23,11 @@ layout = html.Div(
                         [
                             nmc.form
                         ], xs=6, sm=6, md=6, lg=6, xl=6, xxl=6,
-                        class_name=''
+                        class_name='px-5'
                     ),
                     dbc.Col(
                         [
-                            html.Div('hi')
+                            nmc.figure
                         ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4
                     ),
                 ],
@@ -75,6 +75,8 @@ def update_criteria_text(tm_name, tm_metadata):
         dbc.CardBody(
             dcc.Markdown(
                 f'''
+                __Template Model Name__: {unpacked_tm_name}
+
                 ##### Architecture
                 - __Location:__ {location}
                 - __Building Use Type:__ {building_use_type}
