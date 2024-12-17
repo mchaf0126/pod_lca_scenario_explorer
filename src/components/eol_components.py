@@ -75,7 +75,7 @@ eol_special_material = html.Div(
 eol_scenarios = dbc.Card(
     [
         dbc.CardHeader(
-            'Construction Scenarios'
+            'End-of-life Scenarios'
         ),
         dbc.CardBody(
             [

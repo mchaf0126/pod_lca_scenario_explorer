@@ -8,6 +8,7 @@ from src.components.construction_components import construction_scenarios
 from src.components.replacement_components import replacement_scenarios
 from src.components.eol_components import eol_scenarios
 from src.utils.load_config import app_config
+from src.components.descriptions import description_map, description_list
 
 config = app_config
 
@@ -92,11 +93,14 @@ scenario_explorer_layout = html.Div(
                         ], xs=7, sm=7, md=7, lg=7, xl=7, xxl=7,
                         class_name=''
                     ),
-                    # dbc.Col(
-                    #     [
-                    #         sec.description
-                    #     ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4
-                    # ),
+                    dbc.Col(
+                        [
+                            html.Div(
+                                id='se_description',
+                                className='pt-2'
+                            )
+                        ], xs=3, sm=3, md=3, lg=3, xl=3, xxl=3
+                    ),
                 ],
                 # justify='center',
                 className=''
@@ -152,17 +156,20 @@ def update_se_figure(life_cycle_stage: str,
         'End-of-life': '[C2-C4] End of Life'
     }
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    pb_impacts_df = pd.DataFrame.from_dict(prebuilt_scenario_impacts.get('prebuilt_scenario_impacts'))
+    pb_impacts_df = pd.DataFrame.from_dict(
+        prebuilt_scenario_impacts.get('prebuilt_scenario_impacts')
+    )
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_graph = tm_impacts_df[
-        (tm_impacts_df['Revit model'] == unpacked_tm_name) & (tm_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
+        (tm_impacts_df['Revit model'] == unpacked_tm_name) &
+        (tm_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
     ]
     pb_df_to_graph = pb_impacts_df[
-        (pb_impacts_df['Revit model'] == unpacked_tm_name) &\
-        (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage)) &\
+        (pb_impacts_df['Revit model'] == unpacked_tm_name) &
+        (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage)) &
         (pb_impacts_df['scenario'].isin(sum(checklist, [])))
     ]
-    
+
     categories = category_orders.get(life_cycle_stage)
 
     combined_df_to_graph = pd.concat([tm_df_to_graph, pb_df_to_graph])
@@ -190,3 +197,24 @@ def update_se_figure(life_cycle_stage: str,
         # showlegend=False
     )
     return fig
+
+
+@callback(
+    Output('se_description', 'children'),
+    [
+        Input({'type': 'prebuilt_scenario', 'id': ALL}, 'value'),
+    ]
+)
+def update_description(checklist):
+    flattened_checklist = sum(checklist, [])
+    sorted_list = sorted(flattened_checklist, key=description_list.index)
+    title = [
+        dcc.Markdown(
+            '''
+            ### Descriptions
+            See below for a description of the different scenarios that have been selected.
+            ''',
+            className='fw-light'
+        )
+    ]
+    return title + [description_map.get(value) for value in sorted_list]
