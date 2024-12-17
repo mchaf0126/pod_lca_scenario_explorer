@@ -59,3 +59,17 @@ def create_custom_dropdowns() -> html.Div:
         className='mb-3'
     )
     return custom_dropdowns
+
+# a5_scenarios = dbc.Card(
+#     [
+#         dbc.CardHeader(
+#             'Transportation Scenarios'
+#         ),
+#         dbc.CardBody(
+#             [
+#                 scenario_checklist,
+#                 a4_special_mat
+#             ]
+#         )
+#     ]
+# )

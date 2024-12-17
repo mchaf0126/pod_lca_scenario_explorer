@@ -1,17 +1,10 @@
-from pathlib import Path
 from dash import html, dcc, callback, Input, Output, register_page
 import dash_bootstrap_components as dbc
-import src.utils.general as utils
 from src.components.selection import create_dropdown
 import src.components.a4_components as transportation
+from src.components.load_config import app_config
 
-current_file_path = Path(__file__)
-main_directory = current_file_path.parents[2]
-
-config_path = main_directory.joinpath('src/components/config.yml')
-
-config = utils.read_yaml(config_path)
-assert config is not None, 'The config dictionary could not be set'
+config = app_config
 
 life_cycle_stage_dropdown_yaml = config.get('life_cycle_stage_dropdown')
 assert life_cycle_stage_dropdown_yaml is not None, 'The config for lcs could not be set'

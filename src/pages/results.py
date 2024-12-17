@@ -61,6 +61,9 @@ def update_tabs(active_tab):
         return results.scenario_explorer_layout
     if active_tab == 'tab-2':
         return 'model comp time!'
+
+
+
 # @callback(
 #     Output('stacked_bar', 'figure'),
 #     [

@@ -1,16 +1,9 @@
-from pathlib import Path
 from dash import html
 import dash_bootstrap_components as dbc
-import src.utils.general as utils
 from src.components.selection import create_radio, create_checklist
+from src.components.load_config import app_config
 
-current_file_path = Path(__file__)
-main_directory = current_file_path.parents[2]
-
-config_path = main_directory.joinpath('src/components/config.yml')
-
-config = utils.read_yaml(config_path)
-assert config is not None, 'The config dictionary could not be set'
+config = app_config
 
 a4_radioitem_yaml = config.get('a4_scenario_radioitem')
 assert a4_radioitem_yaml is not None, 'The config for a4 radioitem could not be set'
@@ -52,12 +45,12 @@ a4_special_mat = html.Div(
                     value=1
                 ),
             ],
-            className="mb-1",
+            className="mb-3",
         ),
         dbc.InputGroup(
             [
                 dbc.InputGroupText("Distance (mi)"),
-                dbc.Input(placeholder=" ", type="number"),
+                dbc.Input(placeholder="0", type="number"),
             ],
             className="mb-3",
         ),
