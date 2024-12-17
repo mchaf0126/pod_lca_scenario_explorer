@@ -5,14 +5,14 @@ from src.utils.load_config import app_config
 
 config = app_config
 
-replacement_checklist_yaml = config.get('b4_scenario_checklist')
+replacement_checklist_yaml = config.get('replacement_scenario_checklist')
 assert replacement_checklist_yaml is not None, 'The config for scenario checklist could not be set'
 
 replacement_checklist = create_checklist(
     label=replacement_checklist_yaml['label'],
     checklist=replacement_checklist_yaml['checklist'],
     first_item=replacement_checklist_yaml['first_item'],
-    dropdown_id=replacement_checklist_yaml['checklist_id']
+    dropdown_id={"type": "prebuilt_scenario", "id": 'replacement_checklist'}
 )
 
 replacement_special_mat = html.Div(

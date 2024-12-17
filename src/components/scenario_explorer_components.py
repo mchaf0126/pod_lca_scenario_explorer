@@ -1,5 +1,7 @@
-from dash import html, callback, Input, Output
+from dash import html, dcc, callback, Input, Output, State, ALL
 import dash_bootstrap_components as dbc
+import pandas as pd
+import plotly.express as px
 from src.utils.selection import create_dropdown
 from src.components.transportation_components import transportation_scenarios
 from src.components.construction_components import construction_scenarios
@@ -17,6 +19,9 @@ assert scope_dropdown_yaml is not None, 'The config for cat. dropdowns could not
 
 impact_dropdown_yaml = config.get('impact_dropdown')
 assert impact_dropdown_yaml is not None, 'The config for the impact dropdowns could not be set'
+
+category_orders = config.get('category_orders')
+assert category_orders is not None, 'The ids for category_orders could not be set'
 
 life_cycle_stage_dropdown = create_dropdown(
     label=life_cycle_stage_dropdown_yaml['label'],
@@ -67,12 +72,26 @@ scenario_explorer_layout = html.Div(
                         ], xs=2, sm=2, md=2, lg=2, xl=2, xxl=2,
                         class_name=''
                     ),
-                    # dbc.Col(
-                    #     [
-                    #         sec.display_data
-                    #     ], xs=6, sm=6, md=6, lg=6, xl=6, xxl=6,
-                    #     class_name=''
-                    # ),
+                    dbc.Col(
+                        [
+                            dbc.Container(
+                                [
+                                    dbc.Row(
+                                        dbc.Label(
+                                            id='se_figure_label',
+                                            class_name='fw-bold text-center'
+                                        ),
+                                    ),
+                                    dbc.Row(
+                                        dcc.Graph(id="se_figure"),
+                                    )
+                                ],
+                                class_name='mt-2',
+                                fluid=True
+                            )
+                        ], xs=7, sm=7, md=7, lg=7, xl=7, xxl=7,
+                        class_name=''
+                    ),
                     # dbc.Col(
                     #     [
                     #         sec.description
@@ -104,3 +123,70 @@ def update_scenario_card(life_cycle_stage):
         return eol_scenarios
     else:
         return "try again!"
+
+
+@callback(
+    Output('se_figure', 'figure'),
+    [
+        Input('life_cycle_stage_dropdown', 'value'),
+        Input('impact_dropdown', 'value'),
+        Input('scope_dropdown', 'value'),
+        Input({'type': 'prebuilt_scenario', 'id': ALL}, 'value'),
+        State('template_model_name', 'data'),
+        State('template_model_impacts', 'data'),
+        State('prebuilt_scenario_impacts', 'data'),
+    ]
+)
+def update_se_figure(life_cycle_stage: str,
+                     impact: str,
+                     scope: str,
+                     checklist: list,
+                     template_model_name: dict,
+                     template_model_impacts: dict,
+                     prebuilt_scenario_impacts: dict):
+
+    lcs_map = {
+        'Transportation': '[A4] Transportation',
+        'Construction': '[A5] Construction',
+        'Replacement': '[B2-B5] Maintenance and Replacement',
+        'End-of-life': '[C2-C4] End of Life'
+    }
+    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    pb_impacts_df = pd.DataFrame.from_dict(prebuilt_scenario_impacts.get('prebuilt_scenario_impacts'))
+    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_df_to_graph = tm_impacts_df[
+        (tm_impacts_df['Revit model'] == unpacked_tm_name) & (tm_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
+    ]
+    pb_df_to_graph = pb_impacts_df[
+        (pb_impacts_df['Revit model'] == unpacked_tm_name) &\
+        (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage)) &\
+        (pb_impacts_df['scenario'].isin(sum(checklist, [])))
+    ]
+    
+    categories = category_orders.get(life_cycle_stage)
+
+    combined_df_to_graph = pd.concat([tm_df_to_graph, pb_df_to_graph])
+    combined_df_to_graph['scenario'] = pd.Categorical(
+        combined_df_to_graph['scenario'],
+        ordered=True,
+        categories=categories
+    )
+    combined_df_to_graph = combined_df_to_graph.sort_values('scenario')
+
+    fig = px.histogram(
+        combined_df_to_graph,
+        x='scenario',
+        y=impact,
+        color=scope,
+        # title=f'GWP Impacts of {unpacked_tm_name}',
+        height=600,
+
+    ).update_yaxes(
+        title='',
+        tickformat=',.0f',
+    ).update_xaxes(
+        title='',
+    ).update_layout(
+        # showlegend=False
+    )
+    return fig

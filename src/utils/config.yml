@@ -153,9 +153,6 @@ scope_dropdown:
   label: Categorization
   dropdown_list:
     - 
-      label: Life Cycle Stage
-      value: Life Cycle Stage
-    - 
       label: Revit Building Element
       value: Revit building element
     - 
@@ -189,7 +186,7 @@ impact_dropdown:
   dropdown_id: impact_dropdown
 
 
-a4_scenario_checklist: 
+transporation_scenario_checklist: 
   label: Prebuilt Scenarios
   checklist: 
     -
@@ -199,9 +196,9 @@ a4_scenario_checklist:
       label: Global Supply Chain
       value: global_supply_chain   
   first_item: []
-  checklist_id: a4_scenario_checklist
+  checklist_id: transporation_scenario_checklist
 
-a5_scenario_checklist: 
+construction_scenario_checklist: 
   label: Construction Scenarios
   checklist: 
     - 
@@ -211,9 +208,9 @@ a5_scenario_checklist:
       label: Off-site Fabrication
       value: Off-site Fabrication
   first_item: []
-  checklist_id: a5_scenario_checklist
+  checklist_id: construction_scenario_checklist
 
-b4_scenario_checklist: 
+replacement_scenario_checklist: 
   label: Replacement Scenarios
   checklist: 
     -
@@ -223,7 +220,7 @@ b4_scenario_checklist:
       label: ASHRAE 240P Replacement Rates
       value: ASHRAE_240
   first_item: []
-  checklist_id: b4_scenario_checklist
+  checklist_id: replacement_scenario_checklist
 
 eol_scenario_checklist: 
   label: End-of-life Scenarios
@@ -233,6 +230,23 @@ eol_scenario_checklist:
       value: regional_mix
   first_item: []
   checklist_id: eol_scenario_checklist
+
+category_orders:
+  Transportation: 
+    - default
+    - domestic_supply_chain
+    - global_supply_chain
+  Construction: 
+    - default
+    - Advanced Waste Recovery
+    - Off-site Fabrication
+  Replacement: 
+    - default
+    - RICS
+    - ASHRAE_240
+  End-of-life: 
+    - default
+    - regional_mix
 
 
 

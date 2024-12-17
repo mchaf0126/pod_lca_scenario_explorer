@@ -12,7 +12,7 @@ eol_checklist = create_checklist(
     label=eol_checklist_yaml['label'],
     checklist=eol_checklist_yaml['checklist'],
     first_item=eol_checklist_yaml['first_item'],
-    dropdown_id=eol_checklist_yaml['checklist_id']
+    dropdown_id={"type": "prebuilt_scenario", "id": 'eol_checklist'}
 )
 
 eol_form = html.Div(

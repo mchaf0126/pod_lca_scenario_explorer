@@ -135,7 +135,7 @@ def update_criteria_text(tm_name, tm_metadata):
         State('template_model_impacts', 'data')
     ]
 )
-def update_tm_summary_graph(tm_name, tm_impacts):
+def update_tm_summary_graph(tm_name: dict, tm_impacts: dict):
     tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
     unpacked_tm_name = tm_name.get('template_model_value')
     df_to_graph = tm_impacts_df[tm_impacts_df['Revit model'] == unpacked_tm_name]

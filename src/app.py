@@ -18,6 +18,7 @@ current_file_path = Path(__file__)
 main_directory = current_file_path.parents[1]
 tm_metadata_df = pd.read_csv(main_directory.joinpath('data/frontend/project_metadata.csv'))
 tm_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_impacts.csv'))
+prebuilt_scenario_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_prebuilt_scenarios.csv'))
 
 load_figure_template('pulse')
 
@@ -36,6 +37,10 @@ app.layout = dbc.Container(
         ),
         dcc.Store(
             id='template_model_impacts',
+            storage_type='session',
+        ),
+        dcc.Store(
+            id='prebuilt_scenario_impacts',
             storage_type='session',
         ),
         dbc.Row(
@@ -96,6 +101,14 @@ def load_tm_metadata(_):
 )
 def load_tm_impacts(_):
     return {'tm_impacts': tm_impacts_df.to_dict()}
+
+
+@callback(
+    Output(component_id='prebuilt_scenario_impacts', component_property='data'),
+    Input(component_id='prebuilt_scenario_impacts', component_property='data')
+)
+def load_prebuilt_scenario_impacts(_):
+    return {'prebuilt_scenario_impacts': prebuilt_scenario_impacts_df.to_dict()}
 
 
 if __name__ == "__main__":
