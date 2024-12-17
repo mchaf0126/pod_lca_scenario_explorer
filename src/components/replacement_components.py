@@ -1,4 +1,4 @@
-from dash import html, dcc
+from dash import html
 import dash_bootstrap_components as dbc
 from src.utils.selection import create_checklist
 from src.utils.load_config import app_config
@@ -15,58 +15,30 @@ replacement_checklist = create_checklist(
     dropdown_id=replacement_checklist_yaml['checklist_id']
 )
 
-replacement_custom_dropdowns = html.Div(
+replacement_special_mat = html.Div(
     [
-        html.Div(
+        dbc.Label("Custom Scenario"),
+        dbc.InputGroup(
             [
-                dbc.Label('Envelope'),
-                dcc.Dropdown(
+                dbc.Select(
                     options=[
-                        '20 Year Full Replacement',
-                        '25 Year Full Replacement',
-                        '40 Year Full Replacement'
+                        {"label": "Wood fiber insulation", "value": 1},
+                        {"label": "CLT", "value": 2},
+                        {"label": "Glulam", "value": 3}
                     ],
-                    value='20 Year Full Replacement',
-                    id='custom_b4_envelope_id',
-                    clearable=False,
-                    className='mb-3'
+                    value=1
                 ),
             ],
+            className="mb-3",
         ),
-        html.Div(
+        dbc.InputGroup(
             [
-                dbc.Label('Finishes'),
-                dcc.Dropdown(
-                    options=[
-                        '20 Year Full Replacement',
-                        '25 Year Full Replacement',
-                        '40 Year Full Replacement'
-                    ],
-                    value='20 Year Full Replacement',
-                    id='custom_b4_finishes_id',
-                    clearable=False,
-                    className='mb-3'
-                ),
+                dbc.InputGroupText("Replacement Rate (yr)"),
+                dbc.Input(placeholder="0", type="number"),
             ],
+            className="mb-3",
         ),
-        html.Div(
-            [
-                dbc.Label('Circularity'),
-                dcc.Dropdown(
-                    options=[
-                        '20% Design for Deconstruction',
-                        '40% Design for Deconstruction',
-                        '60% Design for Deconstruction'
-                    ],
-                    value='20% Design for Deconstruction',
-                    id='custom_b4_circularity_id',
-                    clearable=False,
-                    className='mb-3'
-                ),
-            ],
-        ),
-    ],
-    className='mb-3'
+    ]
 )
 
 replacement_scenarios = dbc.Card(
@@ -77,7 +49,7 @@ replacement_scenarios = dbc.Card(
         dbc.CardBody(
             [
                 replacement_checklist,
-                replacement_custom_dropdowns
+                replacement_special_mat
             ]
         )
     ]

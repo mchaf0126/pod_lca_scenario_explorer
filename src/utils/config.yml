@@ -170,9 +170,6 @@ scope_dropdown:
 impact_dropdown: 
   label: Impacts
   dropdown_list: 
-    -
-      label: All
-      value: All
     - 
       label: GWP
       value: Global Warming Potential Total (kgCO2eq)        
@@ -188,7 +185,7 @@ impact_dropdown:
     - 
       label: SFP
       value: Smog Formation Potential Total (kgO3eq)
-  first_item: All
+  first_item: Global Warming Potential Total (kgCO2eq)
   dropdown_id: impact_dropdown
 
 
@@ -208,34 +205,13 @@ a5_scenario_checklist:
   label: Construction Scenarios
   checklist: 
     - 
-      label: All Electric Site Equipment
-      value: 1_all_elec_equip
-    - 
       label: Advanced Waste Recovery
-      value: 2_waste_recovery
+      value: Advanced Waste Recovery
     - 
       label: Off-site Fabrication
-      value: 3_off_site_fab
+      value: Off-site Fabrication
   first_item: []
   checklist_id: a5_scenario_checklist
-
-a5_equipment_checklist:
-  label: Equipment
-  checklist: 
-    -
-      label: Site Heating
-      value: site_heating
-    - 
-      label: Electric Lighting
-      value: electric_lighting
-    - 
-      label: Grid Connection
-      value: grid_connection
-    - 
-      label: Diesel Generators
-      value: diesel_generatorss
-  first_item: []
-  checklist_id: a5_equipment_checklist
 
 b4_scenario_checklist: 
   label: Replacement Scenarios

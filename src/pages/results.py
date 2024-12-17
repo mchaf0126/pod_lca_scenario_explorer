@@ -1,11 +1,7 @@
 """Results page of dashboard"""
-import pandas as pd
-import plotly.express as px
 from dash import html, dcc, callback, Input, Output, register_page
 import dash_bootstrap_components as dbc
-from src.utils.selection import create_dropdown
-from src.components.results_data_work import create_all_impacts_df
-import src.components.results_components as results
+import src.components.scenario_explorer_components as se
 
 register_page(__name__, path='/results')
 
@@ -36,11 +32,6 @@ layout = html.Div(
                         tabs
                     ], xs=12, sm=12, md=12, lg=12, xl=12, xxl=12
                 ),
-                # dbc.Col(
-                #     [
-                #         dcc.Graph(id="stacked_bar"),
-                #     ], xs=8, sm=8, md=9, lg=9, xl=9, xxl=9
-                # ),
             ],
             justify='center',
             className='mb-4'
@@ -54,13 +45,10 @@ layout = html.Div(
     Input('tab_collection', 'value')
 )
 def update_tabs(active_tab):
-    print(active_tab)
     if active_tab == 'tab-1':
-        return results.scenario_explorer_layout
+        return se.scenario_explorer_layout
     if active_tab == 'tab-2':
         return 'model comp time!'
-
-
 
 # @callback(
 #     Output('stacked_bar', 'figure'),
