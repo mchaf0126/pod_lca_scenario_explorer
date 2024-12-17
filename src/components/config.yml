@@ -131,6 +131,23 @@ wwr_dropdown:
   first_item: "75%"
   dropdown_id: wwr_dropdown
 
+life_cycle_stage_dropdown:
+  label: Life Cycle Stage
+  dropdown_list:
+    - 
+      label: Transportation
+      value: Transportation
+    - 
+      label: Construction
+      value: Construction
+    - 
+      label: Replacement
+      value: Replacement
+    - 
+      label: End-of-life
+      value: End-of-life
+  first_item: Transportation
+  dropdown_id: life_cycle_stage_dropdown
 
 scope_dropdown:
   label: Categorization
@@ -248,7 +265,7 @@ a4_scenario_radioitem:
 
 
 a4_scenario_checklist: 
-  label: Transportation Scenarios
+  label: Prebuilt Scenarios
   checklist: 
     -
       label: Regional Supply Chain
