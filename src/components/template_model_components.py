@@ -1,16 +1,9 @@
-from pathlib import Path
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-import src.utils.general as utils
-from src.components.selection import create_dropdown
+from src.utils.selection import create_dropdown
+from src.utils.load_config import app_config
 
-current_file_path = Path(__file__)
-main_directory = current_file_path.parents[2]
-
-config_path = main_directory.joinpath('src/components/config.yml')
-
-config = utils.read_yaml(config_path)
-assert config is not None, 'The config dictionary could not be set'
+config = app_config
 
 location_dropdown_yaml = config.get('location_dropdown')
 assert location_dropdown_yaml is not None, 'The config for location dropdown could not be set'

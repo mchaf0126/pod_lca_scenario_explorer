@@ -32,7 +32,7 @@ layout = html.Div(
                     ),
                 ],
                 justify='center',
-                className='vh-100 pt-2'
+                className='pt-2'
             ),
             fluid=True,
             class_name='mw-100'
