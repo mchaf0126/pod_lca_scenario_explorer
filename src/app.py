@@ -3,8 +3,8 @@ from dash import Dash, page_container, dcc, Input, Output, callback
 import dash_bootstrap_components as dbc
 import pandas as pd
 from dash_bootstrap_templates import load_figure_template
-from src.components.header import create_header
-from src.components.sidebar import create_sidebar
+from src.utils.header import create_header
+from src.utils.sidebar import create_sidebar
 
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 app = Dash(

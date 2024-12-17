@@ -1,8 +1,12 @@
-from dash import html, dcc, callback, Input, Output, register_page
+from dash import html, callback, Input, Output
 import dash_bootstrap_components as dbc
-from src.components.selection import create_dropdown
-import src.components.a4_components as transportation
-from src.components.load_config import app_config
+from src.utils.selection import create_dropdown
+from src.components.transportation_components import transportation_scenarios
+from src.components.construction_components import construction_scenarios
+from src.components.replacement_components import replacement_scenarios
+from src.components.eol_components import eol_scenarios
+from src.utils.load_config import app_config
+
 
 config = app_config
 
@@ -191,6 +195,12 @@ scenario_explorer_layout = html.Div(
 )
 def update_scenario_card(life_cycle_stage):
     if life_cycle_stage == 'Transportation':
-        return transportation.a4_scenarios
+        return transportation_scenarios
+    elif life_cycle_stage == 'Construction':
+        return construction_scenarios
+    elif life_cycle_stage == 'Replacement':
+        return replacement_scenarios
+    elif life_cycle_stage == 'End-of-life':
+        return eol_scenarios
     else:
-        return 'try again!'
+        return "try again!"

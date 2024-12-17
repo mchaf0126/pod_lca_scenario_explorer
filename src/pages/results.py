@@ -1,11 +1,9 @@
 """Results page of dashboard"""
-from pathlib import Path
 import pandas as pd
 import plotly.express as px
 from dash import html, dcc, callback, Input, Output, register_page
 import dash_bootstrap_components as dbc
-import src.utils.general as utils
-from src.components.selection import create_dropdown
+from src.utils.selection import create_dropdown
 from src.components.results_data_work import create_all_impacts_df
 import src.components.results_components as results
 

@@ -1,7 +1,7 @@
 from dash import html, dcc
 import dash_bootstrap_components as dbc
-from src.components.selection import create_dropdown
-from src.components.load_config import app_config
+from src.utils.selection import create_dropdown
+from src.utils.load_config import app_config
 
 config = app_config
 

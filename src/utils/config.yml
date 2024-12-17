@@ -191,78 +191,6 @@ impact_dropdown:
   first_item: All
   dropdown_id: impact_dropdown
 
-scope_dropdown_a4_scenario:
-  label: Categorization
-  dropdown_list:
-    - 
-      label: Revit Building Element
-      value: Revit building element
-    - 
-      label: Tally Entry Division
-      value: Tally Entry Division
-    - 
-      label: Revit Category
-      value: Revit category
-  first_item: Revit building element
-  dropdown_id: scope_dropdown_a4_scenario
-
-scope_dropdown_a5_scenario:
-  label: Categorization
-  dropdown_list:
-    - 
-      label: Revit Building Element
-      value: Revit building element
-    - 
-      label: Tally Entry Division
-      value: Tally Entry Division
-    - 
-      label: Revit Category
-      value: Revit category
-  first_item: Revit building element
-  dropdown_id: scope_dropdown_a5_scenario
-
-scope_dropdown_b4_scenario:
-  label: Categorization
-  dropdown_list:
-    - 
-      label: Revit Building Element
-      value: Revit building element
-    - 
-      label: Tally Entry Division
-      value: Tally Entry Division
-    - 
-      label: Revit Category
-      value: Revit category
-  first_item: Revit building element
-  dropdown_id: scope_dropdown_b4_scenario
-
-scope_dropdown_eol_scenario:
-  label: Categorization
-  dropdown_list:
-    - 
-      label: Revit Building Element
-      value: Revit building element
-    - 
-      label: Tally Entry Division
-      value: Tally Entry Division
-    - 
-      label: Revit Category
-      value: Revit category
-  first_item: Revit building element
-  dropdown_id: scope_dropdown_eol_scenario
-
-a4_scenario_radioitem: 
-  label: Approach
-  radiolist: 
-    -
-      label: Prebuilt Scenarios
-      value: prebuilt
-    - 
-      label: Custom Scenarios
-      value: custom 
-  first_item: prebuilt
-  radio_id: a4_scenario_radioitem
-
 
 a4_scenario_checklist: 
   label: Prebuilt Scenarios
@@ -275,39 +203,6 @@ a4_scenario_checklist:
       value: global_supply_chain   
   first_item: []
   checklist_id: a4_scenario_checklist
-
-a4_impact_dropdown: 
-  label: Impacts
-  dropdown_list: 
-    - 
-      label: GWP
-      value: Global Warming Potential Total (kgCO2eq)        
-    - 
-      label: AP
-      value: Acidification Potential Total (kgSO2eq)
-    - 
-      label: EP
-      value: Eutrophication Potential Total (kgNeq)
-    - 
-      label: ODP
-      value: Ozone Depletion Potential Total (CFC-11eq)
-    - 
-      label: SFP
-      value: Smog Formation Potential Total (kgO3eq)
-  first_item: Global Warming Potential Total (kgCO2eq)
-  dropdown_id: a4_impact_dropdown
-
-a5_scenario_radioitem: 
-  label: Approach
-  radiolist: 
-    -
-      label: Prebuilt Scenarios
-      value: prebuilt
-    - 
-      label: Custom Scenarios
-      value: custom 
-  first_item: prebuilt
-  radio_id: a5_scenario_radioitem
 
 a5_scenario_checklist: 
   label: Construction Scenarios
@@ -342,19 +237,6 @@ a5_equipment_checklist:
   first_item: []
   checklist_id: a5_equipment_checklist
 
-
-b4_scenario_radioitem: 
-  label: Approach
-  radiolist: 
-    -
-      label: Prebuilt Scenarios
-      value: prebuilt
-    - 
-      label: Custom Scenarios
-      value: custom 
-  first_item: prebuilt
-  radio_id: b4_scenario_radioitem
-
 b4_scenario_checklist: 
   label: Replacement Scenarios
   checklist: 
@@ -367,39 +249,6 @@ b4_scenario_checklist:
   first_item: []
   checklist_id: b4_scenario_checklist
 
-b4_impact_dropdown: 
-  label: Impacts
-  dropdown_list: 
-    - 
-      label: GWP
-      value: Global Warming Potential Total (kgCO2eq)        
-    - 
-      label: AP
-      value: Acidification Potential Total (kgSO2eq)
-    - 
-      label: EP
-      value: Eutrophication Potential Total (kgNeq)
-    - 
-      label: ODP
-      value: Ozone Depletion Potential Total (CFC-11eq)
-    - 
-      label: SFP
-      value: Smog Formation Potential Total (kgO3eq)
-  first_item: Global Warming Potential Total (kgCO2eq)
-  dropdown_id: b4_impact_dropdown
-
-eol_scenario_radioitem: 
-  label: Approach
-  radiolist: 
-    -
-      label: Prebuilt Scenarios
-      value: prebuilt
-    - 
-      label: Custom Scenarios
-      value: custom 
-  first_item: prebuilt
-  radio_id: eol_scenario_radioitem
-
 eol_scenario_checklist: 
   label: End-of-life Scenarios
   checklist: 
@@ -408,27 +257,6 @@ eol_scenario_checklist:
       value: regional_mix
   first_item: []
   checklist_id: eol_scenario_checklist
-
-eol_impact_dropdown: 
-  label: Impacts
-  dropdown_list: 
-    - 
-      label: GWP
-      value: Global Warming Potential Total (kgCO2eq)        
-    - 
-      label: AP
-      value: Acidification Potential Total (kgSO2eq)
-    - 
-      label: EP
-      value: Eutrophication Potential Total (kgNeq)
-    - 
-      label: ODP
-      value: Ozone Depletion Potential Total (CFC-11eq)
-    - 
-      label: SFP
-      value: Smog Formation Potential Total (kgO3eq)
-  first_item: Global Warming Potential Total (kgCO2eq)
-  dropdown_id: b4_impact_dropdown
 
 
 
