@@ -2,6 +2,7 @@
 from dash import html, dcc, callback, Input, Output, register_page
 import dash_bootstrap_components as dbc
 import src.components.scenario_explorer_components as se
+import src.components.model_comp_components as mc
 
 register_page(__name__, path='/results')
 
@@ -48,82 +49,4 @@ def update_tabs(active_tab):
     if active_tab == 'tab-1':
         return se.scenario_explorer_layout
     if active_tab == 'tab-2':
-        return 'model comp time!'
-
-# @callback(
-#     Output('stacked_bar', 'figure'),
-#     [
-#         Input('scope_dropdown', 'value'),
-#         Input('impact_dropdown', 'value'),
-#         Input('impact_dropdown', 'options'),
-#         Input('template_model_name', 'data')
-#     ],
-#     prevent_initial_callback=True
-# )
-# def update_chart(scope, impact_type, impact_options, template_model_name_dict):
-
-#     for item in impact_options:
-#         if item['value'] == impact_type:
-#             impact_index = impact_options.index(item)
-
-#     filtered_df_by_tm = df[df['Revit model'] == template_model_name_dict.get('template_model_value')]
-
-#     if impact_type == 'All':
-
-#         new_grouped_impacts = create_all_impacts_df(
-#             df=filtered_df_by_tm,
-#             scope=scope
-#         )
-
-#         fig = px.histogram(
-#             new_grouped_impacts,
-#             x='Impacts',
-#             y='percentage',
-#             color=scope,
-#             title=f'Impacts for {template_model_name_dict.get("template_model_name")}'
-#         ).update_yaxes(
-#             title=f'Percent contribution by {scope}',
-#             tickformat=".1%"
-#         ).update_xaxes(
-#             categoryorder='array',
-#             categoryarray=[
-#                 'GWP',
-#                 'AP',
-#                 'EP',
-#                 'ODP',
-#                 'SFP'
-#             ],
-#             title=''
-#         )
-
-#     else:
-#         new_df = pd.melt(
-#             filtered_df_by_tm,
-#             id_vars=scope,
-#             value_vars=impact_type,
-#             var_name='Impacts',
-#             value_name='Impact Amount'
-#         )
-
-#         fig = px.histogram(
-#             new_df.sort_values(scope),
-#             y=scope,
-#             x='Impact Amount',
-#             color=scope,
-#             histfunc='sum',
-#             title=f'Impacts for {template_model_name_dict.get("template_model_name")}'
-#         )
-#         fig.update_yaxes(
-#             title=f'Impacts by {scope}',
-#             categoryorder='category descending'
-#         )
-#         fig.update_xaxes(
-#             title=f'{impact_options[impact_index]["value"]}',
-#             tickformat=',.0f',
-#         )
-#         if impact_type == 'Ozone Depletion Potential Total (CFC-11eq)':
-#             fig.update_xaxes(
-#                 tickformat='.4f',
-#             )
-
-#     return fig
+        return mc.model_comp_layout

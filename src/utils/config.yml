@@ -161,7 +161,7 @@ scope_dropdown:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown
 
 impact_dropdown: 
@@ -248,6 +248,40 @@ category_orders:
     - default
     - regional_mix
 
+scope_dropdown_model_comp:
+  label: Categorization
+  dropdown_list:
+    - 
+      label: Revit Building Element
+      value: Revit building element
+    - 
+      label: Tally Entry Division
+      value: Tally Entry Division
+    - 
+      label: Revit Category
+      value: Revit category
+  first_item: Revit building element
+  dropdown_id: scope_dropdown_model_comp
 
+impact_dropdown_model_comp: 
+  label: Impacts
+  dropdown_list: 
+    - 
+      label: GWP
+      value: Global Warming Potential Total (kgCO2eq)        
+    - 
+      label: AP
+      value: Acidification Potential Total (kgSO2eq)
+    - 
+      label: EP
+      value: Eutrophication Potential Total (kgNeq)
+    - 
+      label: ODP
+      value: Ozone Depletion Potential Total (CFC-11eq)
+    - 
+      label: SFP
+      value: Smog Formation Potential Total (kgO3eq)
+  first_item: Global Warming Potential Total (kgCO2eq)
+  dropdown_id: impact_dropdown_model_comp
 
 
