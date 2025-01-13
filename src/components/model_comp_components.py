@@ -3,10 +3,10 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
 from src.utils.selection import create_dropdown
-from src.components.transportation_components import transportation_scenarios
-from src.components.construction_components import construction_scenarios
-from src.components.replacement_components import replacement_scenarios
-from src.components.eol_components import eol_scenarios
+import src.components.transportation_components as tc
+import src.components.construction_components as cc
+import src.components.replacement_components as rc
+import src.components.eol_components as ec
 from src.utils.load_config import app_config
 from src.components.descriptions import description_map, description_list
 
@@ -44,7 +44,40 @@ model_comp_sidebar = dbc.Container(
             ]
         ),
         dbc.Row(
-            html.Div(id='scenario_card')
+            dbc.Accordion(
+                [
+                    dbc.AccordionItem(
+                        [
+                            tc.transportation_radio_model_comp,
+                            tc.a4_special_mat_model_comp
+                        ],
+                        title="Transportation",
+                    ),
+                    dbc.AccordionItem(
+                        [
+                            cc.construction_radio_model_comp,
+                        ],
+                        title="Construction",
+                    ),
+                    dbc.AccordionItem(
+                        [
+                            rc.replacement_radio_model_comp,
+                            rc.replacement_special_mat_model_comp,
+                        ],
+                        title="Replacement",
+                    ),
+                    dbc.AccordionItem(
+                        [
+                            ec.eol_radio_model_comp,
+                            ec.eol_form_mc,
+                            ec.eol_special_material_mc
+                        ],
+                        title="End-of-life",
+                    ),
+                ],
+                start_collapsed=True,
+                always_open=True
+            )
         )
     ],
     class_name='p-0 mt-2',
