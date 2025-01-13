@@ -4,8 +4,8 @@ domestic_supply_chain = dcc.Markdown(
     '''
     #### Domestic Supply Chain
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure do mollit anim id est laborum.
     ''',
     className='fw-light'
@@ -15,8 +15,8 @@ global_supply_chain = dcc.Markdown(
     '''
     #### Global Supply Chain
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure do mollit anim id est laborum.
     ''',
     className='fw-light'
@@ -26,8 +26,8 @@ advanced_waste_recovery = dcc.Markdown(
     '''
     #### Advanced Waste Recovery
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure do mollit anim id est laborum.
     ''',
     className='fw-light'
@@ -37,8 +37,8 @@ offsite_fabrication = dcc.Markdown(
     '''
     #### Off-site Fabrication
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure do mollit anim id est laborum.
     ''',
     className='fw-light'
@@ -48,8 +48,8 @@ Rics = dcc.Markdown(
     '''
     #### RICS Replacement Rates
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure do mollit anim id est laborum.
     ''',
     className='fw-light'
@@ -59,8 +59,8 @@ Ashrae_240 = dcc.Markdown(
     '''
     #### ASHRAE 240 Replacement Rates
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure do mollit anim id est laborum.
     ''',
     className='fw-light'
@@ -70,8 +70,8 @@ eol_regional_mix = dcc.Markdown(
     '''
     #### End-of-life Regional Mix
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
     Duis aute irure do mollit anim id est laborum.
     ''',
     className='fw-light'
@@ -96,4 +96,3 @@ description_list = [
     'ASHRAE_240',
     'regional_mix'
 ]
-
