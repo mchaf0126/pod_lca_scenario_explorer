@@ -79,7 +79,7 @@ app.layout = dbc.Container(
                     class_name='p-0'
                 )
             ],
-            class_name='vh-100'
+            class_name=''
         )
     ],
     fluid=True,

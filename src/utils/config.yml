@@ -11,18 +11,23 @@ location_dropdown:
     - 
       label: Los Angeles, CA
       value: Los Angeles, CA
+      disabled: True
     - 
       label: Chicago, IL
       value: Chicago, IL
+      disabled: True
     - 
       label: Austin, TX
       value: Austin, TX
+      disabled: True
     - 
       label: Atlanta, GA
       value: Atlanta, GA
+      disabled: True
     - 
       label: Unknown
       value: Unknown
+      disabled: True
   first_item: Philadelphia, PA
   dropdown_id: location_dropdown
 
@@ -33,17 +38,20 @@ building_use_type_dropdown:
       label: Office
       value: Office
     - 
-      label: Multi-family
-      value: Multi-family
-    - 
       label: Single Family Home
       value: Single Family Home
     - 
+      label: Multi-family
+      value: Multi-family
+      disabled: True
+    - 
       label: Education
       value: Education
+      disabled: True
     - 
       label: Healthcare
       value: Healthcare
+      disabled: True
   first_item: Office
   dropdown_id: building_use_type_dropdown
 
@@ -89,6 +97,7 @@ str_lat_sys_dropdown:
     - 
       label: "Wood: Shear Panels"
       value: "Wood: Shear Panels"
+      disabled: True
   first_item: "Concrete: Shear Walls"
   dropdown_id: str_lat_sys_dropdown
 
@@ -161,7 +170,7 @@ scope_dropdown:
     - 
       label: Revit Category
       value: Revit category
-  first_item: Life Cycle Stage
+  first_item: Revit building element
   dropdown_id: scope_dropdown
 
 impact_dropdown: 
@@ -198,6 +207,21 @@ transporation_scenario_checklist:
   first_item: []
   checklist_id: transporation_scenario_checklist
 
+transporation_scenario_radio: 
+  label: Prebuilt Scenarios
+  radiolist: 
+    - 
+      label: Default
+      value: default
+    -
+      label: Regional Supply Chain
+      value: domestic_supply_chain
+    - 
+      label: Global Supply Chain
+      value: global_supply_chain   
+  first_item: default
+  radio_id: transporation_scenario_radio
+
 construction_scenario_checklist: 
   label: Construction Scenarios
   checklist: 
@@ -210,6 +234,21 @@ construction_scenario_checklist:
   first_item: []
   checklist_id: construction_scenario_checklist
 
+construction_scenario_radio: 
+  label: Construction Scenarios
+  radiolist: 
+    - 
+      label: Default
+      value: default
+    - 
+      label: Advanced Waste Recovery
+      value: Advanced Waste Recovery
+    - 
+      label: Off-site Fabrication
+      value: Off-site Fabrication
+  first_item: default
+  radio_id: construction_scenario_radio
+
 replacement_scenario_checklist: 
   label: Replacement Scenarios
   checklist: 
@@ -220,7 +259,22 @@ replacement_scenario_checklist:
       label: ASHRAE 240P Replacement Rates
       value: ASHRAE_240
   first_item: []
-  checklist_id: replacement_scenario_checklist
+  checklist_id: replacement_scenario_checklist'
+
+replacement_scenario_radio: 
+  label: Replacement Scenarios
+  radiolist: 
+    - 
+      label: Default
+      value: default
+    -
+      label: RICS Replacement Rates
+      value: RICS
+    - 
+      label: ASHRAE 240P Replacement Rates
+      value: ASHRAE_240
+  first_item: default
+  radio_id: replacement_scenario_radio
 
 eol_scenario_checklist: 
   label: End-of-life Scenarios
@@ -230,6 +284,18 @@ eol_scenario_checklist:
       value: regional_mix
   first_item: []
   checklist_id: eol_scenario_checklist
+
+eol_scenario_radio: 
+  label: End-of-life Scenarios
+  radiolist: 
+    - 
+      label: Default
+      value: default
+    -
+      label: Regional Mix
+      value: regional_mix
+  first_item: default
+  radio_id: eol_scenario_radio
 
 category_orders:
   Transportation: 
@@ -248,6 +314,43 @@ category_orders:
     - default
     - regional_mix
 
+scope_dropdown_model_comp:
+  label: Categorization
+  dropdown_list:
+    - 
+      label: Life Cycle Stage
+      value: Life Cycle Stage
+    - 
+      label: Revit Building Element
+      value: Revit building element
+    - 
+      label: Tally Entry Division
+      value: Tally Entry Division
+    - 
+      label: Revit Category
+      value: Revit category
+  first_item: Revit building element
+  dropdown_id: scope_dropdown_model_comp
 
+impact_dropdown_model_comp: 
+  label: Impacts
+  dropdown_list: 
+    - 
+      label: GWP
+      value: Global Warming Potential Total (kgCO2eq)        
+    - 
+      label: AP
+      value: Acidification Potential Total (kgSO2eq)
+    - 
+      label: EP
+      value: Eutrophication Potential Total (kgNeq)
+    - 
+      label: ODP
+      value: Ozone Depletion Potential Total (CFC-11eq)
+    - 
+      label: SFP
+      value: Smog Formation Potential Total (kgO3eq)
+  first_item: Global Warming Potential Total (kgCO2eq)
+  dropdown_id: impact_dropdown_model_comp
 
 

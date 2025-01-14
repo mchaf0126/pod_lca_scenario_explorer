@@ -78,12 +78,6 @@ scenario_explorer_layout = html.Div(
                             dbc.Container(
                                 [
                                     dbc.Row(
-                                        dbc.Label(
-                                            id='se_figure_label',
-                                            class_name='fw-bold text-center'
-                                        ),
-                                    ),
-                                    dbc.Row(
                                         dcc.Graph(id="se_figure"),
                                     )
                                 ],
@@ -161,13 +155,13 @@ def update_se_figure(life_cycle_stage: str,
     )
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_graph = tm_impacts_df[
-        (tm_impacts_df['Revit model'] == unpacked_tm_name) &
-        (tm_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
+        (tm_impacts_df['Revit model'] == unpacked_tm_name)
+        & (tm_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
     ]
     pb_df_to_graph = pb_impacts_df[
-        (pb_impacts_df['Revit model'] == unpacked_tm_name) &
-        (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage)) &
-        (pb_impacts_df['scenario'].isin(sum(checklist, [])))
+        (pb_impacts_df['Revit model'] == unpacked_tm_name)
+        & (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
+        & (pb_impacts_df['scenario'].isin(sum(checklist, [])))
     ]
 
     categories = category_orders.get(life_cycle_stage)
@@ -187,7 +181,6 @@ def update_se_figure(life_cycle_stage: str,
         color=scope,
         # title=f'GWP Impacts of {unpacked_tm_name}',
         height=600,
-
     ).update_yaxes(
         title='',
         tickformat=',.0f',
