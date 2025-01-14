@@ -11,18 +11,23 @@ location_dropdown:
     - 
       label: Los Angeles, CA
       value: Los Angeles, CA
+      disabled: True
     - 
       label: Chicago, IL
       value: Chicago, IL
+      disabled: True
     - 
       label: Austin, TX
       value: Austin, TX
+      disabled: True
     - 
       label: Atlanta, GA
       value: Atlanta, GA
+      disabled: True
     - 
       label: Unknown
       value: Unknown
+      disabled: True
   first_item: Philadelphia, PA
   dropdown_id: location_dropdown
 
@@ -33,17 +38,20 @@ building_use_type_dropdown:
       label: Office
       value: Office
     - 
-      label: Multi-family
-      value: Multi-family
-    - 
       label: Single Family Home
       value: Single Family Home
     - 
+      label: Multi-family
+      value: Multi-family
+      disabled: True
+    - 
       label: Education
       value: Education
+      disabled: True
     - 
       label: Healthcare
       value: Healthcare
+      disabled: True
   first_item: Office
   dropdown_id: building_use_type_dropdown
 
@@ -89,6 +97,7 @@ str_lat_sys_dropdown:
     - 
       label: "Wood: Shear Panels"
       value: "Wood: Shear Panels"
+      disabled: True
   first_item: "Concrete: Shear Walls"
   dropdown_id: str_lat_sys_dropdown
 
@@ -308,6 +317,9 @@ category_orders:
 scope_dropdown_model_comp:
   label: Categorization
   dropdown_list:
+    - 
+      label: Life Cycle Stage
+      value: Life Cycle Stage
     - 
       label: Revit Building Element
       value: Revit building element
