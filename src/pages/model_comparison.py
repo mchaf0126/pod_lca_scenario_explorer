@@ -4,7 +4,7 @@ import dash_bootstrap_components as dbc
 import src.components.scenario_explorer_components as se
 import src.components.model_comp_components as mc
 
-register_page(__name__, path='/results')
+register_page(__name__, path='/model_comparison')
 
 tabs = dbc.Container(
     [
