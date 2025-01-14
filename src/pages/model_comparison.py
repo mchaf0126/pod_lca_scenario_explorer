@@ -16,7 +16,7 @@ layout = html.Div(
                     dbc.Col(
                         [
                             mc.model_comp_sidebar
-                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4,
+                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=3,
                         class_name='',
                         style={'max-height': '600px'}
                     ),
@@ -38,7 +38,7 @@ layout = html.Div(
                                 fluid=True,
                                 class_name='m-3'
                             )
-                        ], xs=8, sm=8, md=8, lg=8, xl=8, xxl=8,
+                        ], xs=8, sm=8, md=8, lg=8, xl=8, xxl=9,
                     ),
                 ],
                 # justify='center',
