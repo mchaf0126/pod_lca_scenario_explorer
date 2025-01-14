@@ -105,24 +105,51 @@ cladding_type_dropdown:
   label: Cladding Type
   dropdown_list:
     - 
-      label: "Curtainwall"
-      value: "Curtainwall"
+      label: "Curtain wall: steel spandrel"
+      value: "Curtain wall: steel spandrel"
     - 
-      label: "Wood rainscreen"
-      value: "Wood rainscreen"
-  first_item: "Curtainwall"
+      label: "Curtain wall: aluminum spandrel"
+      value: "Curtain wall: aluminum spandrel"
+    - 
+      label: "MV: Brick"
+      value: "MV: Brick"
+    - 
+      label: "MV: Granite"
+      value: "MV: Granite"
+    - 
+      label: "Insulated Metal Panel"
+      value: "Insulated Metal Panel"
+    - 
+      label: "EIFS (XPS)"
+      value: "EIFS (XPS)"
+    - 
+      label: "Rainscreen: GFRC"
+      value: "Rainscreen: GFRC"
+    - 
+      label: "Rainscreen: Thin brick"
+      value: "Rainscreen: Thin brick"
+    - 
+      label: "Rainscreen: Wood"
+      value: "Rainscreen: Wood"
+    - 
+      label: "Rainscreen: Formed Steel Panel"
+      value: "Rainscreen: Formed Steel Panel"
+  first_item: "Curtain wall: steel spandrel"
   dropdown_id: cladding_type_dropdown
 
 roofing_type_dropdown:
   label: Roofing Type
   dropdown_list:
     - 
-      label: "Roof Option 1"
-      value: "Roof Option 1"
+      label: "EPDM roofing"
+      value: "EPDM roofing"
     - 
-      label: "Roof Option 2"
-      value: "Roof Option 2"
-  first_item: "Roof Option 1"
+      label: "TPO roofing"
+      value: "TPO roofing"
+    - 
+      label: "Mod Bit Roofing"
+      value: "Mod Bit Roofing"
+  first_item: "EPDM roofing"
   dropdown_id: roofing_type_dropdown
 
 wwr_dropdown:
