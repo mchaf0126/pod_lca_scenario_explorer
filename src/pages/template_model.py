@@ -16,19 +16,27 @@ layout = html.Div(
                     dbc.Col(
                         [
                             tmc.sidebar
-                        ], xs=2, sm=2, md=2, lg=2, xl=2, xxl=2,
-                        class_name=''
+                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4,
+                        class_name='',
+                        style={'max-height': '600px'}
                     ),
                     dbc.Col(
                         [
-                            tmc.display_data
-                        ], xs=6, sm=6, md=6, lg=6, xl=6, xxl=6,
-                        class_name=''
-                    ),
-                    dbc.Col(
-                        [
-                            tmc.figure
-                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4
+                            dbc.Row(
+                                dbc.Label(
+                                    id='tm_description',
+                                    class_name='fs-5 fw-bold mt-3 text-center'
+                                ),
+                            ),
+                            dbc.Row(
+                                tmc.figure
+                            ),
+                            dbc.Row(
+                                tmc.display_data,
+                            )
+                        ],
+                        xs=8, sm=8, md=8, lg=8, xl=8, xxl=8,
+                        class_name='',
                     ),
                 ],
                 justify='center',
@@ -64,24 +72,16 @@ def update_tm_name(location_dropdown_value, tm_metadata):
 
 
 @callback(
-    [
-        Output('tm_image', 'src'),
-        Output('tm_description', 'children')
-    ],
-    Input('template_model_name', 'data')
+    Output('tm_description', 'children'),
+    Input('building_use_type_dropdown', 'value')
 )
-def update_image(template_model_name_dict):
-    markdown_text = f'This is {template_model_name_dict.get("template_model_name")}'
-    return f'assets/tm_images/{template_model_name_dict.get("template_model_value")}.png', \
-        markdown_text
+def update_title(template_model_use_type):
+    markdown_text = f'{template_model_use_type} Template Model'
+    return markdown_text
 
 
 @callback(
-    [
-        Output('arch_criteria_text', 'children'),
-        Output('str_criteria_text', 'children'),
-        Output('enc_criteria_text', 'children'),
-    ],
+        Output('criteria_text', 'children'),
     [
         Input('template_model_name', 'data'),
         State('template_model_metadata', 'data')
@@ -106,26 +106,27 @@ def update_criteria_text(tm_name, tm_metadata):
     roofing_type = tm_row['roofing_type'].item()
     wwr = tm_row['wwr'].item()
 
-    arch_text = f'''
-        - __Location:__ {location}
+    criteria_text = f'''
+        ### Architecture
+        - **Location:** {location}
         - __Building Use Type:__ {building_use_type}
         - __Project Area:__ {project_area}
         - __Building Height:__ {building_height}
         - __Stories Above Grade:__ {stories_above_grade}
         - __Stories Below Grade:__ {stories_below_grade}
         - __Bay Size:__ {bay_size}
-    '''
-    str_text = f'''
+
+        ### Structure
         - __H. Gravity System:__ {str_horiz_grav_sys}
         - __V. Gravity System:__ {str_vert_grav_sys}
         - __Lateral System:__ {str_lat_sys}
-    '''
-    enc_text = f'''
+
+        ### Enclosure
         - __Cladding Type:__ {cladding_type}
         - __Roofing Type:__ {roofing_type}
         - __Window-to-wall Ratio:__ {wwr}
     '''
-    return arch_text, str_text, enc_text
+    return criteria_text
 
 
 @callback(
@@ -144,10 +145,10 @@ def update_tm_summary_graph(tm_name: dict, tm_impacts: dict):
 
     fig = px.bar(
         df_to_graph,
-        x='Global Warming Potential Total (kgCO2eq)',
+        y='Global Warming Potential Total (kgCO2eq)',
         color=df_to_graph.index,
         # title=f'GWP Impacts of {unpacked_tm_name}',
-        height=600
+        # height=600
     ).update_yaxes(
         title='',
         tickformat=',.0f',

@@ -101,6 +101,7 @@ sidebar = dbc.Container(
                             building_use_type_dropdown
                         ],
                         title="Architecture",
+                        item_id='arch'
                     ),
                     dbc.AccordionItem(
                         [
@@ -109,6 +110,7 @@ sidebar = dbc.Container(
                             str_lat_sys_dropdown
                         ],
                         title="Structure",
+                        item_id='str'
                     ),
                     dbc.AccordionItem(
                         [
@@ -117,93 +119,35 @@ sidebar = dbc.Container(
                             wwr_dropdown
                         ],
                         title="Enclosure",
+                        item_id='enc'
                     ),
                 ],
                 start_collapsed=True,
-                always_open=True
+                always_open=True,
+                active_item=['arch', 'str', 'enc'],
             )
         )
     ],
-    class_name='p-0 mt-2',
+    class_name='p-0 mt-2 overflow-scroll h-100',
     fluid=True
 )
 
 display_data = dbc.Container(
     [
         dbc.Row(
-            dbc.Label(
-                id='tm_description',
-                class_name='fs-5 fw-bold mt-2 text-center'
-            ),
-        ),
-        dbc.Row(
-            html.Img(id='tm_image'),
-            class_name='py-4'
-        ),
-        dbc.Row(
             [
-                dbc.Col(
-                    [
-                        dbc.Card(
-                            [
-                                dbc.CardHeader(
-                                    "Architecture",
-                                    class_name='fs-5 fw-bold'
-                                ),
-                                dbc.CardBody(
-                                    [
-                                        dcc.Markdown(
-                                            id='arch_criteria_text',
-                                            className="card-text",
-                                        ),
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
+                dcc.Markdown(
+                    '''
+                    ### Description
+                    See below for a description of the template model that has been selected.
+                    ''',
+                    className='fw-light'
                 ),
-                dbc.Col(
-                    [
-                        dbc.Card(
-                            [
-                                dbc.CardHeader(
-                                    "Structure",
-                                    class_name='fs-5 fw-bold'
-                                ),
-                                dbc.CardBody(
-                                    [
-                                        dcc.Markdown(
-                                            id='str_criteria_text',
-                                            className="card-text",
-                                        ),
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
+                dcc.Markdown(
+                    id='criteria_text',
+                    className='fw-light'
                 ),
-                dbc.Col(
-                    [
-                        dbc.Card(
-                            [
-                                dbc.CardHeader(
-                                    "Enclosure",
-                                    class_name='fs-5 fw-bold'
-                                ),
-                                dbc.CardBody(
-                                    [
-                                        dcc.Markdown(
-                                            id='enc_criteria_text',
-                                            className="card-text",
-                                        ),
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
-                )
-            ],
-            class_name='pt-4'
+            ]
         )
     ],
     class_name='px-3 mt-2',
@@ -212,12 +156,6 @@ display_data = dbc.Container(
 
 figure = dbc.Container(
     [
-        dbc.Row(
-            dbc.Label(
-                'Total Global Warming Potential by Building Element',
-                class_name='fw-bold text-center'
-            ),
-        ),
         dbc.Row(
             dcc.Graph(id="tm_summary"),
         )
