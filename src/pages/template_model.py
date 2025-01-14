@@ -81,7 +81,7 @@ def update_title(template_model_use_type):
 
 
 @callback(
-        Output('criteria_text', 'children'),
+    Output('criteria_text', 'children'),
     [
         Input('template_model_name', 'data'),
         State('template_model_metadata', 'data')
