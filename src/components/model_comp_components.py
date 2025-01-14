@@ -48,12 +48,14 @@ model_comp_sidebar = dbc.Container(
                             tc.a4_special_mat_model_comp
                         ],
                         title="Transportation",
+                        item_id='trans'
                     ),
                     dbc.AccordionItem(
                         [
                             cc.construction_radio_model_comp,
                         ],
                         title="Construction",
+                        item_id='constr'
                     ),
                     dbc.AccordionItem(
                         [
@@ -61,6 +63,7 @@ model_comp_sidebar = dbc.Container(
                             rc.replacement_special_mat_model_comp,
                         ],
                         title="Replacement",
+                        item_id='repl'
                     ),
                     dbc.AccordionItem(
                         [
@@ -69,13 +72,15 @@ model_comp_sidebar = dbc.Container(
                             ec.eol_special_material_mc
                         ],
                         title="End-of-life",
+                        item_id='eol'
                     ),
                 ],
-                start_collapsed=True,
-                always_open=True
-            )
+                start_collapsed=False,
+                always_open=True,
+                active_item=['trans', 'constr', 'repl', 'eol'],
+            ),
+            class_name=''
         )
     ],
-    class_name='p-0 mt-2',
-    fluid=True
+    class_name='overflow-y-scroll h-100 p-0 mt-2',
 )

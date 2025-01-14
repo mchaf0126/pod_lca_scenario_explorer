@@ -38,8 +38,14 @@ def create_sidebar() -> html.Div:
                                             className='fw-bolder'
                                         ),
                                         dbc.NavLink(
-                                            "3. Results",
-                                            href="/results",
+                                            "3. Scenario Explorer",
+                                            href="/scenario_explorer",
+                                            active="exact",
+                                            className='fw-bolder'
+                                        ),
+                                        dbc.NavLink(
+                                            "4. Model Comparison",
+                                            href="/model_comparison",
                                             active="exact",
                                             className='fw-bolder'
                                         ),

@@ -16,8 +16,9 @@ layout = html.Div(
                     dbc.Col(
                         [
                             mc.model_comp_sidebar
-                        ], xs=3, sm=3, md=3, lg=3, xl=3, xxl=3,
-                        class_name=''
+                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4,
+                        class_name='',
+                        style={'max-height': '600px'}
                     ),
                     dbc.Col(
                         [
@@ -37,14 +38,14 @@ layout = html.Div(
                                 fluid=True,
                                 class_name='m-3'
                             )
-                        ], xs=9, sm=9, md=9, lg=9, xl=9, xxl=9,
+                        ], xs=8, sm=8, md=8, lg=8, xl=8, xxl=8,
                     ),
                 ],
                 # justify='center',
                 className=''
             ),
             fluid=True,
-            class_name='mw-100'
+            class_name='mw-100',
         ),
     ],
 )
@@ -120,7 +121,6 @@ def update_se_figure(impact: str,
         y=impact,
         color=scope,
         # title=f'GWP Impacts of {unpacked_tm_name}',
-        height=600,
     ).update_yaxes(
         title='',
         tickformat=',.0f',

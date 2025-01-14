@@ -50,7 +50,6 @@ app.layout = dbc.Container(
                     xs=3, sm=3, md=2, lg=2, xl=2, xxl=2,
                     style={
                         "width": "14rem",
-                        'position': 'relative'
                     },
                     class_name='p-3 bg-light'
                 ),
@@ -79,7 +78,6 @@ app.layout = dbc.Container(
                     class_name='p-0'
                 )
             ],
-            class_name=''
         )
     ],
     fluid=True,

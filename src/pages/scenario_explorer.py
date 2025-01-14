@@ -20,8 +20,9 @@ layout = html.Div(
                     dbc.Col(
                         [
                             sec.se_sidebar
-                        ], xs=2, sm=2, md=2, lg=2, xl=2, xxl=2,
-                        class_name=''
+                        ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=4,
+                        class_name='',
+                        style={'max-height': '600px'}
                     ),
                     dbc.Col(
                         [
@@ -29,21 +30,19 @@ layout = html.Div(
                                 [
                                     dbc.Row(
                                         dcc.Graph(id="se_figure"),
+                                    ),
+                                    dbc.Row(
+                                        html.Div(
+                                            id='se_description',
+                                            className='pt-2'
+                                        )
                                     )
                                 ],
                                 class_name='mt-2',
                                 fluid=True
                             )
-                        ], xs=7, sm=7, md=7, lg=7, xl=7, xxl=7,
+                        ], xs=8, sm=8, md=8, lg=8, xl=8, xxl=8,
                         class_name=''
-                    ),
-                    dbc.Col(
-                        [
-                            html.Div(
-                                id='se_description',
-                                className='pt-2'
-                            )
-                        ], xs=3, sm=3, md=3, lg=3, xl=3, xxl=3
                     ),
                 ],
                 # justify='center',
@@ -130,7 +129,6 @@ def update_se_figure(life_cycle_stage: str,
         y=impact,
         color=scope,
         # title=f'GWP Impacts of {unpacked_tm_name}',
-        height=600,
     ).update_yaxes(
         title='',
         tickformat=',.0f',
