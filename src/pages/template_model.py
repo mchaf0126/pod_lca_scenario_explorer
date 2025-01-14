@@ -18,7 +18,7 @@ layout = html.Div(
                             tmc.sidebar
                         ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=3,
                         class_name='',
-                        style={'max-height': '600px'}
+                        style={'max-height': '1200px'}
                     ),
                     dbc.Col(
                         [
