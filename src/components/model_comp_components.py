@@ -82,5 +82,5 @@ model_comp_sidebar = dbc.Container(
             class_name=''
         )
     ],
-    class_name='overflow-y-scroll h-100 p-0 mt-2',
+    class_name='overflow-scroll h-100 p-0 mt-2',
 )
