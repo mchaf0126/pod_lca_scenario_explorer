@@ -82,6 +82,9 @@ def update_criteria_text(tm_name, tm_metadata):
             ),
         ),
         dbc.Row(
+            html.Br()
+        ),
+        dbc.Row(
             dcc.Markdown(
                 f'''
                 ##### Building Information
