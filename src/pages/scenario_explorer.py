@@ -78,19 +78,20 @@ def update_scenario(life_cycle_stage):
         Input('life_cycle_stage_dropdown', 'value'),
         Input('impact_dropdown', 'value'),
         Input('scope_dropdown', 'value'),
-        Input({'type': 'prebuilt_scenario', 'id': ALL}, 'value'),
+        # Input({'type': 'prebuilt_scenario', 'id': ALL}, 'value'),
         State('template_model_name', 'data'),
         State('template_model_impacts', 'data'),
-        State('prebuilt_scenario_impacts', 'data'),
+        # State('prebuilt_scenario_impacts', 'data'),
     ]
 )
 def update_se_figure(life_cycle_stage: str,
                      impact: str,
                      scope: str,
-                     checklist: list,
+                     # checklist: list,
                      template_model_name: dict,
                      template_model_impacts: dict,
-                     prebuilt_scenario_impacts: dict):
+                     # prebuilt_scenario_impacts: dict
+                     ):
 
     lcs_map = {
         'Transportation': 'Transportation: A4',
