@@ -3,14 +3,15 @@ location_dropdown:
   label: Location
   dropdown_list:
     - 
+      label: Los Angeles, CA
+      value: Los Angeles, CA
+    - 
       label: Philadelphia, PA
       value: Philadelphia, PA
+      disabled: True
     - 
       label: Seattle, WA
       value: Seattle, WA
-    - 
-      label: Los Angeles, CA
-      value: Los Angeles, CA
       disabled: True
     - 
       label: Chicago, IL
@@ -38,7 +39,7 @@ building_use_type_dropdown:
       label: Office
       value: Office
     - 
-      label: Single Family Home
+      label: Single family home
       value: Single Family Home
     - 
       label: Multi-family
@@ -59,15 +60,15 @@ str_horiz_grav_sys_dropdown:
   label: Primary Horizontal Gravity System
   dropdown_list:
     - 
-      label: "Concrete: Non-PT Framing"
-      value: "Concrete: Non-PT Framing"
+      label: "Concrete: non-PT framing"
+      value: "Concrete: non-PT framing"
     - 
-      label: "Steel: Frame + Concrete on Metal Deck"
-      value: "Steel: Frame + Concrete on Metal Deck"
+      label: "Steel: frame + concrete on metal deck"
+      value: "Steel: Frame + concrete on metal deck"
     - 
-      label: "Wood: Engineered Panels"
-      value: "Wood: Engineered Panels"
-  first_item: "Concrete: Non-PT Framing"
+      label: "Wood: engineered oanels"
+      value: "Wood: engineered oanels"
+  first_item: "Concrete: non-PT framing"
   dropdown_id: str_horiz_grav_sys_dropdown
 
 str_vert_grav_sys_dropdown:
@@ -77,28 +78,29 @@ str_vert_grav_sys_dropdown:
       label: "Concrete: CIP"
       value: "Concrete: CIP"
     - 
-      label: "Steel: Columns"
-      value: "Steel: Columns"
+      label: "Steel: columns"
+      value: "Steel: columns"
     - 
-      label: "Wood: Mass Timber"
-      value: "Wood: Mass Timber"
-  first_item: "Wood: Mass Timber"
+      label: "Wood: mass timber"
+      value: "Wood: mass timber"
+  first_item: "Concrete: CIP"
   dropdown_id: str_vert_grav_sys_dropdown
 
 str_lat_sys_dropdown:
   label: Primary Lateral System
   dropdown_list:
     - 
-      label: "Concrete: Shear Walls"
-      value: "Concrete: Shear Walls"
+      label: "Concrete: shear walls"
+      value: "Concrete: shear walls"
     - 
-      label: "Steel: Braced Frames"
-      value: "Steel: Braced Frames"
-    - 
-      label: "Wood: Shear Panels"
-      value: "Wood: Shear Panels"
+      label: "Steel: braced frames"
+      value: "Steel: braced frames"
       disabled: True
-  first_item: "Concrete: Shear Walls"
+    - 
+      label: "Wood: shear panels"
+      value: "Wood: shear panels"
+      disabled: True
+  first_item: "Concrete: shear walls"
   dropdown_id: str_lat_sys_dropdown
 
 cladding_type_dropdown:
@@ -111,14 +113,14 @@ cladding_type_dropdown:
       label: "Curtain wall: aluminum spandrel"
       value: "Curtain wall: aluminum spandrel"
     - 
-      label: "MV: Brick"
-      value: "MV: Brick"
+      label: "MV: brick"
+      value: "MV: brick"
     - 
-      label: "MV: Granite"
-      value: "MV: Granite"
+      label: "MV: granite"
+      value: "MV: granite"
     - 
-      label: "Insulated Metal Panel"
-      value: "Insulated Metal Panel"
+      label: "Insulated metal panel"
+      value: "Insulated metal panel"
     - 
       label: "EIFS (XPS)"
       value: "EIFS (XPS)"
@@ -126,14 +128,14 @@ cladding_type_dropdown:
       label: "Rainscreen: GFRC"
       value: "Rainscreen: GFRC"
     - 
-      label: "Rainscreen: Thin brick"
-      value: "Rainscreen: Thin brick"
+      label: "Rainscreen: thin brick"
+      value: "Rainscreen: thin brick"
     - 
-      label: "Rainscreen: Wood"
-      value: "Rainscreen: Wood"
+      label: "Rainscreen: wood"
+      value: "Rainscreen: wood"
     - 
-      label: "Rainscreen: Formed Steel Panel"
-      value: "Rainscreen: Formed Steel Panel"
+      label: "Rainscreen: formed steel panel"
+      value: "Rainscreen: formed steel panel"
   first_item: "Curtain wall: steel spandrel"
   dropdown_id: cladding_type_dropdown
 
@@ -146,9 +148,11 @@ roofing_type_dropdown:
     - 
       label: "TPO roofing"
       value: "TPO roofing"
+      disabled: True
     - 
-      label: "Mod Bit Roofing"
-      value: "Mod Bit Roofing"
+      label: "Mod bit roofing"
+      value: "Mod bit roofing"
+      disabled: True
   first_item: "EPDM roofing"
   dropdown_id: roofing_type_dropdown
 
@@ -156,15 +160,21 @@ wwr_dropdown:
   label: Window-to-wall Ratio
   dropdown_list:
     - 
+      label: "33%"
+      value: "33%"
+    - 
       label: "25%"
       value: "25%"
+      disabled: True
     - 
       label: "50%"
       value: "50%"
+      disabled: True
     - 
       label: "75%"
       value: "75%"
-  first_item: "75%"
+      disabled: True
+  first_item: "33%"
   dropdown_id: wwr_dropdown
 
 life_cycle_stage_dropdown:
@@ -189,13 +199,13 @@ scope_dropdown:
   label: Categorization
   dropdown_list:
     - 
-      label: Revit Building Element
+      label: Revit building element
       value: Revit building element
     - 
-      label: Tally Entry Division
+      label: Tally entry division
       value: Tally Entry Division
     - 
-      label: Revit Category
+      label: Revit category
       value: Revit category
   first_item: Revit building element
   dropdown_id: scope_dropdown
@@ -226,11 +236,13 @@ transporation_scenario_checklist:
   label: Prebuilt Scenarios
   checklist: 
     -
-      label: Regional Supply Chain
+      label: Domestic supply chain
       value: domestic_supply_chain
+      disabled: True
     - 
       label: Global Supply Chain
-      value: global_supply_chain   
+      value: global_supply_chain
+      disabled: True 
   first_item: []
   checklist_id: transporation_scenario_checklist
 
@@ -241,11 +253,13 @@ transporation_scenario_radio:
       label: Default
       value: default
     -
-      label: Regional Supply Chain
+      label: Domestic Supply Chain
       value: domestic_supply_chain
+      disabled: True
     - 
       label: Global Supply Chain
       value: global_supply_chain   
+      disabled: True
   first_item: default
   radio_id: transporation_scenario_radio
 
@@ -255,9 +269,11 @@ construction_scenario_checklist:
     - 
       label: Advanced Waste Recovery
       value: Advanced Waste Recovery
+      disabled: True
     - 
       label: Off-site Fabrication
       value: Off-site Fabrication
+      disabled: True
   first_item: []
   checklist_id: construction_scenario_checklist
 
@@ -270,9 +286,11 @@ construction_scenario_radio:
     - 
       label: Advanced Waste Recovery
       value: Advanced Waste Recovery
+      disabled: True
     - 
       label: Off-site Fabrication
       value: Off-site Fabrication
+      disabled: True
   first_item: default
   radio_id: construction_scenario_radio
 
@@ -282,10 +300,7 @@ replacement_scenario_checklist:
     -
       label: RICS Replacement Rates
       value: RICS
-    - 
-      label: ASHRAE 240P Replacement Rates
-      value: ASHRAE_240
-  first_item: []
+  first_item: [RICS]
   checklist_id: replacement_scenario_checklist'
 
 replacement_scenario_radio: 
@@ -294,12 +309,6 @@ replacement_scenario_radio:
     - 
       label: Default
       value: default
-    -
-      label: RICS Replacement Rates
-      value: RICS
-    - 
-      label: ASHRAE 240P Replacement Rates
-      value: ASHRAE_240
   first_item: default
   radio_id: replacement_scenario_radio
 
@@ -309,6 +318,7 @@ eol_scenario_checklist:
     -
       label: Regional Mix
       value: regional_mix
+      disabled: True
   first_item: []
   checklist_id: eol_scenario_checklist
 
@@ -321,6 +331,7 @@ eol_scenario_radio:
     -
       label: Regional Mix
       value: regional_mix
+      disabled: True
   first_item: default
   radio_id: eol_scenario_radio
 
@@ -345,16 +356,16 @@ scope_dropdown_model_comp:
   label: Categorization
   dropdown_list:
     - 
-      label: Life Cycle Stage
-      value: Life Cycle Stage
+      label: Life cycle stage
+      value: Life cycle stage
     - 
-      label: Revit Building Element
+      label: Revit building element
       value: Revit building element
     - 
-      label: Tally Entry Division
+      label: Tally entry division
       value: Tally Entry Division
     - 
-      label: Revit Category
+      label: Revit category
       value: Revit category
   first_item: Revit building element
   dropdown_id: scope_dropdown_model_comp
