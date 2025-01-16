@@ -26,7 +26,7 @@ layout = html.Div(
                         [
                             nmc.form
                         ], xs=8, sm=8, md=8, lg=8, xl=8, xxl=9,
-                        class_name='px-5'
+                        class_name='mt-2 px-5'
                     ),
                 ],
                 justify='center',
