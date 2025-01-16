@@ -1,4 +1,3 @@
-from dash import dcc
 import dash_bootstrap_components as dbc
 
 
@@ -117,20 +116,4 @@ form = dbc.Container(
     ],
     fluid=True,
     className=''
-)
-
-figure = dbc.Container(
-    [
-        dbc.Row(
-            dbc.Label(
-                'Future Graph TBD',
-                class_name='fs-5 fw-bold mt-2 text-center'
-            ),
-        ),
-        dbc.Row(
-            dcc.Graph(id="nm_summary"),
-        )
-    ],
-    class_name='mt-2',
-    fluid=True
 )

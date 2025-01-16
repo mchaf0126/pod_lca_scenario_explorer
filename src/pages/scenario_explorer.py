@@ -22,7 +22,7 @@ layout = html.Div(
                             sec.se_sidebar
                         ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=3,
                         class_name='',
-                        style={'max-height': '1200px'}
+                        style={'max-height': '1000px'}
                     ),
                     dbc.Col(
                         [
@@ -34,7 +34,7 @@ layout = html.Div(
                                     dbc.Row(
                                         html.Div(
                                             id='se_description',
-                                            className='pt-2'
+                                            className='pt-2 mx-5'
                                         )
                                     )
                                 ],
@@ -59,7 +59,7 @@ layout = html.Div(
     Output('scenario_card', 'children'),
     Input('life_cycle_stage_dropdown', 'value')
 )
-def update_scenario_card(life_cycle_stage):
+def update_scenario(life_cycle_stage):
     if life_cycle_stage == 'Transportation':
         return transportation_scenarios
     elif life_cycle_stage == 'Construction':

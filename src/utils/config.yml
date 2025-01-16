@@ -3,33 +3,33 @@ location_dropdown:
   label: Location
   dropdown_list:
     - 
-      label: Los Angeles, CA
-      value: Los Angeles, CA
+      label: Los Angeles
+      value: Los Angeles
     - 
-      label: Philadelphia, PA
-      value: Philadelphia, PA
+      label: Philadelphia
+      value: Philadelphia
       disabled: True
     - 
-      label: Seattle, WA
-      value: Seattle, WA
+      label: Seattle
+      value: Seattle
       disabled: True
     - 
-      label: Chicago, IL
-      value: Chicago, IL
+      label: Chicago
+      value: Chicago
       disabled: True
     - 
-      label: Austin, TX
-      value: Austin, TX
+      label: Austin
+      value: Austin
       disabled: True
     - 
-      label: Atlanta, GA
-      value: Atlanta, GA
+      label: Atlanta
+      value: Atlanta
       disabled: True
     - 
       label: Unknown
       value: Unknown
       disabled: True
-  first_item: Philadelphia, PA
+  first_item: Los Angeles
   dropdown_id: location_dropdown
 
 building_use_type_dropdown:
@@ -64,10 +64,10 @@ str_horiz_grav_sys_dropdown:
       value: "Concrete: non-PT framing"
     - 
       label: "Steel: frame + concrete on metal deck"
-      value: "Steel: Frame + concrete on metal deck"
+      value: "Steel: frame + concrete on metal deck"
     - 
-      label: "Wood: engineered oanels"
-      value: "Wood: engineered oanels"
+      label: "Wood: engineered panels"
+      value: "Wood: engineered panels"
   first_item: "Concrete: non-PT framing"
   dropdown_id: str_horiz_grav_sys_dropdown
 
@@ -138,6 +138,18 @@ cladding_type_dropdown:
       value: "Rainscreen: formed steel panel"
   first_item: "Curtain wall: steel spandrel"
   dropdown_id: cladding_type_dropdown
+
+glazing_type_dropdown:
+  label: Glazing Type
+  dropdown_list:
+    - 
+      label: "Glazing: double pane IGU"
+      value: "Glazing: double pane IGU"
+    - 
+      label: "Glazing: triple pane IGU"
+      value: "Glazing: triple pane IGU"
+  first_item: "Glazing: double pane IGU"
+  dropdown_id: glazing_type_dropdown
 
 roofing_type_dropdown:
   label: Roofing Type
@@ -233,10 +245,10 @@ impact_dropdown:
 
 
 transporation_scenario_checklist: 
-  label: Prebuilt Scenarios
+  label: Prebuilt
   checklist: 
     -
-      label: Domestic supply chain
+      label: Regionally-specific Distances
       value: domestic_supply_chain
       disabled: True
     - 
@@ -247,13 +259,13 @@ transporation_scenario_checklist:
   checklist_id: transporation_scenario_checklist
 
 transporation_scenario_radio: 
-  label: Prebuilt Scenarios
+  label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: North American Average (default)
       value: default
     -
-      label: Domestic Supply Chain
+      label: Regionally-specific Distances
       value: domestic_supply_chain
       disabled: True
     - 
@@ -264,38 +276,30 @@ transporation_scenario_radio:
   radio_id: transporation_scenario_radio
 
 construction_scenario_checklist: 
-  label: Construction Scenarios
+  label: Prebuilt
   checklist: 
     - 
       label: Advanced Waste Recovery
       value: Advanced Waste Recovery
       disabled: True
-    - 
-      label: Off-site Fabrication
-      value: Off-site Fabrication
-      disabled: True
   first_item: []
   checklist_id: construction_scenario_checklist
 
 construction_scenario_radio: 
-  label: Construction Scenarios
+  label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: North American Average (default)
       value: default
     - 
       label: Advanced Waste Recovery
       value: Advanced Waste Recovery
       disabled: True
-    - 
-      label: Off-site Fabrication
-      value: Off-site Fabrication
-      disabled: True
   first_item: default
   radio_id: construction_scenario_radio
 
 replacement_scenario_checklist: 
-  label: Replacement Scenarios
+  label: Prebuilt
   checklist: 
     -
       label: RICS Replacement Rates
@@ -304,32 +308,32 @@ replacement_scenario_checklist:
   checklist_id: replacement_scenario_checklist'
 
 replacement_scenario_radio: 
-  label: Replacement Scenarios
+  label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: ASHRAE 240P Replacement Rates (default)
       value: default
   first_item: default
   radio_id: replacement_scenario_radio
 
 eol_scenario_checklist: 
-  label: End-of-life Scenarios
+  label: Prebuilt
   checklist: 
     -
-      label: Regional Mix
+      label: Regional C&D treatment mix 
       value: regional_mix
       disabled: True
   first_item: []
   checklist_id: eol_scenario_checklist
 
 eol_scenario_radio: 
-  label: End-of-life Scenarios
+  label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: National Ave C&D treatment mix (default)
       value: default
     -
-      label: Regional Mix
+      label: Regional C&D treatment mix
       value: regional_mix
       disabled: True
   first_item: default

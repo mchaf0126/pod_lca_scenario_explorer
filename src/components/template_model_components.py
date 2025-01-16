@@ -1,4 +1,4 @@
-from dash import html, dcc
+from dash import dcc
 import dash_bootstrap_components as dbc
 from src.utils.selection import create_dropdown
 from src.utils.load_config import app_config
@@ -21,13 +21,16 @@ str_lat_sys_dropdown_yaml = config.get('str_lat_sys_dropdown')
 assert str_lat_sys_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
 
 cladding_type_dropdown_yaml = config.get('cladding_type_dropdown')
-assert cladding_type_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
+assert cladding_type_dropdown_yaml is not None, 'The config for cladding dropdown could not be set'
+
+glazing_type_dropdown_yaml = config.get('glazing_type_dropdown')
+assert glazing_type_dropdown_yaml is not None, 'The config for glazing dropdown could not be set'
 
 roofing_type_dropdown_yaml = config.get('roofing_type_dropdown')
-assert roofing_type_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
+assert roofing_type_dropdown_yaml is not None, 'The config for roofing dropdown could not be set'
 
 wwr_dropdown_yaml = config.get('wwr_dropdown')
-assert wwr_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
+assert wwr_dropdown_yaml is not None, 'The config for wwr dropdown could not be set'
 
 location_dropdown = create_dropdown(
     label=location_dropdown_yaml['label'],
@@ -70,6 +73,13 @@ cladding_type_dropdown = create_dropdown(
     dropdown_id=cladding_type_dropdown_yaml['dropdown_id']
 )
 
+glazing_type_dropdown = create_dropdown(
+    label=glazing_type_dropdown_yaml['label'],
+    dropdown_list=glazing_type_dropdown_yaml['dropdown_list'],
+    first_item=glazing_type_dropdown_yaml['first_item'],
+    dropdown_id=glazing_type_dropdown_yaml['dropdown_id']
+)
+
 roofing_type_dropdown = create_dropdown(
     label=roofing_type_dropdown_yaml['label'],
     dropdown_list=roofing_type_dropdown_yaml['dropdown_list'],
@@ -89,7 +99,7 @@ sidebar = dbc.Container(
         dbc.Row(
             dbc.Label(
                 'Template Model Selector',
-                class_name='fs-5 fw-bold my-2 text-center'
+                class_name='fs-5 fw-bold my-2'
             ),
         ),
         dbc.Row(
@@ -100,8 +110,8 @@ sidebar = dbc.Container(
                             location_dropdown,
                             building_use_type_dropdown
                         ],
-                        title="Architecture",
-                        item_id='arch'
+                        title="Building information",
+                        item_id='build_info'
                     ),
                     dbc.AccordionItem(
                         [
@@ -115,6 +125,7 @@ sidebar = dbc.Container(
                     dbc.AccordionItem(
                         [
                             cladding_type_dropdown,
+                            glazing_type_dropdown,
                             roofing_type_dropdown,
                             wwr_dropdown
                         ],
@@ -124,7 +135,7 @@ sidebar = dbc.Container(
                 ],
                 start_collapsed=True,
                 always_open=True,
-                active_item=['arch', 'str', 'enc'],
+                active_item=['build_info', 'str', 'enc'],
             )
         )
     ],
@@ -136,13 +147,6 @@ display_data = dbc.Container(
     [
         dbc.Row(
             [
-                dcc.Markdown(
-                    '''
-                    ### Description
-                    See below for a description of the template model that has been selected.
-                    ''',
-                    className='fw-light'
-                ),
                 dcc.Markdown(
                     id='criteria_text',
                     className='fw-light'

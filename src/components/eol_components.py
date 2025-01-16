@@ -27,7 +27,7 @@ eol_radio_model_comp = create_radio(
 
 eol_form = html.Div(
     [
-        dbc.Label('Custom Mix'),
+        dbc.Label('Custom Mix (full building)'),
         dbc.InputGroup(
             [
                 dbc.InputGroupText("% Landfill"),
@@ -70,7 +70,7 @@ eol_form = html.Div(
 
 eol_form_mc = html.Div(
     [
-        dbc.Label('Custom Mix'),
+        dbc.Label('Custom Mix (full building)'),
         dbc.InputGroup(
             [
                 dbc.InputGroupText("% Landfill"),
@@ -113,7 +113,7 @@ eol_form_mc = html.Div(
 
 eol_special_material = html.Div(
     [
-        dbc.Label("Custom Scenario"),
+        dbc.Label("Custom Mix (component)"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -144,7 +144,7 @@ eol_special_material = html.Div(
 
 eol_special_material_mc = html.Div(
     [
-        dbc.Label("Custom Scenario"),
+        dbc.Label("Custom Mix (component)"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -173,12 +173,9 @@ eol_special_material_mc = html.Div(
     ]
 )
 
-eol_scenarios = dbc.Card(
+eol_scenarios = dbc.Container(
     [
-        dbc.CardHeader(
-            'End-of-life Scenarios'
-        ),
-        dbc.CardBody(
+        dbc.Row(
             [
                 eol_checklist,
                 eol_form,

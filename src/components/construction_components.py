@@ -24,12 +24,9 @@ construction_radio_model_comp = create_radio(
     radio_id=construction_radio_yaml['radio_id']
 )
 
-construction_scenarios = dbc.Card(
+construction_scenarios = dbc.Container(
     [
-        dbc.CardHeader(
-            'Construction Scenarios'
-        ),
-        dbc.CardBody(
+        dbc.Row(
             [
                 construction_checklist,
             ]
