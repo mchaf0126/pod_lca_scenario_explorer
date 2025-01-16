@@ -93,39 +93,44 @@ def update_se_figure(life_cycle_stage: str,
                      prebuilt_scenario_impacts: dict):
 
     lcs_map = {
-        'Transportation': '[A4] Transportation',
-        'Construction': '[A5] Construction',
-        'Replacement': '[B2-B5] Maintenance and Replacement',
-        'End-of-life': '[C2-C4] End of Life'
+        'Transportation': 'Transportation: A4',
+        'Construction': 'Construction: A5',
+        'Replacement': 'Replacement: B2-B5',
+        'End-of-life': 'End-of-life: C2-C4'
     }
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    pb_impacts_df = pd.DataFrame.from_dict(
-        prebuilt_scenario_impacts.get('prebuilt_scenario_impacts')
-    )
+    # pb_impacts_df = pd.DataFrame.from_dict(
+    #     prebuilt_scenario_impacts.get('prebuilt_scenario_impacts')
+    # )
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_graph = tm_impacts_df[
-        (tm_impacts_df['Revit model'] == unpacked_tm_name)
-        & (tm_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
+        (tm_impacts_df['template_model'] == unpacked_tm_name)
+        & (tm_impacts_df['life_cycle_stage'] == lcs_map.get(life_cycle_stage))
     ]
-    pb_df_to_graph = pb_impacts_df[
-        (pb_impacts_df['Revit model'] == unpacked_tm_name)
-        & (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
-        & (pb_impacts_df['scenario'].isin(sum(checklist, [])))
-    ]
+    # pb_df_to_graph = pb_impacts_df[
+    #     (pb_impacts_df['Revit model'] == unpacked_tm_name)
+    #     & (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
+    #     & (pb_impacts_df['scenario'].isin(sum(checklist, [])))
+    # ]
 
-    categories = sec.category_orders.get(life_cycle_stage)
+    # categories = sec.category_orders.get(life_cycle_stage)
 
-    combined_df_to_graph = pd.concat([tm_df_to_graph, pb_df_to_graph])
-    combined_df_to_graph['scenario'] = pd.Categorical(
-        combined_df_to_graph['scenario'],
-        ordered=True,
-        categories=categories
-    )
-    combined_df_to_graph = combined_df_to_graph.sort_values('scenario')
+    # combined_df_to_graph = pd.concat(
+    #     [
+    #         tm_df_to_graph,
+    #         # pb_df_to_graph
+    #     ]
+    # )
+    # combined_df_to_graph['scenario'] = pd.Categorical(
+    #     combined_df_to_graph['scenario'],
+    #     ordered=True,
+    #     categories=categories
+    # )
+    # combined_df_to_graph = combined_df_to_graph.sort_values('scenario')
 
     fig = px.histogram(
-        combined_df_to_graph,
-        x='scenario',
+        tm_df_to_graph,
+        x='template_model',
         y=impact,
         color=scope,
         # title=f'GWP Impacts of {unpacked_tm_name}',
@@ -136,6 +141,7 @@ def update_se_figure(life_cycle_stage: str,
         title='',
     ).update_layout(
         # showlegend=False
+        title=''
     )
     return fig
 
