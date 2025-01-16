@@ -355,6 +355,16 @@ eol_scenario_radio:
   first_item: default
   radio_id: eol_scenario_radio
 
+energy_use_scenario_radio: 
+  label: Prebuilt
+  radiolist: 
+    - 
+      label: Regional average energy use (default)
+      value: default
+      disabled: True
+  first_item: default
+  radio_id: energy_use_scenario_radio
+
 category_orders:
   Transportation: 
     - default
