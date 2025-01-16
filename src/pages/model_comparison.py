@@ -31,7 +31,7 @@ layout = html.Div(
                                     dbc.Row(
                                         html.Div(
                                             id='mc_description',
-                                            className='pt-2'
+                                            className='pt-2 mx-5'
                                         )
                                     ),
                                 ],

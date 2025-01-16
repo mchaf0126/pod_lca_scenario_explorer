@@ -33,6 +33,7 @@ layout = html.Div(
                             ),
                             dbc.Row(
                                 tmc.display_data,
+                                class_name='mx-5'
                             )
                         ],
                         xs=8, sm=8, md=8, lg=8, xl=8, xxl=9,
