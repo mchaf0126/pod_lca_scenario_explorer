@@ -189,6 +189,22 @@ wwr_dropdown:
   first_item: "33%"
   dropdown_id: wwr_dropdown
 
+template_model_graph_dropdown:
+  label: Categorization
+  dropdown_list:
+    -
+      label: Omniclass level 3
+      value: L3
+    -
+      label: Assembly
+      value: Assembly
+    -
+      label: Component
+      value: Component
+    
+  first_item: L3
+  dropdown_id: template_model_graph_dropdown
+
 life_cycle_stage_dropdown:
   label: Life Cycle Stage
   dropdown_list:

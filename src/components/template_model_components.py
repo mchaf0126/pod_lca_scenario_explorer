@@ -32,6 +32,9 @@ assert roofing_type_dropdown_yaml is not None, 'The config for roofing dropdown 
 wwr_dropdown_yaml = config.get('wwr_dropdown')
 assert wwr_dropdown_yaml is not None, 'The config for wwr dropdown could not be set'
 
+template_model_dropdown_yaml = config.get('template_model_graph_dropdown')
+assert template_model_dropdown_yaml is not None, 'The config for tm_graph dropdown could not be set'
+
 location_dropdown = create_dropdown(
     label=location_dropdown_yaml['label'],
     dropdown_list=location_dropdown_yaml['dropdown_list'],
@@ -92,6 +95,13 @@ wwr_dropdown = create_dropdown(
     dropdown_list=wwr_dropdown_yaml['dropdown_list'],
     first_item=wwr_dropdown_yaml['first_item'],
     dropdown_id=wwr_dropdown_yaml['dropdown_id']
+)
+
+tm_graph_dropdown = create_dropdown(
+    label=template_model_dropdown_yaml['label'],
+    dropdown_list=template_model_dropdown_yaml['dropdown_list'],
+    first_item=template_model_dropdown_yaml['first_item'],
+    dropdown_id=template_model_dropdown_yaml['dropdown_id']
 )
 
 sidebar = dbc.Container(
