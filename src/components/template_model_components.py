@@ -1,4 +1,4 @@
-from dash import html, dcc
+from dash import dcc
 import dash_bootstrap_components as dbc
 from src.utils.selection import create_dropdown
 from src.utils.load_config import app_config

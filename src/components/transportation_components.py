@@ -27,7 +27,7 @@ transportation_radio_model_comp = create_radio(
 
 a4_special_mat = html.Div(
     [
-        dbc.Label("Custom"),
+        dbc.Label("Intentional Sourcing"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -73,7 +73,7 @@ a4_special_mat = html.Div(
 
 a4_special_mat_model_comp = html.Div(
     [
-        dbc.Label("Custom"),
+        dbc.Label("Intentional Sourcing"),
         dbc.InputGroup(
             [
                 dbc.Select(

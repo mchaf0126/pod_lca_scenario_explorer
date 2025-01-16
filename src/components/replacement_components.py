@@ -27,7 +27,7 @@ replacement_radio_model_comp = create_radio(
 
 replacement_special_mat = html.Div(
     [
-        dbc.Label("Custom Scenario"),
+        dbc.Label("Intentional Replacement"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -58,7 +58,7 @@ replacement_special_mat = html.Div(
 
 replacement_special_mat_model_comp = html.Div(
     [
-        dbc.Label("Custom Scenario"),
+        dbc.Label("Intentional Replacement"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -87,12 +87,9 @@ replacement_special_mat_model_comp = html.Div(
     ]
 )
 
-replacement_scenarios = dbc.Card(
+replacement_scenarios = dbc.Container(
     [
-        dbc.CardHeader(
-            'Replacement Scenarios'
-        ),
-        dbc.CardBody(
+        dbc.Row(
             [
                 replacement_checklist,
                 replacement_special_mat

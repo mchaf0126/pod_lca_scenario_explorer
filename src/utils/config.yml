@@ -236,7 +236,7 @@ transporation_scenario_checklist:
   label: Prebuilt
   checklist: 
     -
-      label: Domestic supply chain
+      label: Regionally-specific Distances
       value: domestic_supply_chain
       disabled: True
     - 
@@ -250,10 +250,10 @@ transporation_scenario_radio:
   label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: North American Average (default)
       value: default
     -
-      label: Domestic Supply Chain
+      label: Regionally-specific Distances
       value: domestic_supply_chain
       disabled: True
     - 
@@ -270,10 +270,6 @@ construction_scenario_checklist:
       label: Advanced Waste Recovery
       value: Advanced Waste Recovery
       disabled: True
-    - 
-      label: Off-site Fabrication
-      value: Off-site Fabrication
-      disabled: True
   first_item: []
   checklist_id: construction_scenario_checklist
 
@@ -281,15 +277,11 @@ construction_scenario_radio:
   label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: North American Average (default)
       value: default
     - 
       label: Advanced Waste Recovery
       value: Advanced Waste Recovery
-      disabled: True
-    - 
-      label: Off-site Fabrication
-      value: Off-site Fabrication
       disabled: True
   first_item: default
   radio_id: construction_scenario_radio
@@ -307,7 +299,7 @@ replacement_scenario_radio:
   label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: ASHRAE 240P Replacement Rates (default)
       value: default
   first_item: default
   radio_id: replacement_scenario_radio
@@ -316,7 +308,7 @@ eol_scenario_checklist:
   label: Prebuilt
   checklist: 
     -
-      label: Regional Mix
+      label: Regional C&D treatment mix 
       value: regional_mix
       disabled: True
   first_item: []
@@ -326,10 +318,10 @@ eol_scenario_radio:
   label: Prebuilt
   radiolist: 
     - 
-      label: Default
+      label: National Ave C&D treatment mix (default)
       value: default
     -
-      label: Regional Mix
+      label: Regional C&D treatment mix
       value: regional_mix
       disabled: True
   first_item: default
