@@ -89,7 +89,7 @@ sidebar = dbc.Container(
         dbc.Row(
             dbc.Label(
                 'Template Model Selector',
-                class_name='fs-5 fw-bold my-2 text-center'
+                class_name='fs-5 fw-bold my-2'
             ),
         ),
         dbc.Row(
@@ -100,8 +100,8 @@ sidebar = dbc.Container(
                             location_dropdown,
                             building_use_type_dropdown
                         ],
-                        title="Architecture",
-                        item_id='arch'
+                        title="Building information",
+                        item_id='build_info'
                     ),
                     dbc.AccordionItem(
                         [
@@ -124,7 +124,7 @@ sidebar = dbc.Container(
                 ],
                 start_collapsed=True,
                 always_open=True,
-                active_item=['arch', 'str', 'enc'],
+                active_item=['build_info', 'str', 'enc'],
             )
         )
     ],

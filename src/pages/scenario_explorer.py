@@ -59,7 +59,7 @@ layout = html.Div(
     Output('scenario_card', 'children'),
     Input('life_cycle_stage_dropdown', 'value')
 )
-def update_scenario_card(life_cycle_stage):
+def update_scenario(life_cycle_stage):
     if life_cycle_stage == 'Transportation':
         return transportation_scenarios
     elif life_cycle_stage == 'Construction':

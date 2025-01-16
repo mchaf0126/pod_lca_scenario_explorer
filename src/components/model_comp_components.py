@@ -34,14 +34,22 @@ impact_dropdown = create_dropdown(
 model_comp_sidebar = dbc.Container(
     [
         dbc.Row(
-            [
-                scope_dropdown,
-                impact_dropdown
-            ]
+            dbc.Label(
+                'Model Comparison',
+                class_name='fs-5 fw-bold my-2'
+            ),
         ),
         dbc.Row(
             dbc.Accordion(
                 [
+                    dbc.AccordionItem(
+                        [
+                            scope_dropdown,
+                            impact_dropdown
+                        ],
+                        title="Results",
+                        item_id='results'
+                    ),
                     dbc.AccordionItem(
                         [
                             tc.transportation_radio_model_comp,
@@ -77,10 +85,11 @@ model_comp_sidebar = dbc.Container(
                 ],
                 start_collapsed=False,
                 always_open=True,
-                active_item=['trans', 'constr', 'repl', 'eol'],
+                active_item=['results', 'trans', 'constr', 'repl', 'eol'],
             ),
             class_name=''
         )
     ],
     class_name='overflow-scroll h-100 p-0 mt-2',
+    fluid=True
 )

@@ -233,7 +233,7 @@ impact_dropdown:
 
 
 transporation_scenario_checklist: 
-  label: Prebuilt Scenarios
+  label: Prebuilt
   checklist: 
     -
       label: Domestic supply chain
@@ -247,7 +247,7 @@ transporation_scenario_checklist:
   checklist_id: transporation_scenario_checklist
 
 transporation_scenario_radio: 
-  label: Prebuilt Scenarios
+  label: Prebuilt
   radiolist: 
     - 
       label: Default
@@ -264,7 +264,7 @@ transporation_scenario_radio:
   radio_id: transporation_scenario_radio
 
 construction_scenario_checklist: 
-  label: Construction Scenarios
+  label: Prebuilt
   checklist: 
     - 
       label: Advanced Waste Recovery
@@ -278,7 +278,7 @@ construction_scenario_checklist:
   checklist_id: construction_scenario_checklist
 
 construction_scenario_radio: 
-  label: Construction Scenarios
+  label: Prebuilt
   radiolist: 
     - 
       label: Default
@@ -295,7 +295,7 @@ construction_scenario_radio:
   radio_id: construction_scenario_radio
 
 replacement_scenario_checklist: 
-  label: Replacement Scenarios
+  label: Prebuilt
   checklist: 
     -
       label: RICS Replacement Rates
@@ -304,7 +304,7 @@ replacement_scenario_checklist:
   checklist_id: replacement_scenario_checklist'
 
 replacement_scenario_radio: 
-  label: Replacement Scenarios
+  label: Prebuilt
   radiolist: 
     - 
       label: Default
@@ -313,7 +313,7 @@ replacement_scenario_radio:
   radio_id: replacement_scenario_radio
 
 eol_scenario_checklist: 
-  label: End-of-life Scenarios
+  label: Prebuilt
   checklist: 
     -
       label: Regional Mix
@@ -323,7 +323,7 @@ eol_scenario_checklist:
   checklist_id: eol_scenario_checklist
 
 eol_scenario_radio: 
-  label: End-of-life Scenarios
+  label: Prebuilt
   radiolist: 
     - 
       label: Default

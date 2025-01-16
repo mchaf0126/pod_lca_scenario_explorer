@@ -27,7 +27,7 @@ transportation_radio_model_comp = create_radio(
 
 a4_special_mat = html.Div(
     [
-        dbc.Label("Custom Scenario"),
+        dbc.Label("Custom"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -73,7 +73,7 @@ a4_special_mat = html.Div(
 
 a4_special_mat_model_comp = html.Div(
     [
-        dbc.Label("Custom Scenario"),
+        dbc.Label("Custom"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -117,12 +117,9 @@ a4_special_mat_model_comp = html.Div(
     ]
 )
 
-transportation_scenarios = dbc.Card(
+transportation_scenarios = dbc.Container(
     [
-        dbc.CardHeader(
-            'Transportation Scenarios'
-        ),
-        dbc.CardBody(
+        dbc.Row(
             [
                 transportation_checklist,
                 a4_special_mat

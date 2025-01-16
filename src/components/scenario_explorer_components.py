@@ -41,16 +41,37 @@ impact_dropdown = create_dropdown(
 se_sidebar = dbc.Container(
     [
         dbc.Row(
-            [
-                life_cycle_stage_dropdown,
-                scope_dropdown,
-                impact_dropdown
-            ]
+            dbc.Label(
+                'Scenario Explorer',
+                class_name='fs-5 fw-bold my-2'
+            ),
         ),
         dbc.Row(
-            html.Div(id='scenario_card')
+            dbc.Accordion(
+                [
+                    dbc.AccordionItem(
+                        [
+                            scope_dropdown,
+                            impact_dropdown
+                        ],
+                        title="Results",
+                        item_id='results'
+                    ),
+                    dbc.AccordionItem(
+                        [
+                            life_cycle_stage_dropdown,
+                            html.Div(id='scenario_card')
+                        ],
+                        title="Scenario selection",
+                        item_id='scenario'
+                    ),
+                ],
+                start_collapsed=True,
+                always_open=True,
+                active_item=['results', 'scenario'],
+            )
         )
     ],
-    class_name='p-0 mt-2',
+    class_name='p-0 mt-2 overflow-scroll h-100',
     fluid=True
 )
