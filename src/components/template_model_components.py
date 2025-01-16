@@ -149,7 +149,7 @@ sidebar = dbc.Container(
             )
         )
     ],
-    class_name='p-0 mt-2 overflow-scroll h-100',
+    class_name='p-0 mt-2 mx-2 overflow-scroll h-100',
     fluid=True
 )
 

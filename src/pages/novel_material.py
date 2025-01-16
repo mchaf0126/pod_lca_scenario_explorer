@@ -17,7 +17,7 @@ layout = html.Div(
                             dbc.Container(
                                 id='tm_card_info',
                                 fluid=True,
-                                class_name='p-0 mt-2 h-100',
+                                class_name='p-0 mt-2 mx-2 h-100',
                             )
                         ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=3,
                         class_name=''
