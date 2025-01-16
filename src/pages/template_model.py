@@ -37,6 +37,7 @@ layout = html.Div(
                                         tmc.tm_graph_dropdown
                                     ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=3
                                 ),
+                                class_name='mx-5'
                             ),
                             dbc.Row(
                                 tmc.display_data,
