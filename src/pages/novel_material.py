@@ -84,8 +84,6 @@ def update_criteria_text(tm_name, tm_metadata):
         dbc.Row(
             dcc.Markdown(
                 f'''
-                __Template Model Name__: {unpacked_tm_name}
-
                 ##### Building Information
                 - __Location:__ {location}
                 - __Building Use Type:__ {building_use_type}
