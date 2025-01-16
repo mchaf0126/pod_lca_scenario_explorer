@@ -226,16 +226,16 @@ life_cycle_stage_dropdown:
 scope_dropdown:
   label: Categorization
   dropdown_list:
-    - 
-      label: Revit building element
-      value: Revit building element
-    - 
-      label: Tally entry division
-      value: Tally Entry Division
-    - 
-      label: Revit category
-      value: Revit category
-  first_item: Revit building element
+    -
+      label: Omniclass level 3
+      value: L3
+    -
+      label: Assembly
+      value: Assembly
+    -
+      label: Component
+      value: Component
+  first_item: L3
   dropdown_id: scope_dropdown
 
 impact_dropdown: 
@@ -243,20 +243,20 @@ impact_dropdown:
   dropdown_list: 
     - 
       label: GWP
-      value: Global Warming Potential Total (kgCO2eq)        
+      value: Global Warming Potential_fossil       
     - 
       label: AP
-      value: Acidification Potential Total (kgSO2eq)
+      value: Acidification Potential
     - 
       label: EP
-      value: Eutrophication Potential Total (kgNeq)
+      value: Eutrophication Potential
     - 
       label: ODP
-      value: Ozone Depletion Potential Total (CFC-11eq)
+      value: Ozone Depletion Potential
     - 
       label: SFP
-      value: Smog Formation Potential Total (kgO3eq)
-  first_item: Global Warming Potential Total (kgCO2eq)
+      value: Smog Formation Potential
+  first_item: Global Warming Potential_fossil
   dropdown_id: impact_dropdown
 
 
@@ -375,19 +375,16 @@ category_orders:
 scope_dropdown_model_comp:
   label: Categorization
   dropdown_list:
-    - 
-      label: Life cycle stage
-      value: Life cycle stage
-    - 
-      label: Revit building element
-      value: Revit building element
-    - 
-      label: Tally entry division
-      value: Tally Entry Division
-    - 
-      label: Revit category
-      value: Revit category
-  first_item: Revit building element
+    -
+      label: Omniclass level 3
+      value: L3
+    -
+      label: Assembly
+      value: Assembly
+    -
+      label: Component
+      value: Component
+  first_item: L3
   dropdown_id: scope_dropdown_model_comp
 
 impact_dropdown_model_comp: 
@@ -395,20 +392,19 @@ impact_dropdown_model_comp:
   dropdown_list: 
     - 
       label: GWP
-      value: Global Warming Potential Total (kgCO2eq)        
+      value: Global Warming Potential_fossil       
     - 
       label: AP
-      value: Acidification Potential Total (kgSO2eq)
+      value: Acidification Potential
     - 
       label: EP
-      value: Eutrophication Potential Total (kgNeq)
+      value: Eutrophication Potential
     - 
       label: ODP
-      value: Ozone Depletion Potential Total (CFC-11eq)
+      value: Ozone Depletion Potential
     - 
       label: SFP
-      value: Smog Formation Potential Total (kgO3eq)
-  first_item: Global Warming Potential Total (kgCO2eq)
+      value: Smog Formation Potential
+  first_item: Global Warming Potential_fossil    
   dropdown_id: impact_dropdown_model_comp
-
 

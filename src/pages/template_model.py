@@ -130,7 +130,6 @@ def update_criteria_text(tm_name, tm_metadata):
     This will be improved in future iterations.
     '''
     unpacked_tm_name = tm_name.get('template_model_value')
-    print(unpacked_tm_name)
     tm_row = tm_metadata_df[tm_metadata_df['template_model'] == unpacked_tm_name]
 
     building_use_type = tm_row['building_use_type'].item()
