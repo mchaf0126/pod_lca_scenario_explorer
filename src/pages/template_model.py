@@ -32,6 +32,13 @@ layout = html.Div(
                                 tmc.figure
                             ),
                             dbc.Row(
+                                dbc.Col(
+                                    [
+                                        tmc.tm_graph_dropdown
+                                    ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=3
+                                ),
+                            ),
+                            dbc.Row(
                                 tmc.display_data,
                                 class_name='mx-5'
                             )
@@ -167,31 +174,49 @@ def update_criteria_text(tm_name, tm_metadata):
     Output('tm_summary', 'figure'),
     [
         Input('template_model_name', 'data'),
+        Input('template_model_graph_dropdown', 'value'),
         State('template_model_impacts', 'data')
     ]
 )
-def update_tm_summary_graph(tm_name: dict, tm_impacts: dict):
+def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
     tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
     if tm_name is None:
         return px.bar()
+
+    impacts = [
+        'Global Warming Potential_fossil',
+        'Acidification Potential',
+        'Eutrophication Potential',
+        'Smog Formation Potential',
+        # 'Ozone Depletion Potential'
+    ]
     unpacked_tm_name = tm_name.get('template_model_value')
-    df_to_graph = tm_impacts_df[tm_impacts_df['Revit model'] == unpacked_tm_name]
+    df_to_graph = tm_impacts_df[tm_impacts_df['template_model'] == unpacked_tm_name]
+    df_to_graph = df_to_graph[df_to_graph['Assembly'] != 'Operational energy']
 
-    df_to_graph = df_to_graph.groupby('Revit category').sum()
+    df_to_graph = df_to_graph.melt(
+        id_vars=['L3', 'Assembly', 'Component'],
+        value_vars=impacts
+    )
+    for impact in impacts:
+        temp_sum = df_to_graph[df_to_graph['variable'] == impact]['value'].sum().item()
+        df_to_graph.loc[df_to_graph['variable'] == impact, 'value'] /= temp_sum
 
-    fig = px.bar(
-        df_to_graph,
-        y='Global Warming Potential Total (kgCO2eq)',
-        color=df_to_graph.index,
+    fig = px.histogram(
+        df_to_graph.sort_values(by=tm_dropdown),
+        x='variable',
+        y='value',
+        color=tm_dropdown
         # title=f'GWP Impacts of {unpacked_tm_name}',
         # height=600
     ).update_yaxes(
         title='',
-        tickformat=',.0f',
+        # tickformat=',.0f',
     ).update_xaxes(
         categoryorder='category ascending',
         title=''
     ).update_layout(
-        showlegend=False
+        showlegend=True,
+        legend_title=""
     )
     return fig
