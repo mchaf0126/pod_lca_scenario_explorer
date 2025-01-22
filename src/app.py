@@ -36,21 +36,21 @@ app.layout = dbc.Container(
                 'tm_metadata': tm_metadata_df.to_dict()
             },
             id='template_model_metadata',
-            storage_type='session',
+            storage_type='memory',
         ),
         dcc.Store(
             data={
                 'tm_impacts': tm_impacts_df.to_dict()
             },
             id='template_model_impacts',
-            storage_type='session',
+            storage_type='memory',
         ),
         dcc.Store(
             data={
                 'prebuilt_scenario_impacts': prebuilt_scenario_impacts_df.to_dict()
             },
             id='prebuilt_scenario_impacts',
-            storage_type='session',
+            storage_type='memory',
         ),
         dbc.Row(
             [
