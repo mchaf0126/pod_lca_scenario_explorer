@@ -189,7 +189,7 @@ def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
     df_to_graph = df_to_graph[df_to_graph['Assembly'] != 'Operational energy']
 
     df_to_graph = df_to_graph.melt(
-        id_vars=['L3', 'Assembly', 'Component'],
+        id_vars=['L3', 'Assembly', 'Component', 'life_cycle_stage'],
         value_vars=impacts
     )
     for impact in impacts:
