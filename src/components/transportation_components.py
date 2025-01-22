@@ -8,6 +8,9 @@ config = app_config
 transportation_checklist_yaml = config.get('transporation_scenario_checklist')
 assert transportation_checklist_yaml is not None, 'The config for scenario checklist could not be set'
 
+transportation_custom_checklist_yaml = config.get('transporation_custom_scenario_checklist')
+assert transportation_custom_checklist_yaml is not None, 'The config for scenario checklist could not be set'
+
 transportation_radio_yaml = config.get('transporation_scenario_radio')
 assert transportation_radio_yaml is not None, 'The config for scenario checklist could not be set'
 
@@ -16,6 +19,13 @@ transportation_checklist = create_checklist(
     checklist=transportation_checklist_yaml['checklist'],
     first_item=transportation_checklist_yaml['first_item'],
     dropdown_id={"type": "prebuilt_scenario", "id": 'transportation_checklist'}
+)
+
+transportation_custom_checklist = create_checklist(
+    label=transportation_custom_checklist_yaml['label'],
+    checklist=transportation_custom_checklist_yaml['checklist'],
+    first_item=transportation_custom_checklist_yaml['first_item'],
+    dropdown_id={"type": "prebuilt_scenario", "id": 'transportation_custom_checklist'}
 )
 
 transportation_radio_model_comp = create_radio(
@@ -111,6 +121,7 @@ transportation_scenarios = dbc.Container(
         dbc.Row(
             [
                 transportation_checklist,
+                transportation_custom_checklist,
                 a4_special_mat
             ]
         )
