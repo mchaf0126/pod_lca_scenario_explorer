@@ -205,10 +205,10 @@ def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
         # title=f'GWP Impacts of {unpacked_tm_name}',
         # height=600
     ).update_yaxes(
-        title='',
-        # tickformat=',.0f',
+        title='Percent Contribution of Categorization',
+        tickformat='0%',
     ).update_xaxes(
-        categoryorder='category ascending',
+        # categoryorder='category ascending',
         title=''
     ).update_layout(
         showlegend=True,
