@@ -29,7 +29,7 @@ app.layout = dbc.Container(
     [
         dcc.Store(
             id='template_model_name',
-            storage_type='memory'
+            storage_type='session'
         ),
         dcc.Store(
             id='template_model_metadata',
