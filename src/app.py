@@ -32,16 +32,25 @@ app.layout = dbc.Container(
             storage_type='session'
         ),
         dcc.Store(
+            data={
+                'tm_metadata': tm_metadata_df.to_dict()
+            },
             id='template_model_metadata',
-            storage_type='memory',
+            storage_type='session',
         ),
         dcc.Store(
+            data={
+                'tm_impacts': tm_impacts_df.to_dict()
+            },
             id='template_model_impacts',
-            storage_type='memory',
+            storage_type='session',
         ),
         dcc.Store(
+            data={
+                'prebuilt_scenario_impacts': prebuilt_scenario_impacts_df.to_dict()
+            },
             id='prebuilt_scenario_impacts',
-            storage_type='memory',
+            storage_type='session',
         ),
         dbc.Row(
             [
@@ -83,30 +92,6 @@ app.layout = dbc.Container(
     fluid=True,
     className='dbc'
 )
-
-
-@callback(
-    Output(component_id='template_model_metadata', component_property='data'),
-    Input(component_id='template_model_metadata', component_property='data')
-)
-def load_tm_metadata(_):
-    return {'tm_metadata': tm_metadata_df.to_dict()}
-
-
-@callback(
-    Output(component_id='template_model_impacts', component_property='data'),
-    Input(component_id='template_model_impacts', component_property='data')
-)
-def load_tm_impacts(_):
-    return {'tm_impacts': tm_impacts_df.to_dict()}
-
-
-@callback(
-    Output(component_id='prebuilt_scenario_impacts', component_property='data'),
-    Input(component_id='prebuilt_scenario_impacts', component_property='data')
-)
-def load_prebuilt_scenario_impacts(_):
-    return {'prebuilt_scenario_impacts': prebuilt_scenario_impacts_df.to_dict()}
 
 
 if __name__ == "__main__":
