@@ -74,6 +74,21 @@ def update_scenario(life_cycle_stage):
 
 @callback(
     [
+        Output('transport_custom_mat_type', 'disabled'),
+        Output('transport_custom_distance', 'disabled'),
+        Output('transport_custom_transport_type', 'disabled'),
+    ],
+    Input({"type": "prebuilt_scenario", "id": 'transportation_custom_scenario_checklist'}, 'value'),
+)
+def update_intentional_sourcing_visibility(checklist):
+    if checklist:
+        return False, False, False
+    else:
+        return True, True, True
+
+
+@callback(
+    [
         Output('transport_custom_mat_type', 'options'),
         Output('transport_custom_mat_type', 'value'),
     ],

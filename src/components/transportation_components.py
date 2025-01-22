@@ -25,7 +25,7 @@ transportation_custom_checklist = create_checklist(
     label=transportation_custom_checklist_yaml['label'],
     checklist=transportation_custom_checklist_yaml['checklist'],
     first_item=transportation_custom_checklist_yaml['first_item'],
-    dropdown_id={"type": "prebuilt_scenario", "id": 'transportation_custom_checklist'}
+    dropdown_id={"type": "prebuilt_scenario", "id": 'transportation_custom_scenario_checklist'}
 )
 
 transportation_radio_model_comp = create_radio(
@@ -37,7 +37,6 @@ transportation_radio_model_comp = create_radio(
 
 a4_special_mat = html.Div(
     [
-        dbc.Label("Intentional Sourcing"),
         dbc.InputGroup(
             [
                 dbc.Select(
@@ -77,7 +76,6 @@ a4_special_mat = html.Div(
 
 a4_special_mat_model_comp = html.Div(
     [
-        dbc.Label("Intentional Sourcing"),
         dbc.InputGroup(
             [
                 dbc.Select(
