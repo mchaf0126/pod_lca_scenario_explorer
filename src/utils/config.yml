@@ -216,7 +216,9 @@ template_model_graph_dropdown:
     -
       label: Component
       value: Component
-    
+    -
+      label: Life cycle stage
+      value: life_cycle_stage
   first_item: L3
   dropdown_id: template_model_graph_dropdown
 
@@ -409,6 +411,9 @@ scope_dropdown_model_comp:
     -
       label: Component
       value: Component
+    -
+      label: Life cycle stage
+      value: life_cycle_stage
   first_item: L3
   dropdown_id: scope_dropdown_model_comp
 

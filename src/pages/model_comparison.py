@@ -91,6 +91,8 @@ def update_se_figure(impact: str,
         (tm_impacts_df['template_model'] == unpacked_tm_name)
     ].copy()
     tm_df_to_graph.loc[:, 'model_comp'] = 'Default'
+    if scope != 'life_cycle_stage':
+        tm_df_to_graph = tm_df_to_graph[tm_df_to_graph['Assembly'] != 'Operational energy']
 
     # user_selected_df_to_concat = []
     # user_selected_df_to_concat.append(tm_df_to_graph[tm_df_to_graph['Life Cycle Stage'] == '[A1-A3] Product'])
