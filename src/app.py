@@ -1,5 +1,5 @@
 from pathlib import Path
-from dash import Dash, page_container, dcc, Input, Output, callback
+from dash import Dash, page_container, dcc
 import dash_bootstrap_components as dbc
 import pandas as pd
 from dash_bootstrap_templates import load_figure_template

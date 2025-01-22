@@ -82,6 +82,13 @@ def update_se_figure(impact: str,
     #     'Replacement: B2-B5': repl_scenario,
     #     'End-of-life: C2-C4': eol_scenario
     # }
+    units_map = {
+        'Acidification Potential': 'kgSO2e',
+        'Eutrophication Potential': 'kgNe',
+        'Global Warming Potential_fossil': 'kgCO2e',
+        'Ozone Depletion Potential': 'CFC-11e',
+        'Smog Formation Potential': 'kgO3e'
+    }
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
     # pb_impacts_df = pd.DataFrame.from_dict(
     #     prebuilt_scenario_impacts.get('prebuilt_scenario_impacts')
@@ -128,7 +135,7 @@ def update_se_figure(impact: str,
         color=scope,
         # title=f'GWP Impacts of {unpacked_tm_name}',
     ).update_yaxes(
-        title='',
+        title=f'{impact} ({units_map.get(impact)})',
         tickformat=',.0f',
     ).update_xaxes(
         title='',
