@@ -31,12 +31,6 @@ a4_special_mat = html.Div(
         dbc.InputGroup(
             [
                 dbc.Select(
-                    options=[
-                        {"label": "Wood fiber insulation", "value": 1},
-                        {"label": "CLT", "value": 2},
-                        {"label": "Glulam", "value": 3}
-                    ],
-                    value=1,
                     id='transport_custom_mat_type'
                 ),
             ],
@@ -46,7 +40,7 @@ a4_special_mat = html.Div(
             [
                 dbc.InputGroupText("Distance (mi)"),
                 dbc.Input(
-                    placeholder="0",
+                    value=0,
                     type="number",
                     id='transport_custom_distance'
                 ),
@@ -77,12 +71,7 @@ a4_special_mat_model_comp = html.Div(
         dbc.InputGroup(
             [
                 dbc.Select(
-                    options=[
-                        {"label": "Wood fiber insulation", "value": 1},
-                        {"label": "CLT", "value": 2},
-                        {"label": "Glulam", "value": 3}
-                    ],
-                    value=1,
+                    options=[],
                     id='transport_custom_mat_type_mc'
                 ),
             ],

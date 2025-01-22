@@ -73,6 +73,29 @@ def update_scenario(life_cycle_stage):
 
 
 @callback(
+    [
+        Output('transport_custom_mat_type', 'options'),
+        Output('transport_custom_mat_type', 'value'),
+    ],
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data'),
+    ]
+)
+def update_intentional_sourcing_dropdown(template_model_name: dict,
+                                         template_model_impacts: dict,
+                                         ):
+    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_df_for_values = tm_impacts_df[
+        (tm_impacts_df['template_model'] == unpacked_tm_name)
+    ].copy()
+    options_for_dropdown = tm_df_for_values['Building Material_name'].dropna().unique()
+    first_option = options_for_dropdown[0]
+    return options_for_dropdown, first_option
+
+
+@callback(
     Output('se_figure', 'figure'),
     [
         Input('life_cycle_stage_dropdown', 'value'),
