@@ -29,19 +29,19 @@ app.layout = dbc.Container(
     [
         dcc.Store(
             id='template_model_name',
-            storage_type='session'
+            storage_type='memory'
         ),
         dcc.Store(
             id='template_model_metadata',
-            storage_type='session',
+            storage_type='memory',
         ),
         dcc.Store(
             id='template_model_impacts',
-            storage_type='session',
+            storage_type='memory',
         ),
         dcc.Store(
             id='prebuilt_scenario_impacts',
-            storage_type='session',
+            storage_type='memory',
         ),
         dbc.Row(
             [
