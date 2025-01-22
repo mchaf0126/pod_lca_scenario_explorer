@@ -11,14 +11,8 @@ assert location_dropdown_yaml is not None, 'The config for location dropdown cou
 building_use_type_dropdown_yaml = config.get('building_use_type_dropdown')
 assert building_use_type_dropdown_yaml is not None, 'The config for building use dropdown could not be set'
 
-str_horiz_grav_sys_dropdown_yaml = config.get('str_horiz_grav_sys_dropdown')
-assert str_horiz_grav_sys_dropdown_yaml is not None, 'The config for str horiz grav dropdown could not be set'
-
-str_vert_grav_sys_dropdown_yaml = config.get('str_vert_grav_sys_dropdown')
-assert str_vert_grav_sys_dropdown_yaml is not None, 'The config for str vert grav dropdown could not be set'
-
-str_lat_sys_dropdown_yaml = config.get('str_lat_sys_dropdown')
-assert str_lat_sys_dropdown_yaml is not None, 'The config for str lat dropdown could not be set'
+str_material_dropdown_yaml = config.get('str_material_dropdown')
+assert str_material_dropdown_yaml is not None, 'The config for str horiz grav dropdown could not be set'
 
 cladding_type_dropdown_yaml = config.get('cladding_type_dropdown')
 assert cladding_type_dropdown_yaml is not None, 'The config for cladding dropdown could not be set'
@@ -48,25 +42,11 @@ building_use_type_dropdown = create_dropdown(
     dropdown_id=building_use_type_dropdown_yaml['dropdown_id']
 )
 
-str_horiz_grav_sys_dropdown = create_dropdown(
-    label=str_horiz_grav_sys_dropdown_yaml['label'],
-    dropdown_list=str_horiz_grav_sys_dropdown_yaml['dropdown_list'],
-    first_item=str_horiz_grav_sys_dropdown_yaml['first_item'],
-    dropdown_id=str_horiz_grav_sys_dropdown_yaml['dropdown_id']
-)
-
-str_vert_grav_sys_dropdown = create_dropdown(
-    label=str_vert_grav_sys_dropdown_yaml['label'],
-    dropdown_list=str_vert_grav_sys_dropdown_yaml['dropdown_list'],
-    first_item=str_vert_grav_sys_dropdown_yaml['first_item'],
-    dropdown_id=str_vert_grav_sys_dropdown_yaml['dropdown_id']
-)
-
-str_lat_sys_dropdown = create_dropdown(
-    label=str_lat_sys_dropdown_yaml['label'],
-    dropdown_list=str_lat_sys_dropdown_yaml['dropdown_list'],
-    first_item=str_lat_sys_dropdown_yaml['first_item'],
-    dropdown_id=str_lat_sys_dropdown_yaml['dropdown_id']
+structural_material_dropdown = create_dropdown(
+    label=str_material_dropdown_yaml['label'],
+    dropdown_list=str_material_dropdown_yaml['dropdown_list'],
+    first_item=str_material_dropdown_yaml['first_item'],
+    dropdown_id=str_material_dropdown_yaml['dropdown_id']
 )
 
 cladding_type_dropdown = create_dropdown(
@@ -125,9 +105,7 @@ sidebar = dbc.Container(
                     ),
                     dbc.AccordionItem(
                         [
-                            str_horiz_grav_sys_dropdown,
-                            str_vert_grav_sys_dropdown,
-                            str_lat_sys_dropdown
+                            structural_material_dropdown
                         ],
                         title="Structure",
                         item_id='str'

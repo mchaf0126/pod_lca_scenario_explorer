@@ -56,52 +56,67 @@ building_use_type_dropdown:
   first_item: Office
   dropdown_id: building_use_type_dropdown
 
-str_horiz_grav_sys_dropdown:
-  label: Primary Horizontal Gravity System
+str_material_dropdown:
+  label: Structural Material
   dropdown_list:
     - 
-      label: "Concrete: non-PT framing"
-      value: "Concrete: non-PT framing"
+      label: Concrete
+      value: Concrete
     - 
-      label: "Steel: frame + concrete on metal deck"
-      value: "Steel: frame + concrete on metal deck"
+      label: Steel
+      value: Steel
     - 
-      label: "Wood: engineered panels"
-      value: "Wood: engineered panels"
-  first_item: "Concrete: non-PT framing"
-  dropdown_id: str_horiz_grav_sys_dropdown
+      label: Mass timber
+      value: Mass timber
+  first_item: Concrete
+  dropdown_id: str_material_dropdown
 
-str_vert_grav_sys_dropdown:
-  label: Primary Vertical Gravity System
-  dropdown_list:
-    - 
-      label: "Concrete: CIP"
-      value: "Concrete: CIP"
-    - 
-      label: "Steel: columns"
-      value: "Steel: columns"
-    - 
-      label: "Wood: mass timber"
-      value: "Wood: mass timber"
-  first_item: "Concrete: CIP"
-  dropdown_id: str_vert_grav_sys_dropdown
+# str_horiz_grav_sys_dropdown:
+#   label: Primary Horizontal Gravity System
+#   dropdown_list:
+#     - 
+#       label: "Concrete: non-PT framing"
+#       value: "Concrete: non-PT framing"
+#     - 
+#       label: "Steel: frame + concrete on metal deck"
+#       value: "Steel: frame + concrete on metal deck"
+#     - 
+#       label: "Wood: engineered panels"
+#       value: "Wood: engineered panels"
+#   first_item: "Concrete: non-PT framing"
+#   dropdown_id: str_horiz_grav_sys_dropdown
 
-str_lat_sys_dropdown:
-  label: Primary Lateral System
-  dropdown_list:
-    - 
-      label: "Concrete: shear walls"
-      value: "Concrete: shear walls"
-    - 
-      label: "Steel: braced frames"
-      value: "Steel: braced frames"
-      disabled: True
-    - 
-      label: "Wood: shear panels"
-      value: "Wood: shear panels"
-      disabled: True
-  first_item: "Concrete: shear walls"
-  dropdown_id: str_lat_sys_dropdown
+# str_vert_grav_sys_dropdown:
+#   label: Primary Vertical Gravity System
+#   dropdown_list:
+#     - 
+#       label: "Concrete: CIP"
+#       value: "Concrete: CIP"
+#     - 
+#       label: "Steel: columns"
+#       value: "Steel: columns"
+#     - 
+#       label: "Wood: mass timber"
+#       value: "Wood: mass timber"
+#   first_item: "Concrete: CIP"
+#   dropdown_id: str_vert_grav_sys_dropdown
+
+# str_lat_sys_dropdown:
+#   label: Primary Lateral System
+#   dropdown_list:
+#     - 
+#       label: "Concrete: shear walls"
+#       value: "Concrete: shear walls"
+#     - 
+#       label: "Steel: braced frames"
+#       value: "Steel: braced frames"
+#       disabled: True
+#     - 
+#       label: "Wood: shear panels"
+#       value: "Wood: shear panels"
+#       disabled: True
+#   first_item: "Concrete: shear walls"
+#   dropdown_id: str_lat_sys_dropdown
 
 cladding_type_dropdown:
   label: Cladding Type
