@@ -19,7 +19,7 @@ layout = html.Div(
                 [
                     dbc.Col(
                         [
-                            sec.se_sidebar
+                            sec.se_sidebar,
                         ], xs=4, sm=4, md=4, lg=4, xl=4, xxl=3,
                         class_name='',
                         style={'max-height': '1000px'}

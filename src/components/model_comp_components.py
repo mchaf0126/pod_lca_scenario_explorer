@@ -72,14 +72,14 @@ model_comp_sidebar = dbc.Container(
                             rc.replacement_special_mat_model_comp,
                         ],
                         title="Material Replacement Scenario",
-                        item_id='repl'
+                        item_id='replace'
                     ),
                     dbc.AccordionItem(
                         [
                             euc.energy_use_radio_model_comp
                         ],
                         title="Building Energy Use Scenario",
-                        item_id='repl'
+                        item_id='energy_use'
                     ),
                     dbc.AccordionItem(
                         [
@@ -93,7 +93,7 @@ model_comp_sidebar = dbc.Container(
                 ],
                 start_collapsed=False,
                 always_open=True,
-                active_item=['results', 'trans', 'constr', 'repl', 'eol'],
+                active_item=['results', 'trans', 'constr', 'replace', 'energy_use', 'eol'],
             ),
             class_name=''
         )

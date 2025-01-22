@@ -55,7 +55,7 @@ se_sidebar = dbc.Container(
                             impact_dropdown
                         ],
                         title="Results",
-                        item_id='results'
+                        item_id='result_dropdowns'
                     ),
                     dbc.AccordionItem(
                         [
@@ -63,12 +63,12 @@ se_sidebar = dbc.Container(
                             html.Div(id='scenario_card')
                         ],
                         title="Scenario selection",
-                        item_id='scenario'
+                        item_id='lcs_scenario'
                     ),
                 ],
                 start_collapsed=True,
                 always_open=True,
-                active_item=['results', 'scenario'],
+                active_item=['result_dropdowns', 'lcs_scenario'],
             )
         )
     ],
