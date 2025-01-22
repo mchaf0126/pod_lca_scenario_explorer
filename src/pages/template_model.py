@@ -186,7 +186,8 @@ def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
     ]
     unpacked_tm_name = tm_name.get('template_model_value')
     df_to_graph = tm_impacts_df[tm_impacts_df['template_model'] == unpacked_tm_name]
-    df_to_graph = df_to_graph[df_to_graph['Assembly'] != 'Operational energy']
+    if tm_dropdown != 'life_cycle_stage':
+        df_to_graph = df_to_graph[df_to_graph['Assembly'] != 'Operational energy']
 
     df_to_graph = df_to_graph.melt(
         id_vars=['L3', 'Assembly', 'Component', 'life_cycle_stage'],
