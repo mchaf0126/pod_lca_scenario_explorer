@@ -19,6 +19,7 @@ main_directory = current_file_path.parents[1]
 tm_metadata_df = pd.read_csv(main_directory.joinpath('data/frontend/project_metadata.csv'))
 tm_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_impacts.csv'))
 prebuilt_scenario_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_prebuilt_scenarios.csv'))
+trans_emissions_df = pd.read_excel(main_directory.joinpath('references/background_data/a4_emissions.xlsx'))
 
 load_figure_template('pulse')
 
@@ -51,6 +52,17 @@ app.layout = dbc.Container(
             },
             id='prebuilt_scenario_impacts',
             storage_type='memory',
+        ),
+        dcc.Store(
+            data={
+                'transportation_emission_factors': trans_emissions_df.to_dict()
+            },
+            id='transportation_emission_factors',
+            storage_type='memory',
+        ),
+        dcc.Store(
+            id='intentional_sourcing_impacts',
+            storage_type='memory'
         ),
         dbc.Row(
             [
