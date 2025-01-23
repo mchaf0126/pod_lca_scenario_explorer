@@ -138,12 +138,12 @@ def update_mc_figure(impact: str,
             tm_impacts_df['life_cycle_stage'] == lcs_map.get('Replacement'),
             :
         ]
-    # else:
-    #     repl_df = pd.DataFrame.from_dict(
-    #         intentional_replacement_impacts.get(
-    #             'mc_intentional_replacement_impacts'
-    #         )
-    #     )
+    else:
+        repl_df = pd.DataFrame.from_dict(
+            intentional_replacement_impacts.get(
+                'mc_intentional_replacement_impacts'
+            )
+        )
 
     # operational energy
     op_df = tm_impacts_df.loc[
@@ -231,7 +231,7 @@ def update_description(trans_scenario: str,
                        eol_scenario: str,):
     text = dcc.Markdown(
         f'''
-        ### User selected custom scenarios
+        ### User-defined model with scenarios
         The following scenarios have been selected:
         - Transportation: {trans_scenario}
         - Construction: {constr_scenario}

@@ -89,7 +89,7 @@ a4_special_mat_model_comp = html.Div(
             [
                 dbc.InputGroupText("Distance (mi)"),
                 dbc.Input(
-                    placeholder="0",
+                    value=20,
                     type="number",
                     id='transport_custom_distance_mc'
                 ),
@@ -239,7 +239,6 @@ def create_intentional_sourcing_impacts_mc(mat_type: str,
         trans_emission_factors=trans_emission_factors
     )
     if mc_intentional_sourcing_impacts is None:
-        print('hi')
         return no_update
 
     return {"mc_intentional_sourcing_impacts": mc_intentional_sourcing_impacts.to_dict()}

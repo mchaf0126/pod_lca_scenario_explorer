@@ -367,8 +367,8 @@ replacement_scenario_radio:
       label: ASHRAE 240P Replacement Rates (default)
       value: ASHRAE 240P Replacement Rates (default)
     - 
-      label: Intentional Sourcing
-      value: Intentional Sourcing   
+      label: Intentional Replacement
+      value: Intentional Replacement  
   first_item: ASHRAE 240P Replacement Rates (default)
   radio_id: replacement_scenario_radio
 

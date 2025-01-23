@@ -154,7 +154,7 @@ def update_se_figure(life_cycle_stage: str,
         else:
             custom_impacts_df = pd.DataFrame.from_dict(
                 intentional_replacement_impacts.get(
-                    'intentional_replacement_impacts'
+                    'se_intentional_replacement_impacts'
                 )
             )
             custom_impacts_df.loc[:, 'scenario'] = 'Intentional Replacement'
