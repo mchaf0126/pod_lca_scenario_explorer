@@ -190,7 +190,7 @@ def update_current_template_model_impacts(tm_name, tm_impacts):
     ]
 )
 def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
-    pb_impacts_df = pd.DataFrame.from_dict(pb_impacts.get('prebuilt_scenario_impacts')).set_index()
+    pb_impacts_df = pd.DataFrame.from_dict(pb_impacts.get('prebuilt_scenario_impacts')).set_index('template_model')
     if tm_name is None:
         return no_update
     unpacked_tm_name = tm_name.get('template_model_value')
