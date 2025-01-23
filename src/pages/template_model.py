@@ -176,7 +176,7 @@ def update_current_template_model_impacts(tm_name, tm_impacts):
     if tm_name is None:
         return no_update
     unpacked_tm_name = tm_name.get('template_model_value')
-    current_tm_impacts = tm_impacts_df[tm_impacts_df['template_model'] == unpacked_tm_name]
+    current_tm_impacts = tm_impacts_df.query('template_model == @unpacked_tm_name')
     return {
         "current_tm_impacts": current_tm_impacts.to_dict(),
     }
@@ -194,7 +194,7 @@ def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
     if tm_name is None:
         return no_update
     unpacked_tm_name = tm_name.get('template_model_value')
-    current_pb_impacts = pb_impacts_df[pb_impacts_df['template_model'] == unpacked_tm_name]
+    current_pb_impacts = pb_impacts_df.query('template_model == @unpacked_tm_name')
     return {
         "current_pb_impacts": current_pb_impacts.to_dict(),
     }
@@ -222,14 +222,14 @@ def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, cuurent_tm_impacts:
         # 'Ozone Depletion Potential'
     ]
     if tm_dropdown != 'life_cycle_stage':
-        df_to_graph = tm_impacts_df[tm_impacts_df['Assembly'] != 'Operational energy']
+        df_to_graph = tm_impacts_df.loc[tm_impacts_df['Assembly'] != 'Operational energy', :]
 
     df_to_graph = tm_impacts_df.melt(
         id_vars=['L3', 'Assembly', 'Component', 'life_cycle_stage'],
         value_vars=impacts
     )
     for impact in impacts:
-        temp_sum = df_to_graph[df_to_graph['variable'] == impact]['value'].sum().item()
+        temp_sum = df_to_graph.loc[df_to_graph['variable'] == impact, 'value'].sum().item()
         df_to_graph.loc[df_to_graph['variable'] == impact, 'value'] /= temp_sum
 
     fig = px.histogram(
