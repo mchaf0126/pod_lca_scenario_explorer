@@ -104,7 +104,7 @@ eol_custom_full_building_mix = dcc.Markdown(
 
 eol_custom_component_mix = dcc.Markdown(
     '''
-    #### Custom Mix (for component)
+    #### Custom Mix (component)
     A user would be able to choose a specific mix of landfilling, incineration, and
     recycling that would be applied to a particular material.
     ''',
