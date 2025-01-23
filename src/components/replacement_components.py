@@ -1,4 +1,4 @@
-from dash import html, callback, Input, Output, State
+from dash import html, callback, Input, Output, State, no_update
 import dash_bootstrap_components as dbc
 import pandas as pd
 from src.utils.selection import create_checklist, create_radio
@@ -112,7 +112,9 @@ def update_intentional_sourcing_visibility(checklist):
     ],
     Input('current_tm_impacts', 'data'),
 )
-def update_intentional_sourcing_dropdown(current_tm_impacts: dict,):
+def update_intentional_replacement_dropdown(current_tm_impacts: dict,):
+    if current_tm_impacts is None:
+        return None, None
     tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     options_for_dropdown = tm_df_for_values['Assembly'].dropna().unique()
     first_option = options_for_dropdown[0]
@@ -127,10 +129,10 @@ def update_intentional_sourcing_dropdown(current_tm_impacts: dict,):
         State('current_tm_impacts', 'data'),
     ]
 )
-def create_intentional_sourcing_impacts(mat_type: str,
-                                        input_years: int,
-                                        current_tm_impacts: dict,
-                                        ):
+def create_intentional_replacement_impacts(mat_type: str,
+                                           input_years: int,
+                                           current_tm_impacts: dict,
+                                           ):
     impacts_list = [
         'Global Warming Potential_fossil',
         'Global Warming Potential_biogenic',
@@ -149,6 +151,8 @@ def create_intentional_sourcing_impacts(mat_type: str,
         'eol': 'C2-C4: End-of-life'
     }
     rsp = 60
+    if current_tm_impacts is None:
+        return no_update
     tm_df_to_update = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts')).set_index('element_index')
 
     tm_product_impacts = tm_df_to_update[

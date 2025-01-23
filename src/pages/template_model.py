@@ -1,7 +1,7 @@
 """Results page of dashboard"""
 import pandas as pd
 import plotly.express as px
-from dash import html, callback, Input, Output, State, register_page, no_update
+from dash import html, callback, Input, Output, State, register_page
 import dash_bootstrap_components as dbc
 import src.components.template_model_components as tmc
 
@@ -174,7 +174,7 @@ def update_criteria_text(tm_name, tm_metadata):
 def update_current_template_model_impacts(tm_name, tm_impacts):
     tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts')).set_index('template_model')
     if tm_name is None:
-        return no_update
+        return None
     unpacked_tm_name = tm_name.get('template_model_value')
     current_tm_impacts = tm_impacts_df.loc[unpacked_tm_name].reset_index()
     return {
@@ -192,7 +192,7 @@ def update_current_template_model_impacts(tm_name, tm_impacts):
 def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
     pb_impacts_df = pd.DataFrame.from_dict(pb_impacts.get('prebuilt_scenario_impacts')).set_index('template_model')
     if tm_name is None:
-        return no_update
+        return None
     unpacked_tm_name = tm_name.get('template_model_value')
     current_pb_impacts = pb_impacts_df.loc[unpacked_tm_name].reset_index()
     return {
@@ -203,15 +203,14 @@ def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
 @callback(
     Output('tm_summary', 'figure'),
     [
-        Input('template_model_name', 'data'),
         Input('template_model_graph_dropdown', 'value'),
         Input('current_tm_impacts', 'data')
     ]
 )
-def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, cuurent_tm_impacts: dict):
-    tm_impacts_df = pd.DataFrame.from_dict(cuurent_tm_impacts.get('current_tm_impacts'))
-    if tm_name is None:
+def update_tm_summary_graph(tm_dropdown: str, current_tm_impacts: dict):
+    if current_tm_impacts is None:
         return px.bar()
+    tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
 
     impacts = [
         'Global Warming Potential_fossil',

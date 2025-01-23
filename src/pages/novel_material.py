@@ -124,6 +124,8 @@ def update_criteria_text(tm_name, tm_metadata):
 )
 def update_novel_material_omniclass_dropdown(current_tm_impacts: dict,
                                              ):
+    if current_tm_impacts is None:
+        return None, None
     tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_for_values = tm_impacts_df[
         tm_impacts_df['L3'] != "Electrical Service and Distribution"
@@ -148,6 +150,8 @@ def update_novel_material_omniclass_dropdown(current_tm_impacts: dict,
 def update_novel_material_assembly_dropdown(selected_omniclass: str,
                                             current_tm_impacts: dict,
                                             ):
+    if current_tm_impacts is None:
+        return None, None
     tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_for_values = tm_impacts_df[
         (tm_impacts_df['L3'] == selected_omniclass)
@@ -172,6 +176,8 @@ def update_novel_material_assembly_dropdown(selected_omniclass: str,
 def update_novel_material_component_dropdown(selected_assembly: str,
                                              current_tm_impacts: dict,
                                              ):
+    if current_tm_impacts is None:
+        return None, None
     tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_for_values = tm_impacts_df[
         (tm_impacts_df['Assembly'] == selected_assembly)

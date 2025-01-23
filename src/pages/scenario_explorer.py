@@ -1,5 +1,5 @@
 """Results page of dashboard"""
-from dash import html, dcc, callback, Input, Output, register_page, State, ALL, no_update
+from dash import html, dcc, callback, Input, Output, register_page, State, ALL
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
@@ -113,7 +113,7 @@ def update_se_figure(life_cycle_stage: str,
     prebuilt_scenario_checklist = sum(prebuilt_scenario_checklist, [])
 
     if current_tm_impacts is None:
-        return no_update
+        return px.bar()
     tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     pb_impacts_df = pd.DataFrame.from_dict(
         current_pb_impacts.get(

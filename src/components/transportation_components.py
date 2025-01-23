@@ -145,6 +145,8 @@ def update_intentional_sourcing_visibility(checklist):
     Input('current_tm_impacts', 'data'),
 )
 def update_intentional_sourcing_dropdown(current_tm_impacts: dict):
+    if current_tm_impacts is None:
+        return None, None
     tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     options_for_dropdown = tm_df_for_values['Building Material_name'].unique()
     first_option = options_for_dropdown[0]
@@ -195,6 +197,8 @@ def create_intentional_sourcing_impacts(mat_type: str,
             'transportation_emission_factors'
         )
     ).set_index('Product system name')
+    if current_tm_impacts is None:
+        return no_update
     tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_to_update = tm_impacts_df[
         tm_impacts_df['life_cycle_stage'] == lcs_map.get('trans')
