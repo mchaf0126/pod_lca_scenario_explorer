@@ -16,10 +16,10 @@ app = Dash(
 
 current_file_path = Path(__file__)
 main_directory = current_file_path.parents[1]
-tm_metadata_df = pd.read_csv(main_directory.joinpath('data/frontend/project_metadata.csv'))
-tm_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_impacts.csv'))
-prebuilt_scenario_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_prebuilt_scenarios.csv'))
-trans_emissions_df = pd.read_excel(main_directory.joinpath('references/background_data/a4_emissions.xlsx'))
+tm_metadata_df = pd.read_pickle(main_directory.joinpath('data/frontend/project_metadata.pkl'))
+tm_impacts_df = pd.read_pickle(main_directory.joinpath('data/frontend/combined_impacts.pkl')).reset_index()
+# prebuilt_scenario_impacts_df = pd.read_csv(main_directory.joinpath('data/frontend/combined_prebuilt_scenarios.csv'))
+trans_emissions_df = pd.read_pickle(main_directory.joinpath('references/background_data/a4_emissions.pkl'))
 
 load_figure_template('pulse')
 
@@ -46,13 +46,13 @@ app.layout = dbc.Container(
             id='template_model_impacts',
             storage_type='memory',
         ),
-        dcc.Store(
-            data={
-                'prebuilt_scenario_impacts': prebuilt_scenario_impacts_df.to_dict()
-            },
-            id='prebuilt_scenario_impacts',
-            storage_type='memory',
-        ),
+        # dcc.Store(
+        #     data={
+        #         'prebuilt_scenario_impacts': prebuilt_scenario_impacts_df.to_dict()
+        #     },
+        #     id='prebuilt_scenario_impacts',
+        #     storage_type='memory',
+        # ),
         dcc.Store(
             data={
                 'transportation_emission_factors': trans_emissions_df.to_dict()
