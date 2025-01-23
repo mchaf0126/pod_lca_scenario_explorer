@@ -25,15 +25,7 @@ form = dbc.Container(
                     [
                         dbc.InputGroupText("Omniclass"),
                         dbc.Select(
-                            [
-                                'Standard Foundations',
-                                'Floor Construction',
-                                'Exterior Walls',
-                                'Exterior Windows',
-                                'Roofing',
-                                'Electrical Service and Distribution',
-                            ],
-                            value='Floor Construction'
+                            id='novel_material_tm_omniclass'
                         ),
                     ],
                     className="mb-1",
@@ -42,11 +34,7 @@ form = dbc.Container(
                     [
                         dbc.InputGroupText("Assembly"),
                         dbc.Select(
-                            [
-                                'TBD'
-                            ],
-                            disabled=True,
-                            value='TBD'
+                            id='novel_material_tm_assembly'
                         ),
                     ],
                     className="mb-1",
@@ -55,11 +43,7 @@ form = dbc.Container(
                     [
                         dbc.InputGroupText("Component"),
                         dbc.Select(
-                            [
-                                'TBD'
-                            ],
-                            disabled=True,
-                            value='TBD'
+                            id='novel_material_tm_component'
                         ),
                     ],
                     className="mb-1",
@@ -115,6 +99,14 @@ form = dbc.Container(
                         dbc.InputGroupText("Construction Wastage Rate"),
                         dbc.Input(placeholder="percentage", type="percent"),
                         dbc.InputGroupText("%"),
+                    ],
+                    className="mb-1",
+                ),
+                dbc.InputGroup(
+                    [
+                        dbc.InputGroupText("Stored Carbon"),
+                        dbc.Input(placeholder="number", type="number"),
+                        dbc.InputGroupText("kgCO2e/kg"),
                     ],
                     className="mb-1",
                 ),
