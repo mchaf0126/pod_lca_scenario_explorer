@@ -78,11 +78,10 @@ def update_scenario(life_cycle_stage):
         Input('scope_dropdown', 'value'),
         Input({'type': 'prebuilt_scenario', 'id': ALL}, 'value'),
         Input({'type': 'custom_checklist', 'id': ALL}, 'value'),
-        Input('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
+        State('current_tm_impacts', 'data'),
         Input('intentional_sourcing_impacts', 'data'),
         Input('intentional_replacement_impacts', 'data'),
-        State('prebuilt_scenario_impacts', 'data'),
+        State('current_pb_impacts', 'data'),
     ]
 )
 def update_se_figure(life_cycle_stage: str,
@@ -90,11 +89,10 @@ def update_se_figure(life_cycle_stage: str,
                      scope: str,
                      prebuilt_scenario_checklist: list,
                      custom_trans_checklist: list,
-                     template_model_name: dict,
-                     template_model_impacts: dict,
+                     current_tm_impacts: dict,
                      intentional_sourcing_impacts: dict,
                      intentional_replacement_impacts: dict,
-                     prebuilt_scenario_impacts: dict
+                     current_pb_impacts: dict
                      ):
     lcs_map = {
         'Transportation': 'A4: Transportation',
@@ -114,25 +112,22 @@ def update_se_figure(life_cycle_stage: str,
     custom_trans_checklist = sum(custom_trans_checklist, [])
     prebuilt_scenario_checklist = sum(prebuilt_scenario_checklist, [])
 
-    if template_model_impacts is None:
+    if current_tm_impacts is None:
         return no_update
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     pb_impacts_df = pd.DataFrame.from_dict(
-        prebuilt_scenario_impacts.get(
-            'prebuilt_scenario_impacts'
+        current_pb_impacts.get(
+            'current_pb_impacts'
         )
     )
 
-    unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_graph = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-        & (tm_impacts_df['life_cycle_stage'] == lcs_map.get(life_cycle_stage))
+        (tm_impacts_df['life_cycle_stage'] == lcs_map.get(life_cycle_stage))
     ].copy()
     tm_df_to_graph.loc[:, 'scenario'] = 'Default Scenario'
 
     pb_df_to_graph = pb_impacts_df[
-        (pb_impacts_df['template_model'] == unpacked_tm_name)
-        & (pb_impacts_df['life_cycle_stage'] == lcs_map.get(life_cycle_stage))
+        (pb_impacts_df['life_cycle_stage'] == lcs_map.get(life_cycle_stage))
         & (pb_impacts_df['scenario'].isin(prebuilt_scenario_checklist))
     ]
 

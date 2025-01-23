@@ -47,10 +47,18 @@ app.layout = dbc.Container(
             storage_type='memory',
         ),
         dcc.Store(
+            id='current_tm_impacts',
+            storage_type='memory',
+        ),
+        dcc.Store(
             data={
                 'prebuilt_scenario_impacts': prebuilt_scenario_impacts_df.to_dict()
             },
             id='prebuilt_scenario_impacts',
+            storage_type='memory',
+        ),
+        dcc.Store(
+            id='current_pb_impacts',
             storage_type='memory',
         ),
         dcc.Store(

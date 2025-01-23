@@ -1,7 +1,7 @@
 """Results page of dashboard"""
 import pandas as pd
 import plotly.express as px
-from dash import html, callback, Input, Output, State, register_page
+from dash import html, callback, Input, Output, State, register_page, no_update
 import dash_bootstrap_components as dbc
 import src.components.template_model_components as tmc
 
@@ -165,15 +165,51 @@ def update_criteria_text(tm_name, tm_metadata):
 
 
 @callback(
+    Output('current_tm_impacts', 'data'),
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data')
+    ]
+)
+def update_current_template_model_impacts(tm_name, tm_impacts):
+    tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
+    if tm_name is None:
+        return no_update
+    unpacked_tm_name = tm_name.get('template_model_value')
+    current_tm_impacts = tm_impacts_df[tm_impacts_df['template_model'] == unpacked_tm_name]
+    return {
+        "current_tm_impacts": current_tm_impacts.to_dict(),
+    }
+
+
+@callback(
+    Output('current_pb_impacts', 'data'),
+    [
+        Input('template_model_name', 'data'),
+        State('prebuilt_scenario_impacts', 'data')
+    ]
+)
+def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
+    pb_impacts_df = pd.DataFrame.from_dict(pb_impacts.get('prebuilt_scenario_impacts'))
+    if tm_name is None:
+        return no_update
+    unpacked_tm_name = tm_name.get('template_model_value')
+    current_pb_impacts = pb_impacts_df[pb_impacts_df['template_model'] == unpacked_tm_name]
+    return {
+        "current_pb_impacts": current_pb_impacts.to_dict(),
+    }
+
+
+@callback(
     Output('tm_summary', 'figure'),
     [
         Input('template_model_name', 'data'),
         Input('template_model_graph_dropdown', 'value'),
-        State('template_model_impacts', 'data')
+        State('current_tm_impacts', 'data')
     ]
 )
-def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
-    tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
+def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, cuurent_tm_impacts: dict):
+    tm_impacts_df = pd.DataFrame.from_dict(cuurent_tm_impacts.get('current_tm_impacts'))
     if tm_name is None:
         return px.bar()
 
@@ -185,12 +221,10 @@ def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
         # 'Global Warming Potential_biogenic'
         # 'Ozone Depletion Potential'
     ]
-    unpacked_tm_name = tm_name.get('template_model_value')
-    df_to_graph = tm_impacts_df[tm_impacts_df['template_model'] == unpacked_tm_name]
     if tm_dropdown != 'life_cycle_stage':
-        df_to_graph = df_to_graph[df_to_graph['Assembly'] != 'Operational energy']
+        df_to_graph = tm_impacts_df[tm_impacts_df['Assembly'] != 'Operational energy']
 
-    df_to_graph = df_to_graph.melt(
+    df_to_graph = tm_impacts_df.melt(
         id_vars=['L3', 'Assembly', 'Component', 'life_cycle_stage'],
         value_vars=impacts
     )
