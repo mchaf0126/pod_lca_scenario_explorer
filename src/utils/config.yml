@@ -285,13 +285,12 @@ transporation_scenario_checklist:
   checklist: 
     -
       label: Regionally-specific Distances
-      value: domestic_supply_chain
-      disabled: True
+      value: Regionally-Specific Distances
     - 
       label: Global Supply Chain
       value: global_supply_chain
       disabled: True 
-  first_item: []
+  first_item: [Regionally-Specific Distances, global_supply_chain]
   checklist_id: transporation_scenario_checklist
 
 transportation_custom_scenario_checklist: 
@@ -311,7 +310,7 @@ transporation_scenario_radio:
       value: default
     -
       label: Regionally-specific Distances
-      value: domestic_supply_chain
+      value: Regionally-Specific Distances
       disabled: True
     - 
       label: Global Supply Chain
@@ -327,7 +326,7 @@ construction_scenario_checklist:
       label: Advanced Waste Recovery
       value: Advanced Waste Recovery
       disabled: True
-  first_item: []
+  first_item: [Advanced Waste Recovery]
   checklist_id: construction_scenario_checklist
 
 construction_scenario_radio: 
@@ -348,8 +347,8 @@ replacement_scenario_checklist:
   checklist: 
     -
       label: RICS Replacement Rates
-      value: RICS
-  first_item: [RICS]
+      value: RICS Replacement Rates
+  first_item: [RICS Replacement Rates]
   checklist_id: replacement_scenario_checklist'
 
 replacement_custom_scenario_checklist: 
