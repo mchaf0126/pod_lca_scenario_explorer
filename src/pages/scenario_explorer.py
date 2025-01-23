@@ -127,7 +127,6 @@ def update_se_figure(life_cycle_stage: str,
                 )
             )
             custom_impacts_df.loc[:, 'scenario'] = 'Intentional Sourcing'
-            custom_impacts_df.to_csv('testtrans.csv')
             combined_df_to_graph = pd.concat(
                 [
                     tm_df_to_graph,
