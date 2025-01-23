@@ -1,7 +1,7 @@
 """Results page of dashboard"""
 import pandas as pd
 import plotly.express as px
-from dash import html, callback, Input, Output, State, register_page
+from dash import html, callback, Input, Output, State, register_page, no_update
 import dash_bootstrap_components as dbc
 import src.components.template_model_components as tmc
 
@@ -162,6 +162,42 @@ def update_criteria_text(tm_name, tm_metadata):
         - __Window-to-wall Ratio:__ {wwr}
     '''
     return criteria_text
+
+
+@callback(
+    Output('current_tm_impacts', 'data'),
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data')
+    ]
+)
+def update_current_template_model_impacts(tm_name, tm_impacts):
+    tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
+    if tm_name is None:
+        return no_update
+    unpacked_tm_name = tm_name.get('template_model_value')
+    current_tm_impacts = tm_impacts_df[tm_impacts_df['template_model'] == unpacked_tm_name]
+    return {
+        "current_tm_impacts": current_tm_impacts.to_dict(),
+    }
+
+
+@callback(
+    Output('current_pb_impacts', 'data'),
+    [
+        Input('template_model_name', 'data'),
+        State('prebuilt_scenario_impacts', 'data')
+    ]
+)
+def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
+    pb_impacts_df = pd.DataFrame.from_dict(pb_impacts.get('prebuilt_scenario_impacts'))
+    if tm_name is None:
+        return no_update
+    unpacked_tm_name = tm_name.get('template_model_value')
+    current_pb_impacts = pb_impacts_df[pb_impacts_df['template_model'] == unpacked_tm_name]
+    return {
+        "current_pb_impacts": current_pb_impacts.to_dict(),
+    }
 
 
 @callback(
