@@ -74,6 +74,15 @@ rics = dcc.Markdown(
     className='fw-light'
 )
 
+intentional_replacement = dcc.Markdown(
+    '''
+    #### Intentional Replacement
+    In this custom scenario, a user would be able to choose a specific material and a replacement
+    year in order to recalculate emissions for that material
+    ''',
+    className='fw-light'
+)
+
 default_eol = dcc.Markdown(
     '''
     #### National Average C&D Treatment Mix (default)
@@ -125,7 +134,8 @@ construction_descriptions = [
 
 replacement_descriptions = [
     default_replacement,
-    rics
+    rics,
+    intentional_replacement
 ]
 
 eol_descriptions = [
