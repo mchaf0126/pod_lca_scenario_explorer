@@ -303,19 +303,22 @@ transportation_custom_scenario_checklist:
   checklist_id: transportation_custom_scenario_checklist
 
 transporation_scenario_radio: 
-  label: Prebuilt
+  label: 
   radiolist: 
     - 
       label: North American Average (default)
-      value: default
+      value: North American Average (default)
     -
       label: Regionally-specific Distances
       value: Regionally-Specific Distances
     - 
       label: Global Supply Chain
-      value: global_supply_chain   
+      value: global_supply_chain
       disabled: True
-  first_item: default
+    - 
+      label: Intentional Sourcing
+      value: Intentional Sourcing   
+  first_item: North American Average (default)
   radio_id: transporation_scenario_radio
 
 construction_scenario_checklist: 
@@ -332,11 +335,11 @@ construction_scenario_radio:
   radiolist: 
     - 
       label: North American Average (default)
-      value: default
+      value: North American Average (default)
     - 
       label: Enhanced Waste Management
       value: Enhanced Waste Management
-  first_item: default
+  first_item: North American Average (default)
   radio_id: construction_scenario_radio
 
 replacement_scenario_checklist: 
@@ -358,12 +361,15 @@ replacement_custom_scenario_checklist:
   checklist_id: replacement_custom_scenario_checklist
 
 replacement_scenario_radio: 
-  label: Prebuilt
+  label: 
   radiolist: 
     - 
       label: ASHRAE 240P Replacement Rates (default)
-      value: default
-  first_item: default
+      value: ASHRAE 240P Replacement Rates (default)
+    - 
+      label: Intentional Sourcing
+      value: Intentional Sourcing   
+  first_item: ASHRAE 240P Replacement Rates (default)
   radio_id: replacement_scenario_radio
 
 eol_scenario_checklist: 
@@ -381,12 +387,20 @@ eol_scenario_radio:
   radiolist: 
     - 
       label: National Ave C&D treatment mix (default)
-      value: default
+      value: National Ave C&D treatment mix (default)
     -
       label: Regional C&D treatment mix
       value: regional_mix
       disabled: True
-  first_item: default
+    -
+      label: Custom Mix (full building)
+      value: Custom Mix (full building)
+      disabled: True
+    -
+      label: Custom Mix (component)
+      value: Custom Mix (component)
+      disabled: True
+  first_item: National Ave C&D treatment mix (default)
   radio_id: eol_scenario_radio
 
 energy_use_scenario_radio: 
@@ -394,9 +408,9 @@ energy_use_scenario_radio:
   radiolist: 
     - 
       label: Regional average energy use (default)
-      value: default
+      value: Regional average energy use (default)
       disabled: True
-  first_item: default
+  first_item: Regional average energy use (default)
   radio_id: energy_use_scenario_radio
 
 category_orders:

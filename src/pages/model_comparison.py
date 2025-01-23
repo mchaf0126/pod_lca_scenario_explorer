@@ -152,12 +152,14 @@ def update_se_figure(impact: str,
         Input('transporation_scenario_radio', 'value'),
         Input('construction_scenario_radio', 'value'),
         Input('replacement_scenario_radio', 'value'),
+        Input('energy_use_scenario_radio', 'value'),
         Input('eol_scenario_radio', 'value'),
     ]
 )
 def update_description(trans_scenario: str,
                        constr_scenario: str,
                        repl_scenario: str,
+                       op_scenario: str,
                        eol_scenario: str,):
     text = dcc.Markdown(
         f'''
@@ -166,6 +168,7 @@ def update_description(trans_scenario: str,
         - Transportation: {trans_scenario}
         - Construction: {constr_scenario}
         - Replacement: {repl_scenario}
+        - Operational Energy: {op_scenario}
         - End-of-life: {eol_scenario}
         ''',
         className='fw-light'
