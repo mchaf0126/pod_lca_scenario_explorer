@@ -202,7 +202,13 @@ def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
         df_to_graph.sort_values(by=tm_dropdown),
         x='variable',
         y='value',
-        color=tm_dropdown
+        color=tm_dropdown,
+        category_orders={'variable': [
+            'Global Warming Potential_fossil',
+            'Acidification Potential',
+            'Eutrophication Potential',
+            'Smog Formation Potential',
+        ]}
         # title=f'GWP Impacts of {unpacked_tm_name}',
         # height=600
     ).update_yaxes(
