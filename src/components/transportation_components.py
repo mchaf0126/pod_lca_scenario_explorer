@@ -80,7 +80,6 @@ a4_special_mat_model_comp = html.Div(
         dbc.InputGroup(
             [
                 dbc.Select(
-                    options=[],
                     id='transport_custom_mat_type_mc'
                 ),
             ],
@@ -90,7 +89,7 @@ a4_special_mat_model_comp = html.Div(
             [
                 dbc.InputGroupText("Distance (mi)"),
                 dbc.Input(
-                    placeholder="0",
+                    value=20,
                     type="number",
                     id='transport_custom_distance_mc'
                 ),
@@ -144,7 +143,7 @@ def update_intentional_sourcing_visibility(checklist):
     ],
     Input('current_tm_impacts', 'data'),
 )
-def update_intentional_sourcing_dropdown(current_tm_impacts: dict):
+def update_intentional_sourcing_dropdown_se(current_tm_impacts: dict):
     if current_tm_impacts is None:
         return None, None
     tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
@@ -161,14 +160,96 @@ def update_intentional_sourcing_dropdown(current_tm_impacts: dict):
         Input('transport_custom_transport_type', 'value'),
         State('current_tm_impacts', 'data'),
         State('transportation_emission_factors', 'data'),
-    ]
+    ],
 )
+def create_intentional_sourcing_impacts_se(mat_type: str,
+                                           distance: int,
+                                           trans_custom_transport_type: int,
+                                           current_tm_impacts: dict,
+                                           trans_emission_factors: dict
+                                           ) -> pd.DataFrame:
+
+    se_intentional_sourcing_impacts = create_intentional_sourcing_impacts(
+        mat_type=mat_type,
+        distance=distance,
+        trans_custom_transport_type=trans_custom_transport_type,
+        current_tm_impacts=current_tm_impacts,
+        trans_emission_factors=trans_emission_factors
+    )
+    if se_intentional_sourcing_impacts is None:
+        return no_update
+
+    return {"se_intentional_sourcing_impacts": se_intentional_sourcing_impacts.to_dict()}
+
+
+@callback(
+    [
+        Output('transport_custom_mat_type_mc', 'disabled'),
+        Output('transport_custom_distance_mc', 'disabled'),
+        Output('transport_custom_transport_type_mc', 'disabled'),
+    ],
+    Input("transporation_scenario_radio", 'value'),
+)
+def update_intentional_sourcing_visibility_mc(trans_radio):
+    if trans_radio == 'Intentional Sourcing':
+        return False, False, False
+    else:
+        return True, True, True
+
+
+@callback(
+    [
+        Output('transport_custom_mat_type_mc', 'options'),
+        Output('transport_custom_mat_type_mc', 'value'),
+    ],
+    Input('current_tm_impacts', 'data'),
+)
+def update_intentional_sourcing_dropdown_mc(current_tm_impacts: dict):
+    if current_tm_impacts is None:
+        return None, None
+    tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
+    options_for_dropdown = tm_df_for_values['Building Material_name'].unique()
+    first_option = options_for_dropdown[0]
+    return options_for_dropdown, first_option
+
+
+@callback(
+    Output('intentional_sourcing_impacts', 'data', allow_duplicate=True),
+    [
+        Input('transport_custom_mat_type_mc', 'value'),
+        Input('transport_custom_distance_mc', 'value'),
+        Input('transport_custom_transport_type_mc', 'value'),
+        State('current_tm_impacts', 'data'),
+        State('transportation_emission_factors', 'data'),
+    ],
+    prevent_initial_call=True
+)
+def create_intentional_sourcing_impacts_mc(mat_type: str,
+                                           distance: int,
+                                           trans_custom_transport_type: int,
+                                           current_tm_impacts: dict,
+                                           trans_emission_factors: dict
+                                           ) -> pd.DataFrame:
+
+    mc_intentional_sourcing_impacts = create_intentional_sourcing_impacts(
+        mat_type=mat_type,
+        distance=distance,
+        trans_custom_transport_type=trans_custom_transport_type,
+        current_tm_impacts=current_tm_impacts,
+        trans_emission_factors=trans_emission_factors
+    )
+    if mc_intentional_sourcing_impacts is None:
+        return no_update
+
+    return {"mc_intentional_sourcing_impacts": mc_intentional_sourcing_impacts.to_dict()}
+
+
 def create_intentional_sourcing_impacts(mat_type: str,
                                         distance: int,
                                         trans_custom_transport_type: int,
                                         current_tm_impacts: dict,
                                         trans_emission_factors: dict
-                                        ):
+                                        ) -> pd.DataFrame:
     impacts_map = {
         'Global Warming Potential_fossil': 'GWPf',
         'Global Warming Potential_biogenic': 'GWPb',
@@ -198,14 +279,14 @@ def create_intentional_sourcing_impacts(mat_type: str,
         )
     ).set_index('Product system name')
     if current_tm_impacts is None:
-        return no_update
+        return None
     tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_to_update = tm_impacts_df[
         tm_impacts_df['life_cycle_stage'] == lcs_map.get('trans')
     ]
 
     if distance is None:
-        return no_update
+        return None
 
     if distance > 500:
         additional_factor = 1.5
@@ -225,4 +306,4 @@ def create_intentional_sourcing_impacts(mat_type: str,
             * (distance * mi_to_km_conversion)
         )
 
-    return {"intentional_sourcing_impacts": tm_df_to_update.to_dict()}
+    return tm_df_to_update

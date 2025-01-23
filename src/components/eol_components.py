@@ -157,7 +157,7 @@ eol_special_material_mc = html.Div(
             [
                 dbc.Select(
                     options=[
-                        {"label": "CLT Floor", "value": 1},
+                        {"label": "Normalweight concrete, 4000psi", "value": 1},
                         {"label": "Glulam Beam", "value": 2},
                     ],
                     disabled=True,

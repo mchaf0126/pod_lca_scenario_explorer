@@ -74,7 +74,7 @@ replacement_special_mat_model_comp = html.Div(
             [
                 dbc.InputGroupText("Replacement Rate (yr)"),
                 dbc.Input(
-                    placeholder="0",
+                    value=40,
                     type="number",
                     id='replacement_custom_year_mc'
                 ),
@@ -98,8 +98,22 @@ replacement_scenarios = [
     ],
     Input({"type": "custom_checklist", "id": 'replacement_custom_checklist'}, 'value'),
 )
-def update_intentional_sourcing_visibility(checklist):
+def update_intentional_replacement_visibility_se(checklist):
     if checklist:
+        return False, False
+    else:
+        return True, True
+
+
+@callback(
+    [
+        Output('replacement_custom_mat_type_mc', 'disabled'),
+        Output('replacement_custom_year_mc', 'disabled'),
+    ],
+    Input('replacement_scenario_radio', 'value'),
+)
+def update_intentional_replacement_visibility_mc(radio):
+    if radio == 'Intentional Replacement':
         return False, False
     else:
         return True, True
@@ -112,7 +126,23 @@ def update_intentional_sourcing_visibility(checklist):
     ],
     Input('current_tm_impacts', 'data'),
 )
-def update_intentional_replacement_dropdown(current_tm_impacts: dict,):
+def update_intentional_replacement_dropdown_se(current_tm_impacts: dict,):
+    if current_tm_impacts is None:
+        return None, None
+    tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
+    options_for_dropdown = tm_df_for_values['Assembly'].dropna().unique()
+    first_option = options_for_dropdown[0]
+    return options_for_dropdown, first_option
+
+
+@callback(
+    [
+        Output('replacement_custom_mat_type_mc', 'options'),
+        Output('replacement_custom_mat_type_mc', 'value'),
+    ],
+    Input('current_tm_impacts', 'data'),
+)
+def update_intentional_replacement_dropdown_mc(current_tm_impacts: dict,):
     if current_tm_impacts is None:
         return None, None
     tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
@@ -129,6 +159,47 @@ def update_intentional_replacement_dropdown(current_tm_impacts: dict,):
         State('current_tm_impacts', 'data'),
     ]
 )
+def create_intentional_replacement_impacts_se(mat_type: str,
+                                              input_years: int,
+                                              current_tm_impacts: dict,
+                                              ):
+    se_intentional_replacement_impacts = create_intentional_replacement_impacts(
+        mat_type=mat_type,
+        input_years=input_years,
+        current_tm_impacts=current_tm_impacts
+    )
+
+    if se_intentional_replacement_impacts is None:
+        return no_update
+
+    return {"se_intentional_replacement_impacts": se_intentional_replacement_impacts.to_dict()}
+
+
+@callback(
+    Output('intentional_replacement_impacts', 'data', allow_duplicate=True),
+    [
+        Input('replacement_custom_mat_type_mc', 'value'),
+        Input('replacement_custom_year_mc', 'value'),
+        State('current_tm_impacts', 'data'),
+    ],
+    prevent_initial_call=True
+)
+def create_intentional_replacement_impacts_mc(mat_type: str,
+                                              input_years: int,
+                                              current_tm_impacts: dict,
+                                              ):
+    mc_intentional_replacement_impacts = create_intentional_replacement_impacts(
+        mat_type=mat_type,
+        input_years=input_years,
+        current_tm_impacts=current_tm_impacts
+    )
+
+    if mc_intentional_replacement_impacts is None:
+        return no_update
+
+    return {"mc_intentional_replacement_impacts": mc_intentional_replacement_impacts.to_dict()}
+
+
 def create_intentional_replacement_impacts(mat_type: str,
                                            input_years: int,
                                            current_tm_impacts: dict,
@@ -153,7 +224,10 @@ def create_intentional_replacement_impacts(mat_type: str,
     rsp = 60
     if current_tm_impacts is None:
         return no_update
-    tm_df_to_update = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts')).set_index('element_index')
+
+    tm_df_to_update = pd.DataFrame.from_dict(
+        current_tm_impacts.get('current_tm_impacts')
+    ).set_index('element_index')
 
     tm_product_impacts = tm_df_to_update[
         (tm_df_to_update['life_cycle_stage'] == lcs_map.get('product'))
@@ -194,4 +268,4 @@ def create_intentional_replacement_impacts(mat_type: str,
 
     tm_df_to_update = tm_df_to_update[tm_df_to_update['life_cycle_stage'] == lcs_map.get('repl')]
 
-    return {"intentional_replacement_impacts": tm_df_to_update.to_dict()}
+    return tm_df_to_update

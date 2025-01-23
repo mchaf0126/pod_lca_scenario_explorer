@@ -48,7 +48,7 @@ app.layout = dbc.Container(
         ),
         dcc.Store(
             id='current_tm_impacts',
-            storage_type='memory',
+            storage_type='session',
         ),
         dcc.Store(
             data={
@@ -59,7 +59,7 @@ app.layout = dbc.Container(
         ),
         dcc.Store(
             id='current_pb_impacts',
-            storage_type='memory',
+            storage_type='session',
         ),
         dcc.Store(
             data={
