@@ -129,7 +129,7 @@ def update_se_figure(impact: str,
     # combined_df_to_graph = combined_df_to_graph.sort_values('model_comp')
 
     fig = px.histogram(
-        combined_df_to_graph,
+        combined_df_to_graph.sort_values(by=scope),
         x='template_model',
         y=impact,
         color=scope,

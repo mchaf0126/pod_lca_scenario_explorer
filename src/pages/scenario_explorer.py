@@ -96,10 +96,11 @@ def update_se_figure(life_cycle_stage: str,
                      # prebuilt_scenario_impacts: dict
                      ):
     lcs_map = {
-        'Transportation': 'Transportation: A4',
-        'Construction': 'Construction: A5',
-        'Replacement': 'Replacement: B2-B5',
-        'End-of-life': 'End-of-life: C2-C4'
+        'Transportation': 'A4: Transportation',
+        'Construction': 'A5: Construction',
+        'Replacement': 'B2-B5: Replacement',
+        'op': 'B6: Operational Energy',
+        'End-of-life': 'C2-C4: End-of-life'
     }
     units_map = {
         'Acidification Potential': 'kgSO2e',
@@ -177,7 +178,7 @@ def update_se_figure(life_cycle_stage: str,
     # combined_df_to_graph = combined_df_to_graph.sort_values('scenario')
 
     fig = px.histogram(
-        combined_df_to_graph,
+        combined_df_to_graph.sort_values(by=scope),
         x='scenario',
         y=impact,
         color=scope,
