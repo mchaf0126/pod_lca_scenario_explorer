@@ -205,7 +205,7 @@ def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
     [
         Input('template_model_name', 'data'),
         Input('template_model_graph_dropdown', 'value'),
-        State('current_tm_impacts', 'data')
+        Input('current_tm_impacts', 'data')
     ]
 )
 def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, cuurent_tm_impacts: dict):
