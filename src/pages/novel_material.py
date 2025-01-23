@@ -119,18 +119,14 @@ def update_criteria_text(tm_name, tm_metadata):
         Output('novel_material_tm_omniclass', 'value'),
     ],
     [
-        Input('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
+        Input('current_tm_impacts', 'data'),
     ]
 )
-def update_novel_material_omniclass_dropdown(template_model_name: dict,
-                                             template_model_impacts: dict,
+def update_novel_material_omniclass_dropdown(current_tm_impacts: dict,
                                              ):
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_for_values = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-        & (tm_impacts_df['L3'] != "Electrical Service and Distribution")
+        tm_impacts_df['L3'] != "Electrical Service and Distribution"
     ].copy()
 
     options_for_omniclass_dropdown = tm_df_for_values['L3'].unique()
@@ -146,19 +142,15 @@ def update_novel_material_omniclass_dropdown(template_model_name: dict,
     ],
     [
         Input('novel_material_tm_omniclass', 'value'),
-        Input('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
+        State('current_tm_impacts', 'data'),
     ]
 )
 def update_novel_material_assembly_dropdown(selected_omniclass: str,
-                                            template_model_name: dict,
-                                            template_model_impacts: dict,
+                                            current_tm_impacts: dict,
                                             ):
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_for_values = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-        & ((tm_impacts_df['L3'] == selected_omniclass))
+        (tm_impacts_df['L3'] == selected_omniclass)
     ].copy()
 
     options_for_assembly_dropdown = tm_df_for_values['Assembly'].unique()
@@ -174,19 +166,15 @@ def update_novel_material_assembly_dropdown(selected_omniclass: str,
     ],
     [
         Input('novel_material_tm_assembly', 'value'),
-        Input('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
+        State('current_tm_impacts', 'data'),
     ]
 )
 def update_novel_material_component_dropdown(selected_assembly: str,
-                                             template_model_name: dict,
-                                             template_model_impacts: dict,
+                                             current_tm_impacts: dict,
                                              ):
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_for_values = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-        & ((tm_impacts_df['Assembly'] == selected_assembly))
+        (tm_impacts_df['Assembly'] == selected_assembly)
     ].copy()
 
     options_for_component_dropdown = tm_df_for_values['Component'].unique()

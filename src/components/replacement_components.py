@@ -110,19 +110,10 @@ def update_intentional_sourcing_visibility(checklist):
         Output('replacement_custom_mat_type', 'options'),
         Output('replacement_custom_mat_type', 'value'),
     ],
-    [
-        Input('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
-    ]
+    Input('current_tm_impacts', 'data'),
 )
-def update_intentional_sourcing_dropdown(template_model_name: dict,
-                                         template_model_impacts: dict,
-                                         ):
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    unpacked_tm_name = template_model_name.get('template_model_value')
-    tm_df_for_values = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-    ].copy()
+def update_intentional_sourcing_dropdown(current_tm_impacts: dict,):
+    tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     options_for_dropdown = tm_df_for_values['Assembly'].dropna().unique()
     first_option = options_for_dropdown[0]
     return options_for_dropdown, first_option
@@ -133,14 +124,12 @@ def update_intentional_sourcing_dropdown(template_model_name: dict,
     [
         Input('replacement_custom_mat_type', 'value'),
         Input('replacement_custom_year', 'value'),
-        State('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
+        State('current_tm_impacts', 'data'),
     ]
 )
 def create_intentional_sourcing_impacts(mat_type: str,
                                         input_years: int,
-                                        template_model_name: dict,
-                                        template_model_impacts: dict,
+                                        current_tm_impacts: dict,
                                         ):
     impacts_list = [
         'Global Warming Potential_fossil',
@@ -160,11 +149,7 @@ def create_intentional_sourcing_impacts(mat_type: str,
         'eol': 'C2-C4: End-of-life'
     }
     rsp = 60
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    unpacked_tm_name = template_model_name.get('template_model_value')
-    tm_df_to_update = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-    ].set_index('element_index')
+    tm_df_to_update = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts')).set_index('element_index')
 
     tm_product_impacts = tm_df_to_update[
         (tm_df_to_update['life_cycle_stage'] == lcs_map.get('product'))
