@@ -311,7 +311,6 @@ transporation_scenario_radio:
     -
       label: Regionally-specific Distances
       value: Regionally-Specific Distances
-      disabled: True
     - 
       label: Global Supply Chain
       value: global_supply_chain   
@@ -323,10 +322,9 @@ construction_scenario_checklist:
   label: Prebuilt
   checklist: 
     - 
-      label: Advanced Waste Recovery
-      value: Advanced Waste Recovery
-      disabled: True
-  first_item: [Advanced Waste Recovery]
+      label: Enhanced Waste Management
+      value: Enhanced Waste Management
+  first_item: [Enhanced Waste Management]
   checklist_id: construction_scenario_checklist
 
 construction_scenario_radio: 
@@ -336,9 +334,8 @@ construction_scenario_radio:
       label: North American Average (default)
       value: default
     - 
-      label: Advanced Waste Recovery
-      value: Advanced Waste Recovery
-      disabled: True
+      label: Enhanced Waste Management
+      value: Enhanced Waste Management
   first_item: default
   radio_id: construction_scenario_radio
 
@@ -404,20 +401,18 @@ energy_use_scenario_radio:
 
 category_orders:
   Transportation: 
-    - default
-    - domestic_supply_chain
-    - global_supply_chain
+    - Default Scenario
+    - Regionally-Specific Distances
+    - Intentional Sourcing
   Construction: 
-    - default
-    - Advanced Waste Recovery
-    - Off-site Fabrication
+    - Default Scenario
+    - Enhanced Waste Management
   Replacement: 
-    - default
-    - RICS
-    - ASHRAE_240
+    - Default Scenario
+    - RICS Replacement Rates
+    - Intentional Replacement
   End-of-life: 
-    - default
-    - regional_mix
+    - Default Scenario
 
 scope_dropdown_model_comp:
   label: Categorization
