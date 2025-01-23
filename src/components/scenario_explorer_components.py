@@ -1,4 +1,3 @@
-from dash import html
 import dash_bootstrap_components as dbc
 from src.utils.selection import create_dropdown
 from src.utils.load_config import app_config
@@ -52,16 +51,14 @@ se_sidebar = dbc.Container(
                     dbc.AccordionItem(
                         [
                             scope_dropdown,
-                            impact_dropdown
+                            impact_dropdown,
+                            life_cycle_stage_dropdown
                         ],
                         title="Results",
                         item_id='result_dropdowns'
                     ),
                     dbc.AccordionItem(
-                        [
-                            life_cycle_stage_dropdown,
-                            html.Div(id='scenario_card')
-                        ],
+                        id='scenario_card',
                         title="Scenario selection",
                         item_id='lcs_scenario'
                     ),

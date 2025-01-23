@@ -291,6 +291,15 @@ transporation_scenario_checklist:
   first_item: []
   checklist_id: transporation_scenario_checklist
 
+transportation_custom_scenario_checklist: 
+  label: Custom
+  checklist: 
+    -
+      label: Intentional Sourcing
+      value: Intentional Sourcing
+  first_item: ["Intentional Sourcing"]
+  checklist_id: transportation_custom_scenario_checklist
+
 transporation_scenario_radio: 
   label: Prebuilt
   radiolist: 
