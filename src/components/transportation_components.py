@@ -142,19 +142,10 @@ def update_intentional_sourcing_visibility(checklist):
         Output('transport_custom_mat_type', 'options'),
         Output('transport_custom_mat_type', 'value'),
     ],
-    [
-        Input('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
-    ]
+    Input('current_tm_impacts', 'data'),
 )
-def update_intentional_sourcing_dropdown(template_model_name: dict,
-                                         template_model_impacts: dict,
-                                         ):
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    unpacked_tm_name = template_model_name.get('template_model_value')
-    tm_df_for_values = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-    ].copy()
+def update_intentional_sourcing_dropdown(current_tm_impacts: dict):
+    tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     options_for_dropdown = tm_df_for_values['Building Material_name'].dropna().unique()
     first_option = options_for_dropdown[0]
     return options_for_dropdown, first_option
@@ -166,16 +157,14 @@ def update_intentional_sourcing_dropdown(template_model_name: dict,
         Input('transport_custom_mat_type', 'value'),
         Input('transport_custom_distance', 'value'),
         Input('transport_custom_transport_type', 'value'),
-        State('template_model_name', 'data'),
-        State('template_model_impacts', 'data'),
+        State('current_tm_impacts', 'data'),
         State('transportation_emission_factors', 'data'),
     ]
 )
 def create_intentional_sourcing_impacts(mat_type: str,
                                         distance: int,
                                         trans_custom_transport_type: int,
-                                        template_model_name: dict,
-                                        template_model_impacts: dict,
+                                        current_tm_impacts: dict,
                                         trans_emission_factors: dict
                                         ):
     impacts_map = {
@@ -206,11 +195,9 @@ def create_intentional_sourcing_impacts(mat_type: str,
             'transportation_emission_factors'
         )
     ).set_index('Product system name')
-    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
-    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
     tm_df_to_update = tm_impacts_df[
-        (tm_impacts_df['template_model'] == unpacked_tm_name)
-        & (tm_impacts_df['life_cycle_stage'] == lcs_map.get('trans'))
+        tm_impacts_df['life_cycle_stage'] == lcs_map.get('trans')
     ]
 
     if distance is None:
