@@ -93,6 +93,24 @@ eol_regional_mix = dcc.Markdown(
     className='fw-light'
 )
 
+eol_custom_full_building_mix = dcc.Markdown(
+    '''
+    #### Custom Mix (full building)
+    A user would be able to choose a specific mix of landfilling, incineration, and
+    recycling that would be applied to the whole building.
+    ''',
+    className='fw-light'
+)
+
+eol_custom_component_mix = dcc.Markdown(
+    '''
+    #### Custom Mix (for component)
+    A user would be able to choose a specific mix of landfilling, incineration, and
+    recycling that would be applied to a particular material.
+    ''',
+    className='fw-light'
+)
+
 transportation_descriptions = [
     default_transportation,
     domestic_supply_chain,
@@ -112,7 +130,9 @@ replacement_descriptions = [
 
 eol_descriptions = [
     default_eol,
-    eol_regional_mix
+    eol_regional_mix,
+    eol_custom_full_building_mix,
+    eol_custom_component_mix
 ]
 
 description_map = {
