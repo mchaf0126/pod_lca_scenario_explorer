@@ -208,6 +208,9 @@ template_model_graph_dropdown:
   label: Categorization
   dropdown_list:
     -
+      label: Life cycle stage
+      value: life_cycle_stage
+    -
       label: Omniclass level 3
       value: L3
     -
@@ -216,10 +219,7 @@ template_model_graph_dropdown:
     -
       label: Component
       value: Component
-    -
-      label: Life cycle stage
-      value: life_cycle_stage
-  first_item: L3
+  first_item: life_cycle_stage
   dropdown_id: template_model_graph_dropdown
 
 life_cycle_stage_dropdown:
@@ -421,6 +421,9 @@ scope_dropdown_model_comp:
   label: Categorization
   dropdown_list:
     -
+      label: Life cycle stage
+      value: life_cycle_stage
+    -
       label: Omniclass level 3
       value: L3
     -
@@ -429,10 +432,7 @@ scope_dropdown_model_comp:
     -
       label: Component
       value: Component
-    -
-      label: Life cycle stage
-      value: life_cycle_stage
-  first_item: L3
+  first_item: life_cycle_stage
   dropdown_id: scope_dropdown_model_comp
 
 impact_dropdown_model_comp: 
