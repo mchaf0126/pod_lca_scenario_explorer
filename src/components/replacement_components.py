@@ -50,7 +50,7 @@ replacement_special_mat = html.Div(
             [
                 dbc.InputGroupText("Replacement Rate (yr)"),
                 dbc.Input(
-                    value=20,
+                    value=40,
                     type="number",
                     id='replacement_custom_year'
                 ),

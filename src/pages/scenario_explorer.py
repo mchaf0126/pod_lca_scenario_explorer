@@ -76,24 +76,25 @@ def update_scenario(life_cycle_stage):
         Input('life_cycle_stage_dropdown', 'value'),
         Input('impact_dropdown', 'value'),
         Input('scope_dropdown', 'value'),
+        Input({'type': 'prebuilt_scenario', 'id': ALL}, 'value'),
         Input({'type': 'custom_checklist', 'id': ALL}, 'value'),
         Input('template_model_name', 'data'),
         State('template_model_impacts', 'data'),
         Input('intentional_sourcing_impacts', 'data'),
-        Input('intentional_replacement_impacts', 'data')
-        # State('prebuilt_scenario_impacts', 'data'),
+        Input('intentional_replacement_impacts', 'data'),
+        State('prebuilt_scenario_impacts', 'data'),
     ]
 )
 def update_se_figure(life_cycle_stage: str,
                      impact: str,
                      scope: str,
-                     # checklist: list,
+                     prebuilt_scenario_checklist: list,
                      custom_trans_checklist: list,
                      template_model_name: dict,
                      template_model_impacts: dict,
                      intentional_sourcing_impacts: dict,
                      intentional_replacement_impacts: dict,
-                     # prebuilt_scenario_impacts: dict
+                     prebuilt_scenario_impacts: dict
                      ):
     lcs_map = {
         'Transportation': 'A4: Transportation',
@@ -111,22 +112,33 @@ def update_se_figure(life_cycle_stage: str,
         'Smog Formation Potential': 'kgO3e'
     }
     custom_trans_checklist = sum(custom_trans_checklist, [])
-    if template_model_impacts is None: 
+    prebuilt_scenario_checklist = sum(prebuilt_scenario_checklist, [])
+
+    if template_model_impacts is None:
         return no_update
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    pb_impacts_df = pd.DataFrame.from_dict(
+        prebuilt_scenario_impacts.get(
+            'prebuilt_scenario_impacts'
+        )
+    )
+
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_graph = tm_impacts_df[
         (tm_impacts_df['template_model'] == unpacked_tm_name)
         & (tm_impacts_df['life_cycle_stage'] == lcs_map.get(life_cycle_stage))
     ].copy()
-    tm_df_to_graph.loc[:, 'scenario'] = 'Default scenario'
+    tm_df_to_graph.loc[:, 'scenario'] = 'Default Scenario'
+
+    pb_df_to_graph = pb_impacts_df[
+        (pb_impacts_df['template_model'] == unpacked_tm_name)
+        & (pb_impacts_df['life_cycle_stage'] == lcs_map.get(life_cycle_stage))
+        & (pb_impacts_df['scenario'].isin(prebuilt_scenario_checklist))
+    ]
 
     if life_cycle_stage == 'Transportation':
         if "Intentional Sourcing" not in custom_trans_checklist:
-            # pb_impacts_df = pd.DataFrame.from_dict(
-            #     prebuilt_scenario_impacts.get('prebuilt_scenario_impacts')
-            # )
-            combined_df_to_graph = tm_df_to_graph
+            combined_df_to_graph = pd.concat([tm_df_to_graph, pb_df_to_graph])
         else:
             custom_impacts_df = pd.DataFrame.from_dict(
                 intentional_sourcing_impacts.get(
@@ -137,12 +149,13 @@ def update_se_figure(life_cycle_stage: str,
             combined_df_to_graph = pd.concat(
                 [
                     tm_df_to_graph,
+                    pb_df_to_graph,
                     custom_impacts_df
                 ]
             )
     elif life_cycle_stage == 'Replacement':
         if "Intentional Replacement" not in custom_trans_checklist:
-            combined_df_to_graph = tm_df_to_graph
+            combined_df_to_graph = pd.concat([tm_df_to_graph, pb_df_to_graph])
         else:
             custom_impacts_df = pd.DataFrame.from_dict(
                 intentional_replacement_impacts.get(
@@ -153,38 +166,19 @@ def update_se_figure(life_cycle_stage: str,
             combined_df_to_graph = pd.concat(
                 [
                     tm_df_to_graph,
+                    pb_df_to_graph,
                     custom_impacts_df
                 ]
             )
     else:
-        combined_df_to_graph = tm_df_to_graph
-
-    # pb_df_to_graph = pb_impacts_df[
-    #     (pb_impacts_df['Revit model'] == unpacked_tm_name)
-    #     & (pb_impacts_df['Life Cycle Stage'] == lcs_map.get(life_cycle_stage))
-    #     & (pb_impacts_df['scenario'].isin(sum(checklist, [])))
-    # ]
-
-    # categories = sec.category_orders.get(life_cycle_stage)
-
-    # combined_df_to_graph = pd.concat(
-    #     [
-    #         tm_df_to_graph,
-    #         # pb_df_to_graph
-    #     ]
-    # )
-    # combined_df_to_graph['scenario'] = pd.Categorical(
-    #     combined_df_to_graph['scenario'],
-    #     ordered=True,
-    #     categories=categories
-    # )
-    # combined_df_to_graph = combined_df_to_graph.sort_values('scenario')
+        combined_df_to_graph = pd.concat([tm_df_to_graph, pb_df_to_graph])
 
     fig = px.histogram(
         combined_df_to_graph.sort_values(by=scope),
         x='scenario',
         y=impact,
         color=scope,
+        category_orders={'scenario': sec.category_orders.get(life_cycle_stage)}
         # title=f'GWP Impacts of {unpacked_tm_name}',
     ).update_yaxes(
         title=f'{impact} ({units_map.get(impact)})',
