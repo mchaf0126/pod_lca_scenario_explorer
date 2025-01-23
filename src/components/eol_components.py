@@ -34,7 +34,8 @@ eol_form = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_landfill'
+                    id='eol_custom_landfill',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
@@ -46,7 +47,8 @@ eol_form = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_incineration'
+                    id='eol_custom_incineration',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
@@ -58,7 +60,8 @@ eol_form = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_recycling'
+                    id='eol_custom_recycling',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
@@ -77,7 +80,8 @@ eol_form_mc = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_landfill_mc'
+                    id='eol_custom_landfill_mc',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
@@ -89,7 +93,8 @@ eol_form_mc = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_incineration_mc'
+                    id='eol_custom_incineration_mc',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
@@ -101,7 +106,8 @@ eol_form_mc = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_recycling_mc'
+                    id='eol_custom_recycling_mc',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
@@ -122,6 +128,7 @@ eol_special_material = html.Div(
                         {"label": "Glulam Beam", "value": 2},
                     ],
                     value=1,
+                    disabled=True,
                     id='eol_custom_mat_type'
                 ),
             ],
@@ -133,7 +140,8 @@ eol_special_material = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_reuse'
+                    id='eol_custom_reuse',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
@@ -152,6 +160,7 @@ eol_special_material_mc = html.Div(
                         {"label": "CLT Floor", "value": 1},
                         {"label": "Glulam Beam", "value": 2},
                     ],
+                    disabled=True,
                     value=1,
                     id='eol_custom_mat_type_mc'
                 ),
@@ -164,7 +173,8 @@ eol_special_material_mc = html.Div(
                 dbc.Input(
                     placeholder="percent",
                     type="number",
-                    id='eol_custom_reuse_mc'
+                    id='eol_custom_reuse_mc',
+                    disabled=True
                 ),
                 dbc.InputGroupText("%"),
             ],
