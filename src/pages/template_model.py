@@ -182,6 +182,7 @@ def update_tm_summary_graph(tm_name: dict, tm_dropdown: str, tm_impacts: dict):
         'Acidification Potential',
         'Eutrophication Potential',
         'Smog Formation Potential',
+        # 'Global Warming Potential_biogenic'
         # 'Ozone Depletion Potential'
     ]
     unpacked_tm_name = tm_name.get('template_model_value')

@@ -259,8 +259,11 @@ impact_dropdown:
   label: Impacts
   dropdown_list: 
     - 
-      label: GWP
-      value: Global Warming Potential_fossil       
+      label: GWP_fossil
+      value: Global Warming Potential_fossil
+    - 
+      label: GWP_bio
+      value: Global Warming Potential_biogenic 
     - 
       label: AP
       value: Acidification Potential
@@ -439,8 +442,11 @@ impact_dropdown_model_comp:
   label: Impacts
   dropdown_list: 
     - 
-      label: GWP
-      value: Global Warming Potential_fossil       
+      label: GWP_fossil
+      value: Global Warming Potential_fossil
+    - 
+      label: GWP_bio
+      value: Global Warming Potential_biogenic     
     - 
       label: AP
       value: Acidification Potential

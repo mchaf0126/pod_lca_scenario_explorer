@@ -86,6 +86,7 @@ def update_se_figure(impact: str,
         'Acidification Potential': 'kgSO2e',
         'Eutrophication Potential': 'kgNe',
         'Global Warming Potential_fossil': 'kgCO2e',
+        'Global Warming Potential_biogenic': 'kgCO2e',
         'Ozone Depletion Potential': 'CFC-11e',
         'Smog Formation Potential': 'kgO3e'
     }
