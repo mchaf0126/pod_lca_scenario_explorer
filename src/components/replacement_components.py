@@ -50,7 +50,7 @@ replacement_special_mat = html.Div(
             [
                 dbc.InputGroupText("Replacement Rate (yr)"),
                 dbc.Input(
-                    value="20",
+                    value=20,
                     type="number",
                     id='replacement_custom_year'
                 ),
@@ -123,6 +123,78 @@ def update_intentional_sourcing_dropdown(template_model_name: dict,
     tm_df_for_values = tm_impacts_df[
         (tm_impacts_df['template_model'] == unpacked_tm_name)
     ].copy()
-    options_for_dropdown = tm_df_for_values['Building Material_name'].dropna().unique()
+    options_for_dropdown = tm_df_for_values['Assembly'].dropna().unique()
     first_option = options_for_dropdown[0]
     return options_for_dropdown, first_option
+
+
+@callback(
+    Output('intentional_replacement_impacts', 'data'),
+    [
+        Input('replacement_custom_mat_type', 'value'),
+        Input('replacement_custom_year', 'value'),
+        State('template_model_name', 'data'),
+        State('template_model_impacts', 'data'),
+    ]
+)
+def create_intentional_sourcing_impacts(mat_type: str,
+                                        input_years: int,
+                                        template_model_name: dict,
+                                        template_model_impacts: dict,
+                                        ):
+    impacts_list = [
+        'Global Warming Potential_fossil',
+        'Global Warming Potential_biogenic',
+        'Global Warming Potential_luluc',
+        'Acidification Potential',
+        'Eutrophication Potential',
+        'Smog Formation Potential',
+        'Ozone Depletion Potential',
+    ]
+    rsp = 60
+    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_df_to_update = tm_impacts_df[
+        (tm_impacts_df['template_model'] == unpacked_tm_name)
+    ].set_index('element_index')
+
+    tm_product_impacts = tm_df_to_update[
+        (tm_df_to_update['life_cycle_stage'] == 'Product: A1-A3')
+        & (tm_df_to_update['Assembly'] == mat_type)
+    ]
+    tm_trans_impacts = tm_df_to_update[
+        (tm_df_to_update['life_cycle_stage'] == 'Transportation: A4')
+        & (tm_df_to_update['Assembly'] == mat_type)
+    ]
+    tm_constr_impacts = tm_df_to_update[
+        (tm_df_to_update['life_cycle_stage'] == 'Construction: A5')
+        & (tm_df_to_update['Assembly'] == mat_type)
+    ]
+    tm_eol_impacts = tm_df_to_update[
+        (tm_df_to_update['life_cycle_stage'] == 'End-of-life: C2-C4')
+        & (tm_df_to_update['Assembly'] == mat_type)
+    ]
+
+    if input_years >= 60:
+        number_of_replacements = 0
+    elif input_years <= 0:
+        number_of_replacements = 0
+    else:
+        number_of_replacements = rsp // input_years
+
+    print(number_of_replacements)
+
+    for name in impacts_list:
+        tm_df_to_update.loc[
+            (
+                (tm_df_to_update['Assembly'] == mat_type)
+                & (tm_df_to_update['life_cycle_stage'] == 'Replacement: B2-B5')
+            ), name
+        ] = (
+            tm_product_impacts.loc[:, name]
+            + tm_trans_impacts.loc[:, name]
+            + tm_constr_impacts.loc[:, name]
+            + tm_eol_impacts.loc[:, name]
+        ).mul(number_of_replacements)
+
+    return {"intentional_replacement_impacts": tm_df_to_update.to_dict()}
