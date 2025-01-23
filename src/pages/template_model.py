@@ -2,6 +2,7 @@
 import pandas as pd
 import plotly.express as px
 from dash import html, callback, Input, Output, State, register_page
+import dash_ag_grid as dag
 import dash_bootstrap_components as dbc
 import src.components.template_model_components as tmc
 
@@ -42,6 +43,10 @@ layout = html.Div(
                             dbc.Row(
                                 tmc.display_data,
                                 class_name='mx-5'
+                            ),
+                            dbc.Row(
+                                id='tm_table',
+                                class_name='mx-5'                                
                             )
                         ],
                         xs=8, sm=8, md=8, lg=8, xl=8, xxl=9,
@@ -255,3 +260,128 @@ def update_tm_summary_graph(tm_dropdown: str, current_tm_impacts: dict):
         legend_title=""
     )
     return fig
+
+
+@callback(
+    Output('tm_table', 'children'),
+    Input('current_tm_impacts', 'data')
+)
+def update_tm_table(current_tm_impacts: dict):
+    impacts = [
+        'Global Warming Potential_fossil',
+        'Acidification Potential',
+        'Eutrophication Potential',
+        'Smog Formation Potential',
+        'Ozone Depletion Potential',
+        'Global Warming Potential_biogenic',
+        'Global Warming Potential_luluc',
+    ]
+    table_label = dbc.Label(
+        'Template Model Impacts',
+        class_name='fs-5 fw-bold mt-2'
+    )
+    if current_tm_impacts is None:
+        return None
+    tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
+    tm_impacts_df = tm_impacts_df.groupby('life_cycle_stage')[impacts].sum().reset_index()
+    tm_impacts_df = tm_impacts_df.rename(columns={'life_cycle_stage': 'Life Cycle Stage'})
+    # table = dbc.Table.from_dataframe(tm_impacts_df.T.reset_index(), striped=True)
+    table = dag.AgGrid(
+        rowData=tm_impacts_df.to_dict("records"),
+        defaultColDef={
+            "wrapHeaderText": True,
+            "autoHeaderHeight": True,
+        },
+        columnDefs=[
+            {
+                'field': 'Life Cycle Stage',
+                'cellClass': 'fw-bold',
+                'cellStyle': {
+                    "wordBreak": "normal"
+                },
+                "wrapText": True,
+                "resizable": True,
+                "autoHeight": True,
+                'width': 190
+            },
+            {
+                'field': 'Global Warming Potential_fossil',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+
+                'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right',
+                },
+                'width': 130
+            },
+            {
+                'field': 'Acidification Potential',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+                'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right'
+                },
+                'width': 130
+            },
+            {
+                'field': 'Eutrophication Potential',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+                'valueFormatter': {"function": "d3.format(',.2f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right'
+                },
+                'width': 130
+            },
+            {
+                'field': 'Smog Formation Potential',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+                'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right'
+                },
+                'width': 130
+            },
+            {
+                'field': 'Ozone Depletion Potential',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+                'valueFormatter': {"function": "d3.format(',.5f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right'
+                },
+                'width': 130
+            },
+            {
+                'field': 'Global Warming Potential_biogenic',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+                'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right'
+                },
+                'width': 130
+            },
+            {
+                'field': 'Global Warming Potential_luluc',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+                'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right'
+                },
+                'width': 130
+            },
+        ],
+        dashGridOptions={"domLayout": "autoHeight"},
+        style={'width': '100%'},
+    )
+    
+    final_table = html.Div(
+        table,
+        className='my-3'
+    )
+    return [table_label, final_table]
