@@ -8,7 +8,7 @@ from src.components.transportation_components import transportation_scenarios
 from src.components.construction_components import construction_scenarios
 from src.components.replacement_components import replacement_scenarios
 from src.components.eol_components import eol_scenarios
-from src.components.descriptions import description_map, description_list
+from src.components.descriptions import description_map
 
 register_page(__name__, path='/scenario_explorer')
 
@@ -196,15 +196,9 @@ def update_se_figure(life_cycle_stage: str,
 
 @callback(
     Output('se_description', 'children'),
-    [
-        Input({'type': 'prebuilt_scenario', 'id': ALL}, 'value'),
-        Input({"type": "custom_checklist", "id": 'transportation_custom_checklist'}, 'value'),
-    ]
+    Input('life_cycle_stage_dropdown', 'value'),
 )
-def update_description(checklist, custom_checklist):
-    flattened_checklist = sum(checklist, [])
-    final_checklist = flattened_checklist + custom_checklist
-    sorted_list = sorted(final_checklist, key=description_list.index)
+def update_description(lcs):
     title = [
         dcc.Markdown(
             '''
@@ -214,4 +208,4 @@ def update_description(checklist, custom_checklist):
             className='fw-light'
         )
     ]
-    return title + [description_map.get(value) for value in sorted_list]
+    return title + description_map.get(lcs)
