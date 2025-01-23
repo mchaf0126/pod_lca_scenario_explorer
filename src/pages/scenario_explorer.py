@@ -114,14 +114,18 @@ def update_se_figure(life_cycle_stage: str,
     ].copy()
     tm_df_to_graph.loc[:, 'scenario'] = 'Default scenario'
 
-    if (life_cycle_stage == 'Transportation'):
+    if life_cycle_stage == 'Transportation':
         if custom_trans_checklist == [[]]:
             # pb_impacts_df = pd.DataFrame.from_dict(
             #     prebuilt_scenario_impacts.get('prebuilt_scenario_impacts')
             # )
             combined_df_to_graph = tm_df_to_graph
         else:
-            custom_impacts_df = pd.DataFrame.from_dict(intentional_sourcing_impacts.get('intentional_sourcing_impacts'))
+            custom_impacts_df = pd.DataFrame.from_dict(
+                intentional_sourcing_impacts.get(
+                    'intentional_sourcing_impacts'
+                )
+            )
             custom_impacts_df.loc[:, 'scenario'] = 'Intentional Sourcing'
             custom_impacts_df.to_csv('testtrans.csv')
             combined_df_to_graph = pd.concat(
@@ -130,6 +134,8 @@ def update_se_figure(life_cycle_stage: str,
                     custom_impacts_df
                 ]
             )
+    else:
+        combined_df_to_graph = tm_df_to_graph
 
     # pb_df_to_graph = pb_impacts_df[
     #     (pb_impacts_df['Revit model'] == unpacked_tm_name)
