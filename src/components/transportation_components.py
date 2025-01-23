@@ -146,7 +146,7 @@ def update_intentional_sourcing_visibility(checklist):
 )
 def update_intentional_sourcing_dropdown(current_tm_impacts: dict):
     tm_df_for_values = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
-    options_for_dropdown = tm_df_for_values['Building Material_name'].dropna().unique()
+    options_for_dropdown = tm_df_for_values['Building Material_name'].unique()
     first_option = options_for_dropdown[0]
     return options_for_dropdown, first_option
 
