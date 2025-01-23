@@ -187,6 +187,14 @@ def create_intentional_sourcing_impacts(mat_type: str,
         'Smog Formation Potential': 'smg',
         'Ozone Depletion Potential': 'odp'
     }
+    lcs_map = {
+        'product': 'A1-A3: Product',
+        'trans': 'A4: Transportation',
+        'constr': 'A5: Construction',
+        'repl': 'B2-B5: Replacement',
+        'op': 'B6: Operational Energy',
+        'eol': 'C2-C4: End-of-life'
+    }
     emissions_map = {
         'truck': 'Transport, combination truck, average fuel mix',
         'rail': 'Transport, train, diesel powered',
@@ -202,7 +210,7 @@ def create_intentional_sourcing_impacts(mat_type: str,
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_update = tm_impacts_df[
         (tm_impacts_df['template_model'] == unpacked_tm_name)
-        & (tm_impacts_df['life_cycle_stage'] == "Transportation: A4")
+        & (tm_impacts_df['life_cycle_stage'] == lcs_map.get('trans'))
     ]
 
     if distance is None:

@@ -151,6 +151,14 @@ def create_intentional_sourcing_impacts(mat_type: str,
         'Smog Formation Potential',
         'Ozone Depletion Potential',
     ]
+    lcs_map = {
+        'product': 'A1-A3: Product',
+        'trans': 'A4: Transportation',
+        'constr': 'A5: Construction',
+        'repl': 'B2-B5: Replacement',
+        'op': 'B6: Operational Energy',
+        'eol': 'C2-C4: End-of-life'
+    }
     rsp = 60
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
     unpacked_tm_name = template_model_name.get('template_model_value')
@@ -159,19 +167,19 @@ def create_intentional_sourcing_impacts(mat_type: str,
     ].set_index('element_index')
 
     tm_product_impacts = tm_df_to_update[
-        (tm_df_to_update['life_cycle_stage'] == 'Product: A1-A3')
+        (tm_df_to_update['life_cycle_stage'] == lcs_map.get('product'))
         & (tm_df_to_update['Assembly'] == mat_type)
     ]
     tm_trans_impacts = tm_df_to_update[
-        (tm_df_to_update['life_cycle_stage'] == 'Transportation: A4')
+        (tm_df_to_update['life_cycle_stage'] == lcs_map.get('trans'))
         & (tm_df_to_update['Assembly'] == mat_type)
     ]
     tm_constr_impacts = tm_df_to_update[
-        (tm_df_to_update['life_cycle_stage'] == 'Construction: A5')
+        (tm_df_to_update['life_cycle_stage'] == lcs_map.get('constr'))
         & (tm_df_to_update['Assembly'] == mat_type)
     ]
     tm_eol_impacts = tm_df_to_update[
-        (tm_df_to_update['life_cycle_stage'] == 'End-of-life: C2-C4')
+        (tm_df_to_update['life_cycle_stage'] == lcs_map.get('eol'))
         & (tm_df_to_update['Assembly'] == mat_type)
     ]
 
@@ -186,7 +194,7 @@ def create_intentional_sourcing_impacts(mat_type: str,
         tm_df_to_update.loc[
             (
                 (tm_df_to_update['Assembly'] == mat_type)
-                & (tm_df_to_update['life_cycle_stage'] == 'Replacement: B2-B5')
+                & (tm_df_to_update['life_cycle_stage'] == lcs_map.get('repl'))
             ), name
         ] = (
             tm_product_impacts.loc[:, name]
@@ -195,6 +203,6 @@ def create_intentional_sourcing_impacts(mat_type: str,
             + tm_eol_impacts.loc[:, name]
         ).mul(number_of_replacements)
 
-    tm_df_to_update = tm_df_to_update[tm_df_to_update['life_cycle_stage'] == 'Replacement: B2-B5']
+    tm_df_to_update = tm_df_to_update[tm_df_to_update['life_cycle_stage'] == lcs_map.get('repl')]
 
     return {"intentional_replacement_impacts": tm_df_to_update.to_dict()}
