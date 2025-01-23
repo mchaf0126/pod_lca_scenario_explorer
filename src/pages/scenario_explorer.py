@@ -178,7 +178,7 @@ def update_se_figure(life_cycle_stage: str,
     # combined_df_to_graph = combined_df_to_graph.sort_values('scenario')
 
     fig = px.histogram(
-        combined_df_to_graph,
+        combined_df_to_graph.sort_values(by=scope),
         x='scenario',
         y=impact,
         color=scope,
