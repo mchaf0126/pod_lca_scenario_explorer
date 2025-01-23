@@ -113,33 +113,83 @@ def update_criteria_text(tm_name, tm_metadata):
     return card_info
 
 
-# @callback(
-#     Output('tm_summary', 'figure'),
-#     [
-#         Input('template_model_name', 'data'),
-#         State('template_model_impacts', 'data')
-#     ]
-# )
-# def update_tm_summary_graph(tm_name, tm_impacts):
-#     tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
-#     unpacked_tm_name = tm_name.get('template_model_value')
-#     df_to_graph = tm_impacts_df[tm_impacts_df['Revit model'] == unpacked_tm_name]
+@callback(
+    [
+        Output('novel_material_tm_omniclass', 'options'),
+        Output('novel_material_tm_omniclass', 'value'),
+    ],
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data'),
+    ]
+)
+def update_novel_material_omniclass_dropdown(template_model_name: dict,
+                                             template_model_impacts: dict,
+                                             ):
+    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_df_for_values = tm_impacts_df[
+        (tm_impacts_df['template_model'] == unpacked_tm_name)
+        & (tm_impacts_df['L3'] != "Electrical Service and Distribution")
+    ].copy()
 
-#     df_to_graph = df_to_graph.groupby('Revit category').sum()
+    options_for_omniclass_dropdown = tm_df_for_values['L3'].unique()
+    first_omniclass_option = options_for_omniclass_dropdown[0]
 
-#     fig = px.bar(
-#         df_to_graph,
-#         x='Global Warming Potential Total (kgCO2eq)',
-#         color=df_to_graph.index,
-#         # title=f'GWP Impacts of {unpacked_tm_name}',
-#         height=600
-#     ).update_yaxes(
-#         title='',
-#         tickformat=',.0f',
-#     ).update_xaxes(
-#         categoryorder='category ascending',
-#         title=''
-#     ).update_layout(
-#         showlegend=False
-#     )
-#     return fig
+    return options_for_omniclass_dropdown, first_omniclass_option
+
+
+@callback(
+    [
+        Output('novel_material_tm_assembly', 'options'),
+        Output('novel_material_tm_assembly', 'value'),
+    ],
+    [
+        Input('novel_material_tm_omniclass', 'value'),
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data'),
+    ]
+)
+def update_novel_material_assembly_dropdown(selected_omniclass: str,
+                                            template_model_name: dict,
+                                            template_model_impacts: dict,
+                                            ):
+    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_df_for_values = tm_impacts_df[
+        (tm_impacts_df['template_model'] == unpacked_tm_name)
+        & ((tm_impacts_df['L3'] == selected_omniclass))
+    ].copy()
+
+    options_for_assembly_dropdown = tm_df_for_values['Assembly'].unique()
+    first_assembly_option = options_for_assembly_dropdown[0]
+
+    return options_for_assembly_dropdown, first_assembly_option
+
+
+@callback(
+    [
+        Output('novel_material_tm_component', 'options'),
+        Output('novel_material_tm_component', 'value'),
+    ],
+    [
+        Input('novel_material_tm_assembly', 'value'),
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data'),
+    ]
+)
+def update_novel_material_component_dropdown(selected_assembly: str,
+                                             template_model_name: dict,
+                                             template_model_impacts: dict,
+                                             ):
+    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_df_for_values = tm_impacts_df[
+        (tm_impacts_df['template_model'] == unpacked_tm_name)
+        & ((tm_impacts_df['Assembly'] == selected_assembly))
+    ].copy()
+
+    options_for_component_dropdown = tm_df_for_values['Component'].unique()
+    first_component_option = options_for_component_dropdown[0]
+
+    return options_for_component_dropdown, first_component_option
