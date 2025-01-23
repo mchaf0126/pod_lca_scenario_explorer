@@ -57,8 +57,8 @@ layout = html.Div(
         Input('impact_dropdown_model_comp', 'value'),
         Input('scope_dropdown_model_comp', 'value'),
         Input('transporation_scenario_radio', 'value'),
-        # Input('construction_scenario_radio', 'value'),
-        # Input('replacement_scenario_radio', 'value'),
+        Input('construction_scenario_radio', 'value'),
+        Input('replacement_scenario_radio', 'value'),
         # Input('eol_scenario_radio', 'value'),
         State('current_tm_impacts', 'data'),
         State('current_pb_impacts', 'data'),
@@ -69,8 +69,8 @@ layout = html.Div(
 def update_mc_figure(impact: str,
                      scope: str,
                      trans_scenario: str,
-                     #  constr_scenario: str,
-                     #  repl_scenario: str,
+                     constr_scenario: str,
+                     repl_scenario: str,
                      #  eol_scenario: str,
                      current_tm_impacts: dict,
                      current_pb_impacts: dict,
@@ -121,17 +121,41 @@ def update_mc_figure(impact: str,
         )
 
     # construction
-    constr_df = tm_impacts_df.loc[tm_impacts_df['life_cycle_stage'] == lcs_map.get('Construction'), :]
+    if constr_scenario == 'North American Average (default)':
+        constr_df = tm_impacts_df.loc[
+            tm_impacts_df['life_cycle_stage'] == lcs_map.get('Construction'),
+            :
+        ]
+    else:
+        constr_df = pb_impacts_df.loc[
+            pb_impacts_df['scenario'] == 'Enhanced Waste Management',
+            :
+        ]
 
     # replacement
-    repl_df = tm_impacts_df.loc[tm_impacts_df['life_cycle_stage'] == lcs_map.get('Replacement'), :]
+    if repl_scenario == 'ASHRAE 240P Replacement Rates (default)':
+        repl_df = tm_impacts_df.loc[
+            tm_impacts_df['life_cycle_stage'] == lcs_map.get('Replacement'),
+            :
+        ]
+    # else:
+    #     repl_df = pd.DataFrame.from_dict(
+    #         intentional_replacement_impacts.get(
+    #             'mc_intentional_replacement_impacts'
+    #         )
+    #     )
 
     # operational energy
-    op_df = tm_impacts_df.loc[tm_impacts_df['life_cycle_stage'] == lcs_map.get('Operational Energy'), :]
+    op_df = tm_impacts_df.loc[
+        tm_impacts_df['life_cycle_stage'] == lcs_map.get('Operational Energy'),
+        :
+    ]
 
     # end-of-life
-    eol_df = tm_impacts_df.loc[tm_impacts_df['life_cycle_stage'] == lcs_map.get('End-of-life'), :]
-
+    eol_df = tm_impacts_df.loc[
+        tm_impacts_df['life_cycle_stage'] == lcs_map.get('End-of-life'),
+        :
+    ]
 
     # user_selected_df_to_concat = []
     # user_selected_df_to_concat.append(tm_df_to_graph[tm_df_to_graph['Life Cycle Stage'] == '[A1-A3] Product'])
@@ -177,6 +201,7 @@ def update_mc_figure(impact: str,
         x='model_comp',
         y=impact,
         color=scope,
+        category_orders={'model_comp': ['Default Scenarios', 'User-defined model with scenarios']}
         # title=f'GWP Impacts of {unpacked_tm_name}',
     ).update_yaxes(
         title=f'{impact} ({units_map.get(impact)})',
