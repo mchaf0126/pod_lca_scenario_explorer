@@ -64,6 +64,10 @@ app.layout = dbc.Container(
             id='intentional_sourcing_impacts',
             storage_type='memory'
         ),
+        dcc.Store(
+            id='intentional_replacement_impacts',
+            storage_type='memory'
+        ),
         dbc.Row(
             [
                 dbc.Col(

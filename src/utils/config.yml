@@ -349,6 +349,15 @@ replacement_scenario_checklist:
   first_item: [RICS]
   checklist_id: replacement_scenario_checklist'
 
+replacement_custom_scenario_checklist: 
+  label: Custom
+  checklist: 
+    -
+      label: Intentional Replacement
+      value: Intentional Replacement
+  first_item: ["Intentional Replacement"]
+  checklist_id: replacement_custom_scenario_checklist
+
 replacement_scenario_radio: 
   label: Prebuilt
   radiolist: 
