@@ -9,7 +9,7 @@ config = app_config
 transportation_checklist_yaml = config.get('transporation_scenario_checklist')
 assert transportation_checklist_yaml is not None, 'The config for scenario checklist could not be set'
 
-transportation_custom_checklist_yaml = config.get('transporation_custom_scenario_checklist')
+transportation_custom_checklist_yaml = config.get('transportation_custom_scenario_checklist')
 assert transportation_custom_checklist_yaml is not None, 'The config for scenario checklist could not be set'
 
 transportation_radio_yaml = config.get('transporation_scenario_radio')
@@ -26,7 +26,7 @@ transportation_custom_checklist = create_checklist(
     label=transportation_custom_checklist_yaml['label'],
     checklist=transportation_custom_checklist_yaml['checklist'],
     first_item=transportation_custom_checklist_yaml['first_item'],
-    dropdown_id={"type": "prebuilt_scenario", "id": 'transportation_custom_scenario_checklist'}
+    dropdown_id={"type": "custom_checklist", "id": 'transportation_custom_checklist'}
 )
 
 transportation_radio_model_comp = create_radio(
@@ -62,11 +62,11 @@ a4_special_mat = html.Div(
                 dbc.InputGroupText("Transport Type"),
                 dbc.Select(
                     options=[
-                        {"label": "Truck", "value": 1},
-                        {"label": "Rail", "value": 2},
-                        {"label": "Barge", "value": 3},
+                        {"label": "Truck", "value": 'truck'},
+                        {"label": "Rail", "value": 'rail'},
+                        {"label": "Barge", "value": 'barge'},
                     ],
-                    value=1,
+                    value='truck',
                     id='transport_custom_transport_type'
                 ),
             ],
@@ -102,11 +102,11 @@ a4_special_mat_model_comp = html.Div(
                 dbc.InputGroupText("Transport Type"),
                 dbc.Select(
                     options=[
-                        {"label": "Truck", "value": 1},
-                        {"label": "Rail", "value": 2},
-                        {"label": "Barge", "value": 3},
+                        {"label": "Truck", "value": 'truck'},
+                        {"label": "Rail", "value": 'rail'},
+                        {"label": "Barge", "value": 'barge'},
                     ],
-                    value=1,
+                    value='truck',
                     id='transport_custom_transport_type_mc'
                 ),
             ],
@@ -115,17 +115,11 @@ a4_special_mat_model_comp = html.Div(
     ]
 )
 
-transportation_scenarios = dbc.Container(
-    [
-        dbc.Row(
-            [
-                transportation_checklist,
-                transportation_custom_checklist,
-                a4_special_mat
-            ]
-        )
-    ]
-)
+transportation_scenarios = [
+    transportation_checklist,
+    transportation_custom_checklist,
+    a4_special_mat
+]
 
 
 @callback(
@@ -134,7 +128,7 @@ transportation_scenarios = dbc.Container(
         Output('transport_custom_distance', 'disabled'),
         Output('transport_custom_transport_type', 'disabled'),
     ],
-    Input({"type": "prebuilt_scenario", "id": 'transportation_custom_scenario_checklist'}, 'value'),
+    Input({"type": "custom_checklist", "id": 'transportation_custom_checklist'}, 'value'),
 )
 def update_intentional_sourcing_visibility(checklist):
     if checklist:
@@ -179,7 +173,7 @@ def update_intentional_sourcing_dropdown(template_model_name: dict,
 )
 def create_intentional_sourcing_impacts(mat_type: str,
                                         distance: int,
-                                        trans_custom_transport_type: str,
+                                        trans_custom_transport_type: int,
                                         template_model_name: dict,
                                         template_model_impacts: dict,
                                         trans_emission_factors: dict
@@ -194,24 +188,24 @@ def create_intentional_sourcing_impacts(mat_type: str,
         'Ozone Depletion Potential': 'odp'
     }
     emissions_map = {
-        1: 'Transport, combination truck, average fuel mix',
-        2: 'Transport, train, diesel powered',
-        3: 'Transport, barge, average fuel mix',
+        'truck': 'Transport, combination truck, average fuel mix',
+        'rail': 'Transport, train, diesel powered',
+        'barge': 'Transport, barge, average fuel mix',
     }
     mi_to_km_conversion = 1.60934
     emissions_df = pd.DataFrame.from_dict(
         trans_emission_factors.get(
             'transportation_emission_factors'
         )
-    ).fillna(0).set_index('Product system name')
+    ).set_index('Product system name')
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_update = tm_impacts_df[
         (tm_impacts_df['template_model'] == unpacked_tm_name)
         & (tm_impacts_df['life_cycle_stage'] == "Transportation: A4")
-    ].copy()
+    ]
 
-    if distance == 0:
+    if distance is None:
         return no_update
 
     if distance > 500:
@@ -223,18 +217,13 @@ def create_intentional_sourcing_impacts(mat_type: str,
 
     for name, col_name in impacts_map.items():
         # emission = mass of product * emission factor * distance
-        emissions_factor_with_emissions_distance = (
-            additional_factor
-            * emissions_df.loc[emissions_name, col_name]
-            * (distance * mi_to_km_conversion)
-        )
-        print(emissions_factor_with_emissions_distance)
         tm_df_to_update.loc[
             (tm_df_to_update['Building Material_name'] == mat_type), name
         ] = (
-            (tm_df_to_update['Weight (kg)'] / 1000)
-            * emissions_factor_with_emissions_distance
+            additional_factor
+            * (tm_df_to_update['Weight (kg)'] / 1000)
+            * emissions_df.loc[emissions_name, col_name]
+            * (distance * mi_to_km_conversion)
         )
 
-    print(tm_df_to_update)
     return {"intentional_sourcing_impacts": tm_df_to_update.to_dict()}
