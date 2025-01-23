@@ -1,5 +1,5 @@
 """Results page of dashboard"""
-from dash import html, dcc, callback, Input, Output, register_page, State, ALL
+from dash import html, dcc, callback, Input, Output, register_page, State, ALL, no_update
 import dash_bootstrap_components as dbc
 import pandas as pd
 import plotly.express as px
@@ -111,6 +111,8 @@ def update_se_figure(life_cycle_stage: str,
         'Smog Formation Potential': 'kgO3e'
     }
     custom_trans_checklist = sum(custom_trans_checklist, [])
+    if template_model_impacts is None: 
+        return no_update
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_graph = tm_impacts_df[
