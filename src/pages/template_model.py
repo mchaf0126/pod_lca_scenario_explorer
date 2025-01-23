@@ -172,11 +172,11 @@ def update_criteria_text(tm_name, tm_metadata):
     ]
 )
 def update_current_template_model_impacts(tm_name, tm_impacts):
-    tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts'))
+    tm_impacts_df = pd.DataFrame.from_dict(tm_impacts.get('tm_impacts')).set_index('template_model')
     if tm_name is None:
         return no_update
     unpacked_tm_name = tm_name.get('template_model_value')
-    current_tm_impacts = tm_impacts_df.query('template_model == @unpacked_tm_name')
+    current_tm_impacts = tm_impacts_df.loc[unpacked_tm_name].reset_index()
     return {
         "current_tm_impacts": current_tm_impacts.to_dict(),
     }
@@ -190,11 +190,11 @@ def update_current_template_model_impacts(tm_name, tm_impacts):
     ]
 )
 def update_current_prebuilt_scenario_impacts(tm_name, pb_impacts):
-    pb_impacts_df = pd.DataFrame.from_dict(pb_impacts.get('prebuilt_scenario_impacts'))
+    pb_impacts_df = pd.DataFrame.from_dict(pb_impacts.get('prebuilt_scenario_impacts')).set_index()
     if tm_name is None:
         return no_update
     unpacked_tm_name = tm_name.get('template_model_value')
-    current_pb_impacts = pb_impacts_df.query('template_model == @unpacked_tm_name')
+    current_pb_impacts = pb_impacts_df.loc[unpacked_tm_name].reset_index()
     return {
         "current_pb_impacts": current_pb_impacts.to_dict(),
     }
