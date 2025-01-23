@@ -197,4 +197,6 @@ def create_intentional_sourcing_impacts(mat_type: str,
             + tm_eol_impacts.loc[:, name]
         ).mul(number_of_replacements)
 
+    tm_df_to_update = tm_df_to_update[tm_df_to_update['life_cycle_stage'] == 'Replacement: B2-B5']
+
     return {"intentional_replacement_impacts": tm_df_to_update.to_dict()}

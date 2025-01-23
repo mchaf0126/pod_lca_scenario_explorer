@@ -79,7 +79,8 @@ def update_scenario(life_cycle_stage):
         Input({'type': 'custom_checklist', 'id': ALL}, 'value'),
         Input('template_model_name', 'data'),
         State('template_model_impacts', 'data'),
-        Input('intentional_sourcing_impacts', 'data')
+        Input('intentional_sourcing_impacts', 'data'),
+        Input('intentional_replacement_impacts', 'data')
         # State('prebuilt_scenario_impacts', 'data'),
     ]
 )
@@ -91,6 +92,7 @@ def update_se_figure(life_cycle_stage: str,
                      template_model_name: dict,
                      template_model_impacts: dict,
                      intentional_sourcing_impacts: dict,
+                     intentional_replacement_impacts: dict,
                      # prebuilt_scenario_impacts: dict
                      ):
     lcs_map = {
@@ -106,6 +108,8 @@ def update_se_figure(life_cycle_stage: str,
         'Ozone Depletion Potential': 'CFC-11e',
         'Smog Formation Potential': 'kgO3e'
     }
+    custom_trans_checklist = sum(custom_trans_checklist, [])
+    print(custom_trans_checklist)
     tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
     unpacked_tm_name = template_model_name.get('template_model_value')
     tm_df_to_graph = tm_impacts_df[
@@ -115,7 +119,7 @@ def update_se_figure(life_cycle_stage: str,
     tm_df_to_graph.loc[:, 'scenario'] = 'Default scenario'
 
     if life_cycle_stage == 'Transportation':
-        if custom_trans_checklist == [[]]:
+        if "Intentional Sourcing" not in custom_trans_checklist:
             # pb_impacts_df = pd.DataFrame.from_dict(
             #     prebuilt_scenario_impacts.get('prebuilt_scenario_impacts')
             # )
@@ -127,6 +131,22 @@ def update_se_figure(life_cycle_stage: str,
                 )
             )
             custom_impacts_df.loc[:, 'scenario'] = 'Intentional Sourcing'
+            combined_df_to_graph = pd.concat(
+                [
+                    tm_df_to_graph,
+                    custom_impacts_df
+                ]
+            )
+    elif life_cycle_stage == 'Replacement':
+        if "Intentional Replacement" not in custom_trans_checklist:
+            combined_df_to_graph = tm_df_to_graph
+        else:
+            custom_impacts_df = pd.DataFrame.from_dict(
+                intentional_replacement_impacts.get(
+                    'intentional_replacement_impacts'
+                )
+            )
+            custom_impacts_df.loc[:, 'scenario'] = 'Intentional Replacement'
             combined_df_to_graph = pd.concat(
                 [
                     tm_df_to_graph,
