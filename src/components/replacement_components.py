@@ -182,8 +182,6 @@ def create_intentional_sourcing_impacts(mat_type: str,
     else:
         number_of_replacements = rsp // input_years
 
-    print(number_of_replacements)
-
     for name in impacts_list:
         tm_df_to_update.loc[
             (
