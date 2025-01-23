@@ -1,5 +1,6 @@
-from dash import html
+from dash import html, callback, Input, Output, State
 import dash_bootstrap_components as dbc
+import pandas as pd
 from src.utils.selection import create_checklist, create_radio
 from src.utils.load_config import app_config
 
@@ -7,6 +8,9 @@ config = app_config
 
 replacement_checklist_yaml = config.get('replacement_scenario_checklist')
 assert replacement_checklist_yaml is not None, 'The config for scenario checklist could not be set'
+
+replacement_custom_checklist_yaml = config.get('replacement_custom_scenario_checklist')
+assert replacement_custom_checklist_yaml is not None, 'The config for scenario checklist could not be set'
 
 replacement_radio_yaml = config.get('replacement_scenario_radio')
 assert replacement_radio_yaml is not None, 'The config for scenario radio could not be set'
@@ -18,6 +22,13 @@ replacement_checklist = create_checklist(
     dropdown_id={"type": "prebuilt_scenario", "id": 'replacement_checklist'}
 )
 
+replacement_custom_checklist = create_checklist(
+    label=replacement_custom_checklist_yaml['label'],
+    checklist=replacement_custom_checklist_yaml['checklist'],
+    first_item=replacement_custom_checklist_yaml['first_item'],
+    dropdown_id={"type": "custom_checklist", "id": 'replacement_custom_checklist'}
+)
+
 replacement_radio_model_comp = create_radio(
     label=replacement_radio_yaml['label'],
     radiolist=replacement_radio_yaml['radiolist'],
@@ -27,16 +38,9 @@ replacement_radio_model_comp = create_radio(
 
 replacement_special_mat = html.Div(
     [
-        dbc.Label("Intentional Replacement"),
         dbc.InputGroup(
             [
                 dbc.Select(
-                    options=[
-                        {"label": "Wood fiber insulation", "value": 1},
-                        {"label": "CLT", "value": 2},
-                        {"label": "Glulam", "value": 3}
-                    ],
-                    value=1,
                     id='replacement_custom_mat_type'
                 ),
             ],
@@ -46,7 +50,7 @@ replacement_special_mat = html.Div(
             [
                 dbc.InputGroupText("Replacement Rate (yr)"),
                 dbc.Input(
-                    placeholder="0",
+                    value="20",
                     type="number",
                     id='replacement_custom_year'
                 ),
@@ -58,16 +62,9 @@ replacement_special_mat = html.Div(
 
 replacement_special_mat_model_comp = html.Div(
     [
-        dbc.Label("Intentional Replacement"),
         dbc.InputGroup(
             [
                 dbc.Select(
-                    options=[
-                        {"label": "Wood fiber insulation", "value": 1},
-                        {"label": "CLT", "value": 2},
-                        {"label": "Glulam", "value": 3}
-                    ],
-                    value=1,
                     id='replacement_custom_mat_type_mc'
                 ),
             ],
@@ -87,13 +84,45 @@ replacement_special_mat_model_comp = html.Div(
     ]
 )
 
-replacement_scenarios = dbc.Container(
+replacement_scenarios = [
+    replacement_checklist,
+    replacement_custom_checklist,
+    replacement_special_mat
+]
+
+
+@callback(
     [
-        dbc.Row(
-            [
-                replacement_checklist,
-                replacement_special_mat
-            ]
-        )
+        Output('replacement_custom_mat_type', 'disabled'),
+        Output('replacement_custom_year', 'disabled'),
+    ],
+    Input({"type": "custom_checklist", "id": 'replacement_custom_checklist'}, 'value'),
+)
+def update_intentional_sourcing_visibility(checklist):
+    if checklist:
+        return False, False
+    else:
+        return True, True
+
+
+@callback(
+    [
+        Output('replacement_custom_mat_type', 'options'),
+        Output('replacement_custom_mat_type', 'value'),
+    ],
+    [
+        Input('template_model_name', 'data'),
+        State('template_model_impacts', 'data'),
     ]
 )
+def update_intentional_sourcing_dropdown(template_model_name: dict,
+                                         template_model_impacts: dict,
+                                         ):
+    tm_impacts_df = pd.DataFrame.from_dict(template_model_impacts.get('tm_impacts'))
+    unpacked_tm_name = template_model_name.get('template_model_value')
+    tm_df_for_values = tm_impacts_df[
+        (tm_impacts_df['template_model'] == unpacked_tm_name)
+    ].copy()
+    options_for_dropdown = tm_df_for_values['Building Material_name'].dropna().unique()
+    first_option = options_for_dropdown[0]
+    return options_for_dropdown, first_option
