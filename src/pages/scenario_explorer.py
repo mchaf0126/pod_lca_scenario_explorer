@@ -196,9 +196,12 @@ def update_se_figure(life_cycle_stage: str,
 )
 def update_description(lcs):
     title = [
+        dbc.Label(
+            'Descriptions',
+            class_name='fs-5 fw-bold my-2'
+        ),
         dcc.Markdown(
             '''
-            ### Descriptions
             See below for a description of the different scenarios that have been selected.
             ''',
             className='fw-light'

@@ -85,29 +85,48 @@ def update_criteria_text(tm_name, tm_metadata):
             html.Br()
         ),
         dbc.Row(
-            dcc.Markdown(
-                f'''
-                ##### Building Information
-                - __Location:__ {location}
-                - __Building Use Type:__ {building_use_type}
-                - __Project Area:__ {project_area}
-                - __Building Height:__ {building_height}
-                - __Stories Above Grade:__ {stories_above_grade}
-                - __Stories Below Grade:__ {stories_below_grade}
-
-                ##### Structure
-                - __H. Gravity System:__ {str_horiz_grav_sys}
-                - __V. Gravity System:__ {str_vert_grav_sys}
-                - __Lateral System:__ {str_lat_sys}
-                - __Bay Size:__ {bay_size}
-
-                ##### Enclosure
-                - __Cladding Type:__ {cladding_type}
-                - __Roofing Type:__ {roofing_type}
-                - __Window-to-wall Ratio:__ {wwr}
-                ''',
-                className='fw-light'
-            )
+            [
+                dbc.Label(
+                    'Building Information',
+                    class_name='fs-5 fw-bold my-2'
+                ),
+                dcc.Markdown(
+                    f'''
+                    - __Location:__ {location}
+                    - __Building Use Type:__ {building_use_type}
+                    - __Project Area:__ {project_area}
+                    - __Building Height:__ {building_height}
+                    - __Stories Above Grade:__ {stories_above_grade}
+                    - __Stories Below Grade:__ {stories_below_grade}
+                    ''',
+                    className='fw-light'
+                ),
+                dbc.Label(
+                    'Structure',
+                    class_name='fs-5 fw-bold my-2'
+                ),
+                dcc.Markdown(
+                    f'''
+                    - __H. Gravity System:__ {str_horiz_grav_sys}
+                    - __V. Gravity System:__ {str_vert_grav_sys}
+                    - __Lateral System:__ {str_lat_sys}
+                    - __Bay Size:__ {bay_size}
+                    ''',
+                    className='fw-light'
+                ),
+                dbc.Label(
+                    'Enclosure',
+                    class_name='fs-5 fw-bold my-2'
+                ),
+                dcc.Markdown(
+                    f'''
+                    - __Cladding Type:__ {cladding_type}
+                    - __Roofing Type:__ {roofing_type}
+                    - __Window-to-wall Ratio:__ {wwr}
+                    ''',
+                    className='fw-light'
+                ),
+            ]
         )
     ]
     return card_info
