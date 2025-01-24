@@ -134,12 +134,7 @@ sidebar = dbc.Container(
 display_data = dbc.Container(
     [
         dbc.Row(
-            [
-                dcc.Markdown(
-                    id='criteria_text',
-                    className='fw-light'
-                ),
-            ]
+            id='criteria_text',
         )
     ],
     class_name='px-3 mt-2',
