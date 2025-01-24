@@ -27,10 +27,7 @@ layout = html.Div(
                                 dbc.Container(
                                     [
                                         dbc.Row(
-                                            dbc.Spinner(
-                                                dcc.Graph(id="mc_figure"),
-                                                color='primary'
-                                            )
+                                            dcc.Graph(id="mc_figure"),
                                         )
                                     ],
                                     class_name='mt-2 mx-3',

@@ -29,10 +29,7 @@ layout = html.Div(
                             dbc.Container(
                                 [
                                     dbc.Row(
-                                        dbc.Spinner(
-                                            children=[dcc.Graph(id="se_figure")],
-                                            color='primary'
-                                        )
+                                        dcc.Graph(id="se_figure")
                                     ),
                                     dbc.Row(
                                         id='se_description',
