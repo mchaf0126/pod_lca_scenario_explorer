@@ -27,7 +27,10 @@ layout = html.Div(
                                 dbc.Container(
                                     [
                                         dbc.Row(
-                                            dcc.Graph(id="mc_figure"),
+                                            dbc.Spinner(
+                                                dcc.Graph(id="mc_figure"),
+                                                color='primary'
+                                            )
                                         )
                                     ],
                                     class_name='mt-2 mx-3',
@@ -313,7 +316,6 @@ def update_user_defined_impacts(trans_scenario: str,
     if 'level_0' in user_selected_df_to_graph:
         user_selected_df_to_graph = user_selected_df_to_graph.drop(columns='level_0')
 
-    user_selected_df_to_graph.to_csv('test4.csv')
     return {'user_defined_impacts': user_selected_df_to_graph.reset_index().to_dict()}
 
 

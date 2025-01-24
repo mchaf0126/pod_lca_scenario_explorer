@@ -30,7 +30,10 @@ layout = html.Div(
                                 ),
                             ),
                             dbc.Row(
-                                tmc.figure
+                                dbc.Spinner(
+                                    tmc.figure,
+                                    color='primary'
+                                )
                             ),
                             dbc.Row(
                                 dbc.Col(
