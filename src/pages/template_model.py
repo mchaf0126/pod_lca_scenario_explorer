@@ -1,7 +1,7 @@
 """Results page of dashboard"""
 import pandas as pd
 import plotly.express as px
-from dash import html, callback, Input, Output, State, register_page
+from dash import html, callback, Input, Output, State, register_page, dcc
 import dash_ag_grid as dag
 import dash_bootstrap_components as dbc
 import src.components.template_model_components as tmc
@@ -46,7 +46,7 @@ layout = html.Div(
                             ),
                             dbc.Row(
                                 id='tm_table',
-                                class_name='mx-5'                                
+                                class_name='mx-5'
                             )
                         ],
                         xs=8, sm=8, md=8, lg=8, xl=8, xxl=9,
@@ -147,25 +147,47 @@ def update_criteria_text(tm_name, tm_metadata):
     roofing_type = tm_row['roofing_type'].item()
     wwr = tm_row['wwr'].item()
 
-    criteria_text = f'''
-        ### Building Information
-        The template model is located in {location}, {state}. The {project_area:,} square foot {building_use_type.lower()} building
-        is {stories_above_grade} stories and measures at {building_height} feet tall.
+    criteria_text = [
+        dbc.Label(
+            'Building Information',
+            class_name='fs-5 fw-bold mt-2'
+        ),
+        dcc.Markdown(
+            f'''
+            The template model is located in {location}, {state}. The {project_area:,} square foot {building_use_type.lower()} building
+            is {stories_above_grade} stories and measures at {building_height} feet tall.
 
-        See below for a breakdown of the structure and envelope design criteria.
-
-        ### Structure
-        - __H. Gravity System:__ {str_horiz_grav_sys}
-        - __V. Gravity System:__ {str_vert_grav_sys}
-        - __Lateral System:__ {str_lat_sys}
-        - __Bay Size:__ {bay_size}
-
-        ### Enclosure
-        - __Cladding Type:__ {cladding_type}
-        - __Glazing Type:__ {glazing_type}
-        - __Roofing Type:__ {roofing_type}
-        - __Window-to-wall Ratio:__ {wwr}
-    '''
+            See below for a breakdown of the structure and envelope design criteria.
+            ''',
+            className='fw-light'
+        ),
+        dbc.Label(
+            'Structure',
+            class_name='fs-5 fw-bold mt-2'
+        ),
+        dcc.Markdown(
+            f'''
+            - __H. Gravity System:__ {str_horiz_grav_sys}
+            - __V. Gravity System:__ {str_vert_grav_sys}
+            - __Lateral System:__ {str_lat_sys}
+            - __Bay Size:__ {bay_size}
+            ''',
+            className='fw-light'
+        ),
+        dbc.Label(
+            'Enclosure',
+            class_name='fs-5 fw-bold mt-2'
+        ),
+        dcc.Markdown(
+            f'''
+            - __Cladding Type:__ {cladding_type}
+            - __Glazing Type:__ {glazing_type}
+            - __Roofing Type:__ {roofing_type}
+            - __Window-to-wall Ratio:__ {wwr}
+            ''',
+            className='fw-light'
+        )
+    ]
     return criteria_text
 
 
@@ -267,15 +289,26 @@ def update_tm_summary_graph(tm_dropdown: str, current_tm_impacts: dict):
     Input('current_tm_impacts', 'data')
 )
 def update_tm_table(current_tm_impacts: dict):
-    impacts = [
-        'Global Warming Potential_fossil',
-        'Acidification Potential',
-        'Eutrophication Potential',
-        'Smog Formation Potential',
-        'Ozone Depletion Potential',
-        'Global Warming Potential_biogenic',
-        'Global Warming Potential_luluc',
-    ]
+    impacts_map = {
+        'Global Warming Potential_fossil': 'GWP fossil',
+        'Acidification Potential': 'AP',
+        'Eutrophication Potential': 'EP',
+        'Smog Formation Potential': 'SFP',
+        'Ozone Depletion Potential': 'ODP',
+        'Global Warming Potential_biogenic': 'GWP biogenic',
+        'Global Warming Potential_luluc': 'GWP luluc',
+        'Stored Biogenic Carbon': 'Stored Carbon'
+    }
+    impacts_map = {
+        'Global Warming Potential_fossil': 'GWP fossil',
+        'Acidification Potential': 'AP',
+        'Eutrophication Potential': 'EP',
+        'Smog Formation Potential': 'SFP',
+        'Ozone Depletion Potential': 'ODP',
+        'Global Warming Potential_biogenic': 'GWP biogenic',
+        'Global Warming Potential_luluc': 'GWP luluc',
+        'Stored Biogenic Carbon': 'Stored Carbon'
+    }
     table_label = dbc.Label(
         'Template Model Impacts',
         class_name='fs-5 fw-bold mt-2'
@@ -283,9 +316,18 @@ def update_tm_table(current_tm_impacts: dict):
     if current_tm_impacts is None:
         return None
     tm_impacts_df = pd.DataFrame.from_dict(current_tm_impacts.get('current_tm_impacts'))
-    tm_impacts_df = tm_impacts_df.groupby('life_cycle_stage')[impacts].sum().reset_index()
+    tm_impacts_df = tm_impacts_df.groupby(
+        'life_cycle_stage'
+    )[list(impacts_map.keys())].sum().reset_index()
+    tm_impacts_df.loc[
+        tm_impacts_df['life_cycle_stage'] == 'A5: Construction',
+        'Stored Biogenic Carbon'
+    ] = 0
     tm_impacts_df = tm_impacts_df.rename(columns={'life_cycle_stage': 'Life Cycle Stage'})
+    tm_impacts_df = tm_impacts_df.rename(columns=impacts_map)
     # table = dbc.Table.from_dataframe(tm_impacts_df.T.reset_index(), striped=True)
+
+    impact_col_width = 115
     table = dag.AgGrid(
         rowData=tm_impacts_df.to_dict("records"),
         defaultColDef={
@@ -302,10 +344,12 @@ def update_tm_table(current_tm_impacts: dict):
                 "wrapText": True,
                 "resizable": True,
                 "autoHeight": True,
-                'width': 190
+                'width': 190,
+                'pinned': 'left'
             },
             {
-                'field': 'Global Warming Potential_fossil',
+                'field': impacts_map.get('Global Warming Potential_fossil'),
+                'type': 'rightAligned',
                 'cellClass': 'fw-light',
                 'cellDataType': 'number',
 
@@ -313,73 +357,90 @@ def update_tm_table(current_tm_impacts: dict):
                 'cellStyle': {
                     'textAlign': 'right',
                 },
-                'width': 130
+                'width': impact_col_width
             },
             {
-                'field': 'Acidification Potential',
+                'field': impacts_map.get('Acidification Potential'),
+                'type': 'rightAligned',
                 'cellClass': 'fw-light',
                 'cellDataType': 'number',
                 'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
                 'cellStyle': {
                     'textAlign': 'right'
                 },
-                'width': 130
+                'width': impact_col_width
             },
             {
-                'field': 'Eutrophication Potential',
+                'field': impacts_map.get('Eutrophication Potential'),
+                'type': 'rightAligned',
                 'cellClass': 'fw-light',
                 'cellDataType': 'number',
                 'valueFormatter': {"function": "d3.format(',.2f')(params.value)"},
                 'cellStyle': {
                     'textAlign': 'right'
                 },
-                'width': 130
+                'width': impact_col_width
             },
             {
-                'field': 'Smog Formation Potential',
+                'field': impacts_map.get('Smog Formation Potential'),
+                'type': 'rightAligned',
                 'cellClass': 'fw-light',
                 'cellDataType': 'number',
                 'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
                 'cellStyle': {
                     'textAlign': 'right'
                 },
-                'width': 130
+                'width': impact_col_width
             },
             {
-                'field': 'Ozone Depletion Potential',
+                'field': impacts_map.get('Ozone Depletion Potential'),
+                'type': 'rightAligned',
                 'cellClass': 'fw-light',
                 'cellDataType': 'number',
                 'valueFormatter': {"function": "d3.format(',.5f')(params.value)"},
                 'cellStyle': {
                     'textAlign': 'right'
                 },
-                'width': 130
+                'width': impact_col_width
             },
             {
-                'field': 'Global Warming Potential_biogenic',
+                'field': impacts_map.get('Global Warming Potential_biogenic'),
+                'type': 'rightAligned',
                 'cellClass': 'fw-light',
                 'cellDataType': 'number',
                 'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
                 'cellStyle': {
                     'textAlign': 'right'
                 },
-                'width': 130
+                'width': impact_col_width
             },
             {
-                'field': 'Global Warming Potential_luluc',
+                'field': impacts_map.get('Global Warming Potential_luluc'),
+                'type': 'rightAligned',
                 'cellClass': 'fw-light',
                 'cellDataType': 'number',
                 'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
                 'cellStyle': {
                     'textAlign': 'right'
                 },
-                'width': 130
+                'width': impact_col_width
+            },
+            {
+                'field': impacts_map.get('Stored Biogenic Carbon'),
+                'type': 'rightAligned',
+                'cellClass': 'fw-light',
+                'cellDataType': 'number',
+                'valueFormatter': {"function": "d3.format(',.0f')(params.value)"},
+                'cellStyle': {
+                    'textAlign': 'right'
+                },
+                'width': impact_col_width
             },
         ],
         dashGridOptions={"domLayout": "autoHeight"},
         style={'width': '100%'},
     )
-    
+
     final_table = html.Div(
         table,
         className='my-3'
