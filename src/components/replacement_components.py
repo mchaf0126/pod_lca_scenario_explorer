@@ -176,13 +176,12 @@ def create_intentional_replacement_impacts_se(mat_type: str,
 
 
 @callback(
-    Output('intentional_replacement_impacts', 'data', allow_duplicate=True),
+    Output('intentional_replacement_impacts_mc', 'data'),
     [
         Input('replacement_custom_mat_type_mc', 'value'),
         Input('replacement_custom_year_mc', 'value'),
         State('current_tm_impacts', 'data'),
     ],
-    prevent_initial_call=True
 )
 def create_intentional_replacement_impacts_mc(mat_type: str,
                                               input_years: int,
@@ -223,7 +222,7 @@ def create_intentional_replacement_impacts(mat_type: str,
     }
     rsp = 60
     if current_tm_impacts is None:
-        return no_update
+        return None
 
     tm_df_to_update = pd.DataFrame.from_dict(
         current_tm_impacts.get('current_tm_impacts')
