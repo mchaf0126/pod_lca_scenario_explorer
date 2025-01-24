@@ -214,7 +214,7 @@ def update_intentional_sourcing_dropdown_mc(current_tm_impacts: dict):
 
 
 @callback(
-    Output('intentional_sourcing_impacts', 'data', allow_duplicate=True),
+    Output('intentional_sourcing_impacts_mc', 'data'),
     [
         Input('transport_custom_mat_type_mc', 'value'),
         Input('transport_custom_distance_mc', 'value'),
@@ -222,7 +222,6 @@ def update_intentional_sourcing_dropdown_mc(current_tm_impacts: dict):
         State('current_tm_impacts', 'data'),
         State('transportation_emission_factors', 'data'),
     ],
-    prevent_initial_call=True
 )
 def create_intentional_sourcing_impacts_mc(mat_type: str,
                                            distance: int,
