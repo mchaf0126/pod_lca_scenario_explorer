@@ -377,7 +377,8 @@ def update_tm_table_mc(current_tm_impacts: dict):
         'life_cycle_stage'
     )[list(impacts_map.keys())].sum().reset_index()
     tm_impacts_df.loc[
-        tm_impacts_df['life_cycle_stage'] == 'A5: Construction',
+        (tm_impacts_df['life_cycle_stage'] == 'A5: Construction')
+        | (tm_impacts_df['life_cycle_stage'] == 'B2-B5: Replacement'),
         'Stored Biogenic Carbon'
     ] = 0
     tm_impacts_df = tm_impacts_df.rename(columns={'life_cycle_stage': 'Life Cycle Stage'})
@@ -531,7 +532,8 @@ def update_user_defined_table(user_defined_impacts: dict):
         'life_cycle_stage'
     )[list(impacts_map.keys())].sum().reset_index()
     tm_impacts_df.loc[
-        tm_impacts_df['life_cycle_stage'] == 'A5: Construction',
+        (tm_impacts_df['life_cycle_stage'] == 'A5: Construction')
+        | (tm_impacts_df['life_cycle_stage'] == 'B2-B5: Replacement'),
         'Stored Biogenic Carbon'
     ] = 0
     tm_impacts_df = tm_impacts_df.rename(columns={'life_cycle_stage': 'Life Cycle Stage'})

@@ -67,6 +67,24 @@ layout = html.Div(
 
 
 @callback(
+    [
+        Output('location_dropdown', 'disabled'),
+        Output('str_material_dropdown', 'disabled'),
+        Output('cladding_type_dropdown', 'disabled'),
+        Output('glazing_type_dropdown', 'disabled'),
+        Output('roofing_type_dropdown', 'disabled'),
+        Output('wwr_dropdown', 'disabled'),
+    ],
+    Input('building_use_type_dropdown', 'value'),
+)
+def update_dropdowns_for_sfh(building_use_dropdown: str):
+    if building_use_dropdown == 'Single family home':
+        return True, True, True, True, True, True
+
+    return False, False, False, False, False, False,
+
+
+@callback(
     Output('template_model_name', 'data'),
     [
         Input('location_dropdown', 'value'),
@@ -88,6 +106,13 @@ def update_tm_name(location_dropdown_value: str,
                    wwr_dropdown_value: str,
                    tm_metadata: dict):
     tm_metadata_df = pd.DataFrame.from_dict(tm_metadata.get('tm_metadata'))
+
+    if building_use_dropdown_value == 'Single family home':
+        return {
+            "template_model_name": 'STR4_ENCO11_ENCT3_ENCR2',
+            'template_model_value': 'STR4_ENCO11_ENCT3_ENCR2'
+        }
+
     selected_template_model = tm_metadata_df.loc[
         (
             (tm_metadata_df['location'] == location_dropdown_value)
@@ -323,7 +348,8 @@ def update_tm_table(current_tm_impacts: dict):
         'life_cycle_stage'
     )[list(impacts_map.keys())].sum().reset_index()
     tm_impacts_df.loc[
-        tm_impacts_df['life_cycle_stage'] == 'A5: Construction',
+        (tm_impacts_df['life_cycle_stage'] == 'A5: Construction')
+        | (tm_impacts_df['life_cycle_stage'] == 'B2-B5: Replacement'),
         'Stored Biogenic Carbon'
     ] = 0
     tm_impacts_df = tm_impacts_df.rename(columns={'life_cycle_stage': 'Life Cycle Stage'})
