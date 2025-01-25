@@ -39,8 +39,8 @@ building_use_type_dropdown:
       label: Office
       value: Office
     - 
-      label: Single family home
-      value: Single Family Home
+      label: Single Family Home
+      value: Single family home
     - 
       label: Multi-family
       value: Multi-family
