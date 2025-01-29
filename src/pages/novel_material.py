@@ -94,8 +94,8 @@ def update_criteria_text(tm_name, tm_metadata):
                     f'''
                     - __Location:__ {location}
                     - __Building Use Type:__ {building_use_type}
-                    - __Project Area:__ {project_area}
-                    - __Building Height:__ {building_height}
+                    - __Project Area:__ {project_area:,} square feet
+                    - __Building Height:__ {building_height}'
                     - __Stories Above Grade:__ {stories_above_grade}
                     - __Stories Below Grade:__ {stories_below_grade}
                     ''',
