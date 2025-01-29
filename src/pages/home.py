@@ -60,13 +60,13 @@ layout = html.Div(
                             - __Building elements:__ Structure and enclosure are included in the
                             base model scope. For the residential model, some interior materials
                             have also been included. MEP and site elements are excluded from
-                            both models. 
+                            both models.
                             - __Life cycle stages:__ Modules A-C, including operational and
                             embodied emissions, are reported for both models. For a detailed
                             description of the processes and flows included per life cycle stage,
                             see M1.6 Draft LCA Modeling Framework Part B: Buildings Report.
                             - __Impact categories:__ The five core TRACI 2.1 impact categories
-                            (global warming potential, ozone depletion potential, 
+                            (global warming potential, ozone depletion potential,
                             acidification potential, eutrophication potential, and
                             smog formation potential) are included and reported separately.
                             The model reports carbon emissions from fossil and biogenic
@@ -85,13 +85,14 @@ layout = html.Div(
                         dcc.Markdown(
                             '''
                             At present, the Scenario Explorer consists of four unique pages:
-                            - __Template Model Selection:__ The first page of the proof-of-concept model
-                            allows the user to select the template model for analysis. There are
-                            over 60 models to choose from based on selections of building use
-                            type, structural material, and enclosure design options. The page
-                            also provides a summary of results for the given template model.
-                            - __Novel Material Selection:__ Here, a proof-of-concept display is shown
-                            for how the user would implement novel materials into the Scenario
+                            - __Template Model Selection:__ The first page of the proof-of-concept
+                            model allows the user to select the template model for analysis.
+                            There are over 60 models to choose from based on selections of
+                            building use type, structural material, and enclosure design
+                            options. The page also provides a summary of results for the
+                            given template model.
+                            - __Novel Material Selection:__ Here, a proof-of-concept display is
+                            shown for how the user would implement novel materials into the Scenario
                             Explorer. This page currently only shows the intent of novel material
                             selection.
                             - __Scenario Explorer:__ This page provides the selection of scenarios
@@ -101,9 +102,9 @@ layout = html.Div(
                             described below the main graphs.
                             - __Model Comparison:__ Finally, this page
                             allows users to compare the impact of scenarios on the __whole__
-                            life cycle assessment of the template model. Here, a collection of scenarios
-                            can be selected and compared to the default template model selected on the
-                            __Template Model Selection__ page.
+                            life cycle assessment of the template model. Here, a collection
+                            of scenario can be selected and compared to the default template
+                            model selected on the __Template Model Selection__ page.
                             ''',
                             className='fw-light'
                         ),
