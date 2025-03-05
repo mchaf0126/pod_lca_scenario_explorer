@@ -1,7 +1,15 @@
 ---
-cover: >-
-  https://images.unsplash.com/photo-1725792630033-e462b10672ec?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxOTcwMjR8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MjcxMzMzNzJ8&ixlib=rb-4.0.3&q=85
-coverY: 87
+layout:
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
 ---
 
 # Homepage
