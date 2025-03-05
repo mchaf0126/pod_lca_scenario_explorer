@@ -2,40 +2,42 @@
 
 * [Homepage](README.md)
 
-## Template Model
+## Template Model Selection
 
-* [Description](template-model/page-2.md)
-* [Setup](template-model/setup.md)
-* [Options](template-model/options.md)
+* [Description](template-model-selection/page-2.md)
+* [Selection](template-model-selection/selection.md)
+* [Design](template-model-selection/design/README.md)
+  * [Structural Assumptions](template-model-selection/design/structural-assumptions.md)
+  * [Enclosure Assumptions](template-model-selection/design/enclosure-assumptions.md)
 
-## Special Material
+## Novel Material Selection
 
-* [Description](special-material/description.md)
-* [Methodology](special-material/methodology.md)
+* [Description](novel-material-selection/description.md)
+* [Methodology](novel-material-selection/methodology.md)
 
-## Results
+## Scenario Explorer
 
-* [Description](results/page-1.md)
-* [Options](results/options.md)
+* [Description](scenario-explorer/page-1.md)
+* [Options](scenario-explorer/options.md)
 
-## Scenarios
+## Model Comparison
 
-* [Transportation Scenarios](scenarios/transportation-scenarios/README.md)
-  * [Description](scenarios/transportation-scenarios/description.md)
-  * [Prebuilt Scenarios](scenarios/transportation-scenarios/prebuilt-scenarios.md)
-  * [Custom Scenarios](scenarios/transportation-scenarios/custom-scenarios.md)
-* [Construction Scenarios](scenarios/construction-scenarios/README.md)
-  * [Description](scenarios/construction-scenarios/description.md)
-  * [Prebuilt Scenarios](scenarios/construction-scenarios/prebuilt-scenarios.md)
-  * [Custom Scenarios](scenarios/construction-scenarios/custom-scenarios.md)
-* [Replacement Scenarios](scenarios/replacement-scenarios/README.md)
-  * [Description](scenarios/replacement-scenarios/description.md)
-  * [Prebuilt Scenarios](scenarios/replacement-scenarios/prebuilt-scenarios.md)
-  * [Custom Scenarios](scenarios/replacement-scenarios/custom-scenarios.md)
-* [End-of-life Scenarios](scenarios/end-of-life-scenarios/README.md)
-  * [Description](scenarios/end-of-life-scenarios/description.md)
-  * [Prebuilt Scenarios](scenarios/end-of-life-scenarios/prebuilt-scenarios.md)
-  * [Custom Scenarios](scenarios/end-of-life-scenarios/custom-scenarios.md)
+* [Transportation Scenarios](model-comparison/transportation-scenarios/README.md)
+  * [Description](model-comparison/transportation-scenarios/description.md)
+  * [Prebuilt Scenarios](model-comparison/transportation-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](model-comparison/transportation-scenarios/custom-scenarios.md)
+* [Construction Scenarios](model-comparison/construction-scenarios/README.md)
+  * [Description](model-comparison/construction-scenarios/description.md)
+  * [Prebuilt Scenarios](model-comparison/construction-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](model-comparison/construction-scenarios/custom-scenarios.md)
+* [Replacement Scenarios](model-comparison/replacement-scenarios/README.md)
+  * [Description](model-comparison/replacement-scenarios/description.md)
+  * [Prebuilt Scenarios](model-comparison/replacement-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](model-comparison/replacement-scenarios/custom-scenarios.md)
+* [End-of-life Scenarios](model-comparison/end-of-life-scenarios/README.md)
+  * [Description](model-comparison/end-of-life-scenarios/description.md)
+  * [Prebuilt Scenarios](model-comparison/end-of-life-scenarios/prebuilt-scenarios.md)
+  * [Custom Scenarios](model-comparison/end-of-life-scenarios/custom-scenarios.md)
 
 ## Getting Started
 
