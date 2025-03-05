@@ -38,17 +38,3 @@
   * [Description](model-comparison/end-of-life-scenarios/description.md)
   * [Prebuilt Scenarios](model-comparison/end-of-life-scenarios/prebuilt-scenarios.md)
   * [Custom Scenarios](model-comparison/end-of-life-scenarios/custom-scenarios.md)
-
-## Getting Started
-
-* [Quickstart](getting-started/quickstart.md)
-* [Publish your docs](getting-started/publish-your-docs.md)
-
-## Useful Info for Gitbook
-
-* [Editor](useful-info-for-gitbook/editor.md)
-* [Markdown](useful-info-for-gitbook/markdown.md)
-* [Images & media](useful-info-for-gitbook/images-and-media.md)
-* [Interactive blocks](useful-info-for-gitbook/interactive-blocks.md)
-* [OpenAPI](useful-info-for-gitbook/openapi.md)
-* [Integrations](useful-info-for-gitbook/integrations.md)
