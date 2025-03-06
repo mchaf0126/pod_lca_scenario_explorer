@@ -34,7 +34,6 @@
   * [Description](scenario-explorer/end-of-life-scenarios/description.md)
   * [Prebuilt Scenarios](scenario-explorer/end-of-life-scenarios/prebuilt-scenarios.md)
   * [Custom Scenarios](scenario-explorer/end-of-life-scenarios/custom-scenarios.md)
-* [Options](scenario-explorer/options.md)
 
 ## Model Comparison
 

@@ -1,4 +1,5 @@
 ---
+icon: house-chimney-heart
 layout:
   title:
     visible: true
