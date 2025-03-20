@@ -1,2 +1,0 @@
-# Enclosure Assumptions
-
