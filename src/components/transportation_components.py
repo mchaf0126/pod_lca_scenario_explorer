@@ -287,7 +287,8 @@ def create_intentional_sourcing_impacts(mat_type: str,
     if distance is None:
         return None
 
-    if distance > 500:
+    # If distance less than 500 mi, then return factor = 1.5
+    if distance < 500:
         additional_factor = 1.5
     else:
         additional_factor = 1.0
