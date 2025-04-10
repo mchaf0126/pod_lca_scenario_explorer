@@ -2,22 +2,9 @@
 -e .
 
 # external requirements
-click
-Sphinx
-coverage
-flake8
-python-dotenv
 pandas
-pandera
-pandera[io]
 ipykernel
-black
-flake8
 isort
-loguru
-mkdocs
-tqdm
-typer
 openpyxl
 xlsxwriter
 dash
