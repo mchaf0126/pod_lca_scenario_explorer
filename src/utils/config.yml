@@ -41,6 +41,7 @@ building_use_type_dropdown:
     - 
       label: Single Family Home
       value: Single family home
+      disabled: True
     - 
       label: Multi-family
       value: Multi-family
@@ -70,6 +71,21 @@ str_material_dropdown:
       value: Mass timber
   first_item: Concrete
   dropdown_id: str_material_dropdown
+
+column_span_dropdown:
+  label: Column Spacing
+  dropdown_list:
+    - 
+      label: Short span
+      value: Short span
+    - 
+      label: Best practice
+      value: Best practice
+    - 
+      label: Long span
+      value: Long span
+  first_item: Best practice
+  dropdown_id: column_span_dropdown
 
 # str_horiz_grav_sys_dropdown:
 #   label: Primary Horizontal Gravity System

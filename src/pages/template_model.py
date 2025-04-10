@@ -90,6 +90,7 @@ def update_dropdowns_for_sfh(building_use_dropdown: str):
         Input('location_dropdown', 'value'),
         Input('building_use_type_dropdown', 'value'),
         Input('str_material_dropdown', 'value'),
+        Input('column_span_dropdown', 'value'),
         Input('cladding_type_dropdown', 'value'),
         Input('glazing_type_dropdown', 'value'),
         Input('roofing_type_dropdown', 'value'),
@@ -100,6 +101,7 @@ def update_dropdowns_for_sfh(building_use_dropdown: str):
 def update_tm_name(location_dropdown_value: str,
                    building_use_dropdown_value: str,
                    str_material_dropdown_value: str,
+                   column_span_dropdown_value: str,
                    cladding_dropdown_value: str,
                    glazing_dropdown_value: str,
                    roofing_dropdown_value: str,
@@ -118,6 +120,7 @@ def update_tm_name(location_dropdown_value: str,
             (tm_metadata_df['location'] == location_dropdown_value)
             & (tm_metadata_df['building_use_type'] == building_use_dropdown_value)
             & (tm_metadata_df['structural_material'] == str_material_dropdown_value)
+            & (tm_metadata_df['bay_size_description'] == column_span_dropdown_value)
             & (tm_metadata_df['cladding_type'] == cladding_dropdown_value)
             & (tm_metadata_df['glazing_type'] == glazing_dropdown_value)
             & (tm_metadata_df['roofing_type'] == roofing_dropdown_value)

@@ -14,6 +14,9 @@ assert building_use_type_dropdown_yaml is not None, 'The config for building use
 str_material_dropdown_yaml = config.get('str_material_dropdown')
 assert str_material_dropdown_yaml is not None, 'The config for str horiz grav dropdown could not be set'
 
+column_span_dropdown_yaml = config.get('column_span_dropdown')
+assert column_span_dropdown_yaml is not None, 'The config for column span dropdown could not be set'
+
 cladding_type_dropdown_yaml = config.get('cladding_type_dropdown')
 assert cladding_type_dropdown_yaml is not None, 'The config for cladding dropdown could not be set'
 
@@ -35,11 +38,19 @@ location_dropdown = create_dropdown(
     first_item=location_dropdown_yaml['first_item'],
     dropdown_id=location_dropdown_yaml['dropdown_id']
 )
+
 building_use_type_dropdown = create_dropdown(
     label=building_use_type_dropdown_yaml['label'],
     dropdown_list=building_use_type_dropdown_yaml['dropdown_list'],
     first_item=building_use_type_dropdown_yaml['first_item'],
     dropdown_id=building_use_type_dropdown_yaml['dropdown_id']
+)
+
+column_span_dropdown = create_dropdown(
+    label=column_span_dropdown_yaml['label'],
+    dropdown_list=column_span_dropdown_yaml['dropdown_list'],
+    first_item=column_span_dropdown_yaml['first_item'],
+    dropdown_id=column_span_dropdown_yaml['dropdown_id']
 )
 
 structural_material_dropdown = create_dropdown(
@@ -105,7 +116,8 @@ sidebar = dbc.Container(
                     ),
                     dbc.AccordionItem(
                         [
-                            structural_material_dropdown
+                            structural_material_dropdown,
+                            column_span_dropdown
                         ],
                         title="Structure",
                         item_id='str'
