@@ -13,6 +13,7 @@ app = Dash(
     suppress_callback_exceptions=True,
     external_stylesheets=[dbc.themes.PULSE, dbc_css]
 )
+server = app.server
 
 current_file_path = Path(__file__)
 main_directory = current_file_path.parents[1]
